@@ -1,10 +1,10 @@
 ﻿---
 title: payment_system_design
 date: 2025-11-17
-permalink: /docs/场景题/payment_system_design/
+permalink: /system-design/payment-system.html
 categories:
-  - Technology
-  - Learning
+  - Architecture
+  - System Design
 ---
 
 # 支付系统架构设计文档
