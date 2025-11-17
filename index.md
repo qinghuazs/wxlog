@@ -5,7 +5,6 @@ layout: home
 hero:
   name: "冬眠日记"
   text: "祝我们平日都快乐，做平凡的人"
-  tagline: My great project tagline
   actions:
     - theme: brand
       text: Markdown Examples
