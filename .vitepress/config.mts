@@ -1,9 +1,16 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
+
+  // Mermaid 配置
+  mermaid: {
+    // 可选：配置 mermaid 主题和其他选项
+  },
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -925,4 +932,4 @@ export default defineConfig({
       }
     }
   }
-})
+}))
