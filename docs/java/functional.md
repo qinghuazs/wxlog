@@ -1,7 +1,6 @@
 ﻿---
 title: FunctionalInterface注解
 date: 2024/04/16
-permalink: /docs/java/functional/
 categories:
   - Java
   - Technology

@@ -1,7 +1,6 @@
 ﻿---
 title: TailwindCSS布局
 date: 2025-11-17
-permalink: /docs/htmlcssjs/TailwindCSS/04layout/
 categories:
   - Frontend
   - Technology

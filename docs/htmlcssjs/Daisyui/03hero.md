@@ -1,7 +1,6 @@
 ﻿---
 title: Hero
 date: 2025-11-17
-permalink: /docs/htmlcssjs/Daisyui/03hero/
 categories:
   - Frontend
   - Technology

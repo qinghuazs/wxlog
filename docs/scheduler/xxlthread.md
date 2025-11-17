@@ -1,7 +1,6 @@
 ﻿---
 title: xxl-Job中的线程
 date: 2024/10/22
-permalink: /docs/scheduler/xxlthread/
 categories:
   - Scheduler
   - Java

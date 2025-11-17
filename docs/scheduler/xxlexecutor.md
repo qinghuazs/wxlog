@@ -1,7 +1,6 @@
 ﻿---
 title: 执行器
 date: 2024/04/18
-permalink: /docs/scheduler/xxlexecutor/
 categories:
   - Scheduler
   - Java

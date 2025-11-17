@@ -1,7 +1,6 @@
 ﻿---
 title: JWT实战应用
 date: 2025-11-17
-permalink: /docs/JWT/JWT实战应用/
 categories:
   - JWT
   - Security

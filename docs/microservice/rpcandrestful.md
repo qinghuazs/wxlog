@@ -1,7 +1,6 @@
 ﻿---
 title: RPC和Restful的优劣
 date: 2024/04/15
-permalink: /docs/microservice/rpcandrestful/
 categories:
   - Microservice
   - Architecture

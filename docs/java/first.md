@@ -1,7 +1,6 @@
 ﻿---
 title: ImmuatalePair和ImmutableTriple
 date: 2024/04/15
-permalink: /docs/java/first/
 categories:
   - Java
   - Technology

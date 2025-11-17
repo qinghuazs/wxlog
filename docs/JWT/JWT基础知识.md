@@ -1,7 +1,6 @@
 ﻿---
 title: JWT基础知识
 date: 2025-11-17
-permalink: /docs/JWT/JWT基础知识/
 categories:
   - JWT
   - Security

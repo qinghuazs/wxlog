@@ -1,7 +1,6 @@
 ﻿---
 title: 刷题指南
 date: 2024/10/23
-permalink: /docs/leetcode/first/
 categories:
   - Algorithm
   - LeetCode

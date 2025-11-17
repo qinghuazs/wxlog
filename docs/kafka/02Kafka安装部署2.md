@@ -1,7 +1,6 @@
 ﻿---
 title: Kafka安装部署
 date: 2025-04-07
-permalink: /kafka/Kafka安装部署2/
 categories:
   - Kafka
   - Middleware

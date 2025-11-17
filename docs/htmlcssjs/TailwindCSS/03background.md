@@ -1,7 +1,6 @@
 ﻿---
 title: TailwindCSS背景色
 date: 2025-11-17
-permalink: /docs/htmlcssjs/TailwindCSS/03background/
 categories:
   - Frontend
   - Technology

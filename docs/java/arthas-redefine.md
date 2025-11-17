@@ -1,7 +1,6 @@
 ﻿---
 title: Arthas在线热部署
 date: 2024/10/22
-permalink: /docs/java/arthas-redefine/
 categories:
   - Java
   - Technology

@@ -1,7 +1,6 @@
 ﻿---
 title: Arthas常用命令
 date: 2024/04/28
-permalink: /docs/java/arthas/
 categories:
   - Java
   - Technology

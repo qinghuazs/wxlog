@@ -1,7 +1,6 @@
 ﻿---
 title: LangGraph 完整学习指南
 date: 2025-01-30
-permalink: /ai/langgraph/index.html
 categories:
   - AI
   - LangGraph

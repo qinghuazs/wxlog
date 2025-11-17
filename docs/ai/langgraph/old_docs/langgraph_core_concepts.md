@@ -1,7 +1,6 @@
 ﻿---
 title: langgraph_core_concepts
 date: 2025-11-17
-permalink: /docs/ai/langgraph/old_docs/langgraph_core_concepts/
 categories:
   - AI
   - LangGraph

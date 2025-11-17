@@ -1,7 +1,6 @@
 ﻿---
 title: TailwindCSS
 date: 2025-11-17
-permalink: /docs/htmlcssjs/TailwindCSS/01all/
 categories:
   - Frontend
   - Technology

@@ -1,7 +1,6 @@
 ﻿---
 title: 调度任务选型
 date: 2024/04/17
-permalink: /docs/scheduler/first/
 categories:
   - Scheduler
   - Java

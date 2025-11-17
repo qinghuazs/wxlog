@@ -1,7 +1,6 @@
 ﻿---
 title: Thread
 date: 2024/10/23
-permalink: /docs/java/javathread/
 categories:
   - Java
   - Technology

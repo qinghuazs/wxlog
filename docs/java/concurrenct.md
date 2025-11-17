@@ -1,7 +1,6 @@
 ﻿---
 title: Java Lock
 date: 2025-11-17
-permalink: /docs/java/concurrenct/
 categories:
   - Java
   - Technology

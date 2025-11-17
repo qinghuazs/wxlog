@@ -667,35 +667,27 @@ export default defineConfig({
         }
       ],
 
-      '/docs/场景题/': [
+      '/system-design/': [
         {
           text: '系统设计',
           collapsed: false,
           items: [
-            { text: '短URL系统设计', link: '/system-design/short-url.html' },
-            { text: '注册中心的设计', link: '/system-design/service-registry.html' },
-            { text: '负载均衡设计', link: '/system-design/load-balancing.html' },
-            { text: '分布式事务算法（两阶段提交）', link: '/system-design/distributed-transaction.html' },
-            { text: '分布式熔断算法（滑动窗口）', link: '/system-design/circuit-breaker.html' },
-            { text: 'OpenFeign详解', link: '/system-design/openfeign.html' },
-            { text: '分布式限流算法（令牌桶算法）', link: '/system-design/rate-limiting.html' },
-            { text: '深度解析短URL系统高级特性', link: '/system-design/short-url-detailed.html' },
-            { text: '深入理解企业级异步处理全栈方案', link: '/system-design/async-processing.html' },
-            { text: '聚合一个对接订单平台', link: '/system-design/order-platform.html' },
-            { text: '秒杀系统设计', link: '/system-design/flash-sale.html' },
-            { text: '点赞系统设计', link: '/system-design/like-system.html' },
-            { text: '12306抢票系统设计', link: '/system-design/train-ticket-system.html' },
-            { text: '分布式任务系统设计', link: '/system-design/distributed-task.html' },
-            { text: 'IM系统设计', link: '/system-design/im-system.html' },
-            { text: '详细分析数据库分库分表的方案', link: '/system-design/sharding.html' },
-            { text: 'HTTP链接池深度原理解析', link: '/system-design/http-pool.html' },
-            { text: 'CDN实现原理详解', link: '/system-design/cdn.html' },
-            { text: 'DNS实现原理详解', link: '/system-design/dns.html' },
-            { text: 'ClickHouse和Doris技术选型对比', link: '/system-design/clickhouse-vs-doris.html' },
-            { text: 'MySQL几种同步机制对比分析', link: '/system-design/mysql-replication.html' },
-            { text: '缓存选型标准与分析', link: '/system-design/cache-selection.html' },
-            { text: 'payment_system_design', link: '/system-design/payment-system.html' },
-            { text: '从业这么多年的从业感悟', link: '/system-design/career-insights.html' },
+            { text: '短URL系统设计', link: '/system-design/short-url' },
+            { text: '注册中心的设计', link: '/system-design/service-registry' },
+            { text: '负载均衡设计', link: '/system-design/load-balancing' },
+            { text: '分布式熔断算法（滑动窗口）', link: '/system-design/circuit-breaker' },
+            { text: 'OpenFeign详解', link: '/system-design/openfeign' },
+            { text: '分布式限流算法（令牌桶算法）', link: '/system-design/rate-limiting' },
+            { text: '深度解析短URL系统高级特性', link: '/system-design/short-url-detailed' },
+            { text: '秒杀系统设计', link: '/system-design/flash-sale' },
+            { text: '12306抢票系统设计', link: '/system-design/train-ticket-system' },
+            { text: '详细分析数据库分库分表的方案', link: '/system-design/sharding' },
+            { text: 'CDN实现原理详解', link: '/system-design/cdn' },
+            { text: 'DNS实现原理详解', link: '/system-design/dns' },
+            { text: 'ClickHouse和Doris技术选型对比', link: '/system-design/clickhouse-vs-doris' },
+            { text: 'MySQL几种同步机制对比分析', link: '/system-design/mysql-replication' },
+            { text: '技术选型标准与分析', link: '/system-design/tech-selection' },
+            { text: '支付系统设计', link: '/system-design/payment-system' },
           ]
         }
       ],
@@ -807,14 +799,14 @@ export default defineConfig({
         }
       ],
 
-      '/docs/小程序/': [
+      '/miniprogram/': [
         {
           text: '小程序',
           collapsed: false,
           items: [
-            { text: '保险行业小程序赚钱', link: '/miniprogram/monetization.html' },
-            { text: '小程序备案通过查询', link: '/miniprogram/beian-progress.html' },
-            { text: '重新迭代', link: '/miniprogram/development-process.html' },
+            { text: '保险行业小程序赚钱', link: '/miniprogram/monetization' },
+            { text: '小程序备案通过查询', link: '/miniprogram/beian-progress' },
+            { text: '重新迭代', link: '/miniprogram/development-process' },
           ]
         }
       ],
@@ -838,217 +830,31 @@ export default defineConfig({
         }
       ],
 
-      '/docs/我的玩具/': [
-        {
-          text: '我的玩具',
-          collapsed: false,
-          items: [
-            {
-              text: 'APP',
-              items: [
-                { text: '苹果 App Store 有时候审核优化应用', link: '/my-projects/free-apps.html' },
-                { text: '测试开发文档-测试用例和详细说明', link: '/my-projects/requirements-prioritized.html' },
-                { text: '第一次开发测试文档-审核应用发现和解决的问题', link: '/my-projects/phase1-requirements.html' },
-                { text: '数据库规划-第一个优化包', link: '/my-projects/database-design-v2.html' },
-                { text: '数据库规划', link: '/my-projects/database-design.html' },
-              ]
-            }
-          ]
-        }
-      ],
-
-      '/docs/我的经历/': [
-        {
-          text: '我的经历',
-          collapsed: false,
-          items: [
-            { text: '我的经历', link: '/my-experience/personal-story.html' },
-            { text: '技术与创业杂想', link: '/my-experience/tech-thoughts.html' },
-          ]
-        }
-      ],
-
-      '/docs/面试/': [
-        {
-          text: '面试',
-          collapsed: false,
-          items: [
-            {
-              text: '投资记录',
-              items: [
-                {
-                  text: '202509',
-                  items: [
-                    { text: '亏的一课', link: '/docs/面试/投资记录/202509/20250913亏的一课' },
-                  ]
-                }
-              ]
-            },
-            {
-              text: '投资基金',
-              items: [
-                { text: '投资基金在可以关注哪些指标', link: '/docs/面试/投资基金/01.投资基金在可以关注哪些指标' },
-              ]
-            },
-            {
-              text: '投资讲座',
-              items: [
-                { text: '房子讲座', link: '/docs/面试/投资讲座/01.房子讲座' },
-              ]
-            }
-          ]
-        }
-      ],
-
-      '/docs/项目/': [
-        {
-          text: '项目',
-          collapsed: false,
-          items: [
-            { text: '数据分析类', link: '/projects/data-analysis.html' },
-            { text: '数学建模', link: '/projects/math-modeling.html' },
-            { text: '商超管理', link: '/projects/supermarket.html' },
-            { text: '架构设计类', link: '/projects/architecture.html' },
-            { text: '对账功能', link: '/projects/reconciliation.html' },
-            { text: '资金调度', link: '/projects/fund-management.html' },
-            {
-              text: '消息队列',
-              items: [
-                {
-                  text: 'Disruptor',
-                  items: [
-                    { text: 'Disruptor详解', link: '/performance/disruptor-introduction.html' },
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-
-      // 系统设计路由（与场景题共享侧边栏）
-      '/system-design/': [
-        {
-          text: '系统设计',
-          collapsed: false,
-          items: [
-            { text: '短URL系统设计', link: '/system-design/short-url.html' },
-            { text: '注册中心的设计', link: '/system-design/service-registry.html' },
-            { text: '负载均衡设计', link: '/system-design/load-balancing.html' },
-            { text: '分布式事务算法（两阶段提交）', link: '/system-design/distributed-transaction.html' },
-            { text: '分布式熔断算法（滑动窗口）', link: '/system-design/circuit-breaker.html' },
-            { text: 'OpenFeign详解', link: '/system-design/openfeign.html' },
-            { text: '分布式限流算法（令牌桶算法）', link: '/system-design/rate-limiting.html' },
-            { text: '深度解析短URL系统高级特性', link: '/system-design/short-url-detailed.html' },
-            { text: '深入理解企业级异步处理全栈方案', link: '/system-design/async-processing.html' },
-            { text: '聚合一个对接订单平台', link: '/system-design/order-platform.html' },
-            { text: '秒杀系统设计', link: '/system-design/flash-sale.html' },
-            { text: '点赞系统设计', link: '/system-design/like-system.html' },
-            { text: '12306抢票系统设计', link: '/system-design/train-ticket-system.html' },
-            { text: '分布式任务系统设计', link: '/system-design/distributed-task.html' },
-            { text: 'IM系统设计', link: '/system-design/im-system.html' },
-            { text: '详细分析数据库分库分表的方案', link: '/system-design/sharding.html' },
-            { text: 'HTTP链接池深度原理解析', link: '/system-design/http-pool.html' },
-            { text: 'CDN实现原理详解', link: '/system-design/cdn.html' },
-            { text: 'DNS实现原理详解', link: '/system-design/dns.html' },
-            { text: 'ClickHouse和Doris技术选型对比', link: '/system-design/clickhouse-vs-doris.html' },
-            { text: 'MySQL几种同步机制对比分析', link: '/system-design/mysql-replication.html' },
-            { text: '缓存选型标准与分析', link: '/system-design/cache-selection.html' },
-            { text: 'payment_system_design', link: '/system-design/payment-system.html' },
-            { text: '从业这么多年的从业感悟', link: '/system-design/career-insights.html' },
-          ]
-        }
-      ],
-
-      // 小程序路由（英文路径）
-      '/miniprogram/': [
-        {
-          text: '小程序',
-          collapsed: false,
-          items: [
-            { text: '保险行业小程序赚钱', link: '/miniprogram/monetization.html' },
-            { text: '小程序备案通过查询', link: '/miniprogram/beian-progress.html' },
-            { text: '重新迭代', link: '/miniprogram/development-process.html' },
-          ]
-        }
-      ],
-
-      // 我的玩具路由（英文路径）
       '/my-projects/': [
         {
           text: '我的玩具',
           collapsed: false,
           items: [
-            {
-              text: 'APP',
-              items: [
-                { text: '苹果 App Store 有时候审核优化应用', link: '/my-projects/free-apps.html' },
-                { text: '测试开发文档-测试用例和详细说明', link: '/my-projects/requirements-prioritized.html' },
-                { text: '第一次开发测试文档-审核应用发现和解决的问题', link: '/my-projects/phase1-requirements.html' },
-                { text: '数据库规划-第一个优化包', link: '/my-projects/database-design-v2.html' },
-                { text: '数据库规划', link: '/my-projects/database-design.html' },
-              ]
-            }
+            { text: '苹果 App Store 限时免费应用', link: '/my-projects/free-apps' },
+            { text: '功能需求文档-按优先级详细说明', link: '/my-projects/requirements-prioritized' },
+            { text: '第一期开发需求文档', link: '/my-projects/phase1-requirements' },
+            { text: '数据库规划-第一期优化版', link: '/my-projects/database-design-v2' },
+            { text: '数据库规划', link: '/my-projects/database-design' },
           ]
         }
       ],
 
-      // 我的经历路由（英文路径）
       '/my-experience/': [
         {
           text: '我的经历',
           collapsed: false,
           items: [
-            { text: '我的经历', link: '/my-experience/personal-story.html' },
-            { text: '技术与创业杂想', link: '/my-experience/tech-thoughts.html' },
+            { text: '管理经验', link: '/my-experience/management' },
+            { text: '个人亮点分析', link: '/my-experience/highlights' },
           ]
         }
       ],
 
-      // 项目路由（英文路径）
-      '/projects/': [
-        {
-          text: '项目',
-          collapsed: false,
-          items: [
-            { text: '数据分析类', link: '/projects/data-analysis.html' },
-            { text: '数学建模', link: '/projects/math-modeling.html' },
-            { text: '商超管理', link: '/projects/supermarket.html' },
-            { text: '架构设计类', link: '/projects/architecture.html' },
-            { text: '对账功能', link: '/projects/reconciliation.html' },
-            { text: '资金调度', link: '/projects/fund-management.html' },
-            {
-              text: '消息队列',
-              items: [
-                {
-                  text: 'Disruptor',
-                  items: [
-                    { text: 'Disruptor详解', link: '/performance/disruptor-introduction.html' },
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-
-      // 高性能路由（英文路径）
-      '/performance/': [
-        {
-          text: '高性能',
-          collapsed: false,
-          items: [
-            {
-              text: 'Disruptor',
-              items: [
-                { text: 'Disruptor简介', link: '/performance/disruptor-introduction.html' },
-              ]
-            }
-          ]
-        }
-      ],
-
-      // 面试路由（英文路径）
       '/interview/': [
         {
           text: '面试',
@@ -1057,13 +863,13 @@ export default defineConfig({
             {
               text: '个人情况',
               items: [
-                { text: '自我介绍', link: '/interview/self-introduction.html' },
+                { text: '自我介绍', link: '/interview/self-introduction' },
               ]
             },
             {
               text: '反问环节',
               items: [
-                { text: '反问环节可以问哪些问题', link: '/interview/reverse.html' },
+                { text: '反问环节可以问哪些问题', link: '/interview/reverse' },
               ]
             },
             {
@@ -1072,11 +878,24 @@ export default defineConfig({
                 {
                   text: '202509',
                   items: [
-                    { text: '滴滴一面', link: '/interview/didi-delivery-engine-01.html' },
+                    { text: '滴滴一面', link: '/interview/didi-delivery-engine-01' },
                   ]
                 }
               ]
             },
+          ]
+        }
+      ],
+
+      '/projects/': [
+        {
+          text: '项目',
+          collapsed: false,
+          items: [
+            { text: '衢州安邦车载', link: '/projects/quzhou-anbang' },
+            { text: '架构设计', link: '/projects/architecture' },
+            { text: '对账功能', link: '/projects/reconciliation' },
+            { text: '资金调度', link: '/projects/fund-management' },
           ]
         }
       ],

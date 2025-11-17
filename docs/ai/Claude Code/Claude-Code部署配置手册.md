@@ -1,7 +1,6 @@
 ﻿---
 title: Claude-Code部署配置手册
 date: 2025-11-17
-permalink: /docs/ai/Claude Code/Claude-Code部署配置手册/
 categories:
   - AI
   - Claude Code

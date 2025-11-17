@@ -1,7 +1,6 @@
 ﻿---
 title: permalink
 date: 2025-04-03
-permalink: /pages/permalink/
 categories:
   - Technology
   - Learning
@@ -13,7 +12,6 @@ categories:
 ---
 title: permalink
 date: 2025-04-03
-permalink: /pages/permalink/
 ---
 ```
 

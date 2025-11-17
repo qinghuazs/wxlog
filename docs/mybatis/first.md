@@ -1,7 +1,6 @@
 ﻿---
 title: MyBatis Interceptor扩展
 date: 2024/12/02
-permalink: /docs/mybatis/first/
 categories:
   - MyBatis
   - Java

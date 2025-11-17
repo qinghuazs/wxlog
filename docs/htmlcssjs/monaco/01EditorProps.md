@@ -1,7 +1,6 @@
 ﻿---
 title: EditorProps 使用指南
 date: 2025-11-17
-permalink: /docs/htmlcssjs/monaco/01EditorProps/
 categories:
   - Frontend
   - Technology

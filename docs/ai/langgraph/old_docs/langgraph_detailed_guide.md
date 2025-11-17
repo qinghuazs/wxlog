@@ -1,7 +1,6 @@
 ﻿---
 title: langgraph_detailed_guide
 date: 2025-11-17
-permalink: /docs/ai/langgraph/old_docs/langgraph_detailed_guide/
 categories:
   - AI
   - LangGraph

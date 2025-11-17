@@ -1,7 +1,6 @@
 ﻿---
 title: ollama安装
 date: 2025-11-17
-permalink: /docs/ai/ollma/ollama安装/
 categories:
   - AI
   - Ollama

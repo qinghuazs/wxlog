@@ -1,7 +1,6 @@
 ﻿---
 title: 锁
 date: 2024/10/26
-permalink: /docs/java/lock/
 categories:
   - Java
   - Technology

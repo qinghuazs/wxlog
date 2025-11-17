@@ -1,7 +1,6 @@
 ﻿---
 title: 分布式调度任务中心设计
 date: 2024-04-16
-permalink: /docs/systemdesign/job/
 categories:
   - System Design
   - Architecture

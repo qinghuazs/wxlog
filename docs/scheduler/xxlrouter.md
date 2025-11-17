@@ -1,7 +1,6 @@
 ﻿---
 title: 路由策略
 date: 2024/04/17
-permalink: /docs/scheduler/xxlrouter/
 categories:
   - Scheduler
   - Java

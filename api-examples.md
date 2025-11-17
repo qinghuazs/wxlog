@@ -1,7 +1,6 @@
 ﻿---
 title: api-examples
 date: 2025-11-17
-permalink: /api-examples/
 categories:
   - Technology
   - Learning

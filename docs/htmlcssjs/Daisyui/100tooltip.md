@@ -1,7 +1,6 @@
 ﻿---
 title: tooltip对input不生效
 date: 2025-11-17
-permalink: /docs/htmlcssjs/Daisyui/100tooltip/
 categories:
   - Frontend
   - Technology

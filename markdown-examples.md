@@ -1,7 +1,6 @@
 ﻿---
 title: markdown-examples
 date: 2025-11-17
-permalink: /markdown-examples/
 categories:
   - Technology
   - Learning

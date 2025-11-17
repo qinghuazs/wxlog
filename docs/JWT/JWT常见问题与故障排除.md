@@ -1,7 +1,6 @@
 ﻿---
 title: JWT常见问题与故障排除
 date: 2025-11-17
-permalink: /docs/JWT/JWT常见问题与故障排除/
 categories:
   - JWT
   - Security

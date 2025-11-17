@@ -4,7 +4,14 @@
       "Bash(dir:*)",
       "Bash(powershell -Command:*)",
       "Bash(powershell:*)",
-      "Bash(node generate-sidebar.js:*)"
+      "Bash(node generate-sidebar.js:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(python migrate_permalinks.py:*)",
+      "Bash(python remove_permalinks.py:*)",
+      "Bash(node -c:*)"
     ],
     "deny": [],
     "ask": []

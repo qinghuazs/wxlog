@@ -1,7 +1,6 @@
 ﻿---
 title: Consumer接口
 date: 2024/04/16
-permalink: /docs/java/consumer/
 categories:
   - Java
   - Technology

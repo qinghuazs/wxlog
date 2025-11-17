@@ -1,7 +1,6 @@
 ﻿---
 title: 使用了JWT之后还需要auth2吗
 date: 2025-11-17
-permalink: /docs/JWT/使用了JWT之后还需要auth2吗/
 categories:
   - JWT
   - Security

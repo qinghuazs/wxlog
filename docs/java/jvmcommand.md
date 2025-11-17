@@ -1,7 +1,6 @@
 ﻿---
 title: JVM 问题排查常用命令
 date: 2024/04/17
-permalink: /docs/java/jvmcommand/
 categories:
   - Java
   - JVM
