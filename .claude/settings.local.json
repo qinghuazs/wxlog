@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(powershell:*)",
+      "Bash(node generate-sidebar.js:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
