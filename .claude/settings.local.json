@@ -14,7 +14,15 @@
       "Bash(node -c:*)",
       "Bash(npm install:*)",
       "Bash(node -e \"require(''''./.vitepress/config.mts'''')\")",
-      "Bash(git rm:*)"
+      "Bash(git rm:*)",
+      "WebFetch(domain:shiki.style)",
+      "WebFetch(domain:vitepress.dev)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npm --version)",
+      "Bash(node:*)",
+      "Bash(npx --version:*)",
+      "Bash(test:*)"
     ],
     "deny": [],
     "ask": []

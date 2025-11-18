@@ -168,7 +168,7 @@ touch .env
 # 使用文本编辑器打开 .env，添加以下内容：
 ```
 
-```.env
+```dotenv
 # OpenAI API 密钥（从 https://platform.openai.com/api-keys 获取）
 OPENAI_API_KEY=sk-your-api-key-here
 

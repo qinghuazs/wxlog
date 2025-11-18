@@ -6,6 +6,14 @@ export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
 
+  // Markdown 配置
+  markdown: {
+    theme: {
+      light: 'github-light',
+      dark: 'github-dark'
+    }
+  },
+
   // Mermaid 配置
   mermaid: {
     // 可选：配置 mermaid 主题和其他选项
