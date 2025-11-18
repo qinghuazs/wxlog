@@ -1,5 +1,5 @@
 ---
-title: 09 Mcp Protocol
+title: Claude Code架构详解（九）：MCP协议深入解析
 date: 2025-11-18
 permalink: /ai/claude-code/architecture-09-mcp-protocol.html
 categories:

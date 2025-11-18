@@ -1,5 +1,5 @@
 ---
-title: 10 Browser Automation
+title: Claude Code架构详解（十）：浏览器自动化集成
 date: 2025-11-18
 permalink: /ai/claude-code/architecture-10-browser-automation.html
 categories:
