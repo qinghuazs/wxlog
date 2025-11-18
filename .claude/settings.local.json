@@ -34,7 +34,9 @@
       "Bash(then echo -e \"\\n# VitePress 缓存\\n.vitepress/cache\\n.vitepress/dist\")",
       "Bash(.gitignore)",
       "Bash(else echo \".gitignore 中已存在缓存配置\")",
-      "Bash(fi)"
+      "Bash(fi)",
+      "Bash(grep:*)",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "ask": []
