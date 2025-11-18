@@ -1,13 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git mv:*)",
-      "Bash(git add:*)",
-      "Bash(for:*)",
-      "Bash(do sed -i 's/^## 第一部分:/## 一、/g; s/^## 第二部分:/## 二、/g; s/^## 第三部分:/## 三、/g; s/^## 第四部分:/## 四、/g; s/^## 第五部分:/## 五、/g; s/^## 第六部分:/## 六、/g' \"$file\")",
-      "Bash(git commit -m \"$(cat <<''EOF''\n重构LangChain文档结构和格式\n\n- 文件重命名: 使用数字编号格式 (1.xx.md ~ 18.xx.md)\n- 更新front matter: 统一title/date/tags/categories格式\n- 优化主标题: 移除\"第N周:\"前缀\n- 统一章节号: 转换为中文数字格式 (一、二、三、)\n- 更新config.mts: rewrites和sidebar配置\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
-      "Bash(git push)",
-      "Bash(git commit:*)"
+      "Bash(do sed -i 's/^## 第一部分:/## 一、/g; s/^## 第二部分:/## 二、/g; s/^## 第三部分:/## 三、/g; s/^## 第四部分:/## 四、/g; s/^## 第五部分:/## 五、/g; s/^## 第六部分:/## 六、/g; s/^## 第七部分:/## 七、/g; s/^## 第八部分:/## 八、/g' \"$file\")"
     ],
     "deny": [],
     "ask": []
