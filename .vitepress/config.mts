@@ -6,8 +6,8 @@ export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
 
-  // 路径重写：中文文件名 -> 英文 URL
   rewrites: {
+    // === docs 目录 ===
     // MySQL
     'docs/database/mysql/提示词.md': 'docs/database/mysql/prompts.md',
     // Kafka
@@ -20,7 +20,87 @@ export default withMermaid(defineConfig({
     'docs/区块链/:dir/:page': 'docs/blockchain/:dir/:page',
     // AI 提示词
     'docs/ai/提示词/:dir/:page': 'docs/ai/prompts/:dir/:page',
-  },
+
+    // === 01.AI 目录 ===
+    // Claude Code
+    '01.AI/01.AI开发工具/01. ClaudeCode/Agent工作流引擎详解.md': 'ai/claude-code/agent-workflow-engine.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/Claude Code A2A 机制详解.md': 'ai/claude-code/a2a-mechanism.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/Claude Code MCP 服务加载机制详解.md': 'ai/claude-code/mcp-loading-mechanism.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/03 Context Management.md': 'ai/claude-code/architecture-03-context-management.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/04 Session Management.md': 'ai/claude-code/architecture-04-session-management.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/05 Tool System Architecture.md': 'ai/claude-code/architecture-05-tool-system-architecture.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/09 Mcp Protocol.md': 'ai/claude-code/architecture-09-mcp-protocol.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/10 Browser Automation.md': 'ai/claude-code/architecture-10-browser-automation.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/12 Multimodal Interaction.md': 'ai/claude-code/architecture-12-multimodal-interaction.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/20 Build Your Own Ai Assistant.md': 'ai/claude-code/architecture-20-build-your-own-ai-assistant.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/Claude Code 测试与质量保证.md': 'ai/claude-code/architecture-testing-quality-assurance.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/Completion Summary.md': 'ai/claude-code/architecture-completion-summary.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/MCP Server开发实战.md': 'ai/claude-code/architecture-18-mcp-server-practice.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/Performance Optimization.md': 'ai/claude-code/architecture-performance-optimization.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/index.md': 'ai/claude-code/architecture-index.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/navigation.md': 'ai/claude-code/architecture-navigation.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/代码搜索与分析工具.md': 'ai/claude-code/architecture-code-search-analysis.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/architecture/文件操作工具实现.md': 'ai/claude-code/architecture-file-operations.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/安全机制设计.md': 'ai/claude-code/security-design.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/终端集成实现.md': 'ai/claude-code/terminal-integration.md',
+    // LangChain
+    '01.AI/02.AI 开发框架/01.LangChain/Enterprise Rag System.md': 'ai/langchain/enterprise-rag-system.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Learning Roadmap.md': 'ai/langchain/learning-roadmap.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Llamaindex Vs Langchain.md': 'ai/langchain/llamaindex-vs-langchain.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Recall Concept.md': 'ai/langchain/recall-concept.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week1 Setup Core Concepts.md': 'ai/langchain/week1-setup-core-concepts.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week16 Deployment Optimization.md': 'ai/langchain/week16-deployment-optimization.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week2 Messages Prompts.md': 'ai/langchain/week2-messages-prompts.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week3 Models Deep Dive.md': 'ai/langchain/week3-models-deep-dive.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week4 Chains Basics.md': 'ai/langchain/week4-chains-basics.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week5 Documents.md': 'ai/langchain/week5-documents.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week6 Memory.md': 'ai/langchain/week6-memory.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week7 Tools.md': 'ai/langchain/week7-tools.md',
+    '01.AI/02.AI 开发框架/01.LangChain/Week8 Agents.md': 'ai/langchain/week8-agents.md',
+    '01.AI/02.AI 开发框架/01.LangChain/index.md': 'ai/langchain/index.md',
+    '01.AI/02.AI 开发框架/01.LangChain/第10周-RAG系统详解.md': 'ai/langchain/week10-rag-system.md',
+    '01.AI/02.AI 开发框架/01.LangChain/第11周-Callbacks和监控系统.md': 'ai/langchain/week11-callbacks-monitoring.md',
+    '01.AI/02.AI 开发框架/01.LangChain/第9周-Embeddings和Vector Stores详解.md': 'ai/langchain/week9-embeddings-vectorstores.md',
+    // LangGraph
+    '01.AI/02.AI 开发框架/02.LangGraph/Advanced Features.md': 'ai/langgraph/advanced-features.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph API 参考手册.md': 'ai/langgraph/api-reference.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 与 LangChain 集成.md': 'ai/langgraph/langchain-integration.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 与其他框架对比分析.md': 'ai/langgraph/framework-comparison.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 企业级案例.md': 'ai/langgraph/enterprise-cases.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 入门介绍.md': 'ai/langgraph/introduction.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 基础案例实战.md': 'ai/langgraph/basic-examples.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 基础概念深度解析.md': 'ai/langgraph/basic-concepts.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 多智能体系统.md': 'ai/langgraph/multi-agent-system.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 学习指南 - 目录索引.md': 'ai/langgraph/index.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 学习路线图.md': 'ai/langgraph/learning-roadmap.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 实战案例详解.md': 'ai/langgraph/practical-examples.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 实际项目案例.md': 'ai/langgraph/real-projects.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 常见问题与解决方案.md': 'ai/langgraph/troubleshooting.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 快速入门指南.md': 'ai/langgraph/quickstart.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 性能优化指南.md': 'ai/langgraph/performance-optimization.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 性能测试与基准.md': 'ai/langgraph/performance-testing.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 最佳实践总结.md': 'ai/langgraph/best-practices.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 核心概念解析.md': 'ai/langgraph/core-concepts.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 核心概念详解与作用.md': 'ai/langgraph/core-concepts-detail.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 测试与调试.md': 'ai/langgraph/testing-debugging.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 测试策略与最佳实践.md': 'ai/langgraph/testing-strategy.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 状态管理详解.md': 'ai/langgraph/state-management.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 生产部署实践.md': 'ai/langgraph/production-deployment.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 节点开发指南.md': 'ai/langgraph/node-development.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 路由与控制流.md': 'ai/langgraph/routing-control.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 项目开发实战.md': 'ai/langgraph/project-development.md',
+    '01.AI/02.AI 开发框架/02.LangGraph/LangGraph 项目模板与脚手架.md': 'ai/langgraph/project-template.md',
+    // 提示词工程
+    '01.AI/03.提示词工程/01.小红书提示词/Xiaohongshu Style.md': 'ai/prompts/xiaohongshu-style.md',
+    // CodeAgent
+    '01.AI/codeagent/AI 集成与后端实现 - Code Agent 核心服务.md': 'ai/codeagent/ai-integration.md',
+    '01.AI/codeagent/Code Agent 代码补全实现详解.md': 'ai/codeagent/code-completion.md',
+    '01.AI/codeagent/Code Agent 开发指南 - 构建类似 Cursor 的 AI 编程助手.md': 'ai/codeagent/overview.md',
+    '01.AI/codeagent/Code Agent 架构设计详解.md': 'ai/codeagent/architecture.md',
+    '01.AI/codeagent/VSCode 插件开发 - Code Agent 前端实现.md': 'ai/codeagent/vscode-extension.md',
+    // Other
+    '01.AI/claudecode/architecture/Claude Code 错误处理与容错设计.md': 'ai/claudecode/architecture-error-handling.md',
+  },  },
 
   // Markdown 配置
   markdown: {

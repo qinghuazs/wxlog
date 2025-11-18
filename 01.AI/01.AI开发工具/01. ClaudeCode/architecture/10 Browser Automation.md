@@ -1,0 +1,1600 @@
+---
+title: 10 Browser Automation
+date: 2025-11-18
+permalink: /ai/claude-code/architecture-10-browser-automation.html
+categories:
+  - AI
+---
+
+# 第10篇：浏览器自动化集成
+
+## 引言
+
+浏览器自动化是现代软件开发中不可或缺的能力，无论是 Web 应用测试、网页数据抓取，还是自动化运维任务，都需要与浏览器进行交互。Claude Code 通过 Playwright MCP Server 提供了强大的浏览器自动化能力，让 AI 能够像人类一样操作浏览器。
+
+### 为什么需要浏览器自动化？
+
+在 AI 辅助开发中，浏览器自动化有以下应用场景：
+
+1. **自动化测试**：自动执行 Web 应用的端到端测试
+2. **网页数据采集**：从动态网页中提取数据
+3. **UI 交互调试**：模拟用户操作，定位前端问题
+4. **截图和文档生成**：自动生成应用截图和文档
+5. **网站监控**：定期检查网站可用性和功能正常性
+
+### 本文目标
+
+通过本文，你将学习到：
+- Playwright MCP Server 的实现原理
+- 页面快照和 DOM 解析（Accessibility Tree）
+- 元素定位和交互（click、type、select 等）
+- 网络请求监控和拦截
+- 截图和 PDF 生成
+- 自动化测试场景
+- 完整的 Web 自动化实战案例
+
+
+## 二、Playwright MCP Server 实现
+
+### 2.1 整体架构
+
+Claude Code 通过 MCP（Model Context Protocol）与 Playwright Server 通信，实现浏览器自动化能力。
+
+```mermaid
+graph TB
+    subgraph "Claude Code"
+        A[Claude AI] --> B[MCP Client]
+    end
+
+    subgraph "Playwright MCP Server"
+        B --> C[JSON-RPC Handler]
+        C --> D[Tool Router]
+        D --> E1[Browser Manager]
+        D --> E2[Page Manager]
+        D --> E3[Element Manager]
+
+        E1 --> F[Playwright API]
+        E2 --> F
+        E3 --> F
+    end
+
+    subgraph "Browser"
+        F --> G[Chromium/Firefox/WebKit]
+        G --> H[Web Page]
+    end
+
+    style A fill:#e1f5ff
+    style F fill:#ffe1f5
+    style H fill:#e1ffe1
+```
+
+### 2.2 核心组件
+
+#### **BrowserManager（浏览器管理器）**
+
+负责浏览器实例的生命周期管理：
+
+```typescript
+/**
+ * 浏览器管理器
+ * 管理浏览器实例的创建、配置和销毁
+ */
+class BrowserManager {
+  private browser: Browser | null = null;
+  private context: BrowserContext | null = null;
+  private page: Page | null = null;
+
+  /**
+   * 启动浏览器
+   */
+  async launch(options: LaunchOptions = {}): Promise<void> {
+    const playwright = require('playwright');
+
+    // 默认配置
+    const defaultOptions: LaunchOptions = {
+      headless: false,  // 显示浏览器窗口
+      slowMo: 0,        // 操作延迟（ms）
+      timeout: 30000,   // 超时时间
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage'
+      ]
+    };
+
+    // 启动浏览器
+    this.browser = await playwright.chromium.launch({
+      ...defaultOptions,
+      ...options
+    });
+
+    // 创建浏览器上下文
+    this.context = await this.browser.newContext({
+      viewport: { width: 1280, height: 720 },
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+      locale: 'en-US',
+      timezoneId: 'America/New_York',
+      permissions: ['geolocation', 'notifications']
+    });
+
+    // 创建页面
+    this.page = await this.context.newPage();
+
+    console.error('[BrowserManager] Browser launched successfully');
+  }
+
+  /**
+   * 获取当前页面
+   */
+  getPage(): Page {
+    if (!this.page) {
+      throw new Error('Browser not launched. Call launch() first.');
+    }
+    return this.page;
+  }
+
+  /**
+   * 调整窗口大小
+   */
+  async resize(width: number, height: number): Promise<void> {
+    await this.getPage().setViewportSize({ width, height });
+  }
+
+  /**
+   * 关闭浏览器
+   */
+  async close(): Promise<void> {
+    if (this.browser) {
+      await this.browser.close();
+      this.browser = null;
+      this.context = null;
+      this.page = null;
+      console.error('[BrowserManager] Browser closed');
+    }
+  }
+}
+```
+
+#### **PageManager（页面管理器）**
+
+负责页面导航和状态管理：
+
+```typescript
+/**
+ * 页面管理器
+ * 管理页面导航、网络监控、控制台消息等
+ */
+class PageManager {
+  private page: Page;
+  private consoleMessages: ConsoleMessage[] = [];
+  private networkRequests: Request[] = [];
+  private dialogs: Dialog[] = [];
+
+  constructor(page: Page) {
+    this.page = page;
+    this.setupListeners();
+  }
+
+  /**
+   * 设置事件监听
+   */
+  private setupListeners(): void {
+    // 监听控制台消息
+    this.page.on('console', (msg) => {
+      this.consoleMessages.push(msg);
+      console.error(`[Console] ${msg.type()}: ${msg.text()}`);
+    });
+
+    // 监听网络请求
+    this.page.on('request', (request) => {
+      this.networkRequests.push(request);
+      console.error(`[Network] ${request.method()} ${request.url()}`);
+    });
+
+    // 监听对话框
+    this.page.on('dialog', (dialog) => {
+      this.dialogs.push(dialog);
+      console.error(`[Dialog] ${dialog.type()}: ${dialog.message()}`);
+    });
+
+    // 监听页面错误
+    this.page.on('pageerror', (error) => {
+      console.error('[PageError]', error);
+    });
+  }
+
+  /**
+   * 导航到 URL
+   */
+  async navigate(url: string, options?: NavigationOptions): Promise<string> {
+    try {
+      console.error(`[PageManager] Navigating to: ${url}`);
+
+      const response = await this.page.goto(url, {
+        waitUntil: 'domcontentloaded',
+        timeout: 30000,
+        ...options
+      });
+
+      const status = response?.status() || 0;
+      const finalUrl = this.page.url();
+
+      return `Navigated to ${finalUrl} (Status: ${status})`;
+    } catch (error) {
+      throw new Error(`Navigation failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * 后退
+   */
+  async goBack(): Promise<string> {
+    await this.page.goBack();
+    return `Navigated back to ${this.page.url()}`;
+  }
+
+  /**
+   * 前进
+   */
+  async goForward(): Promise<string> {
+    await this.page.goForward();
+    return `Navigated forward to ${this.page.url()}`;
+  }
+
+  /**
+   * 刷新页面
+   */
+  async reload(): Promise<string> {
+    await this.page.reload();
+    return 'Page reloaded';
+  }
+
+  /**
+   * 等待加载完成
+   */
+  async waitForLoad(state: 'load' | 'domcontentloaded' | 'networkidle' = 'load'): Promise<void> {
+    await this.page.waitForLoadState(state);
+  }
+
+  /**
+   * 获取控制台消息
+   */
+  getConsoleMessages(onlyErrors = false): string {
+    let messages = this.consoleMessages;
+
+    if (onlyErrors) {
+      messages = messages.filter(msg => msg.type() === 'error');
+    }
+
+    return messages
+      .map(msg => `[${msg.type()}] ${msg.text()}`)
+      .join('\n');
+  }
+
+  /**
+   * 获取网络请求
+   */
+  getNetworkRequests(): string {
+    return this.networkRequests
+      .map(req => `${req.method()} ${req.url()} -> ${req.response()?.status() || 'pending'}`)
+      .join('\n');
+  }
+
+  /**
+   * 清空记录
+   */
+  clearRecords(): void {
+    this.consoleMessages = [];
+    this.networkRequests = [];
+    this.dialogs = [];
+  }
+}
+```
+
+#### **ElementManager（元素管理器）**
+
+负责元素定位和交互：
+
+```typescript
+/**
+ * 元素管理器
+ * 负责元素定位、交互和操作
+ */
+class ElementManager {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 点击元素
+   */
+  async click(selector: string, options?: ClickOptions): Promise<string> {
+    try {
+      // 等待元素可见
+      await this.page.waitForSelector(selector, { state: 'visible', timeout: 10000 });
+
+      // 点击元素
+      await this.page.click(selector, {
+        timeout: 5000,
+        ...options
+      });
+
+      return `Clicked element: ${selector}`;
+    } catch (error) {
+      throw new Error(`Click failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 输入文本
+   */
+  async type(selector: string, text: string, options?: TypeOptions): Promise<string> {
+    try {
+      await this.page.waitForSelector(selector, { state: 'visible', timeout: 10000 });
+
+      // 清空输入框
+      await this.page.fill(selector, '');
+
+      // 输入文本
+      if (options?.slowly) {
+        await this.page.type(selector, text, { delay: 100 });
+      } else {
+        await this.page.fill(selector, text);
+      }
+
+      // 是否提交（按 Enter）
+      if (options?.submit) {
+        await this.page.press(selector, 'Enter');
+      }
+
+      return `Typed text into ${selector}`;
+    } catch (error) {
+      throw new Error(`Type failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 选择下拉选项
+   */
+  async select(selector: string, values: string[]): Promise<string> {
+    try {
+      await this.page.waitForSelector(selector, { state: 'visible', timeout: 10000 });
+      await this.page.selectOption(selector, values);
+      return `Selected options in ${selector}: ${values.join(', ')}`;
+    } catch (error) {
+      throw new Error(`Select failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 勾选/取消勾选复选框
+   */
+  async check(selector: string, checked: boolean): Promise<string> {
+    try {
+      await this.page.waitForSelector(selector, { state: 'visible', timeout: 10000 });
+
+      if (checked) {
+        await this.page.check(selector);
+      } else {
+        await this.page.uncheck(selector);
+      }
+
+      return `${checked ? 'Checked' : 'Unchecked'} ${selector}`;
+    } catch (error) {
+      throw new Error(`Check failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 悬停
+   */
+  async hover(selector: string): Promise<string> {
+    try {
+      await this.page.waitForSelector(selector, { state: 'visible', timeout: 10000 });
+      await this.page.hover(selector);
+      return `Hovered over ${selector}`;
+    } catch (error) {
+      throw new Error(`Hover failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 拖拽
+   */
+  async drag(sourceSelector: string, targetSelector: string): Promise<string> {
+    try {
+      await this.page.waitForSelector(sourceSelector, { state: 'visible', timeout: 10000 });
+      await this.page.waitForSelector(targetSelector, { state: 'visible', timeout: 10000 });
+
+      const source = await this.page.locator(sourceSelector);
+      const target = await this.page.locator(targetSelector);
+
+      await source.dragTo(target);
+
+      return `Dragged ${sourceSelector} to ${targetSelector}`;
+    } catch (error) {
+      throw new Error(`Drag failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * 等待元素
+   */
+  async waitFor(selector: string, state: 'visible' | 'hidden' | 'attached' = 'visible'): Promise<string> {
+    try {
+      await this.page.waitForSelector(selector, { state, timeout: 30000 });
+      return `Element ${selector} is now ${state}`;
+    } catch (error) {
+      throw new Error(`Wait failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 获取元素文本
+   */
+  async getText(selector: string): Promise<string> {
+    try {
+      const element = await this.page.waitForSelector(selector, { timeout: 10000 });
+      const text = await element.textContent();
+      return text || '';
+    } catch (error) {
+      throw new Error(`Get text failed for ${selector}: ${error.message}`);
+    }
+  }
+
+  /**
+   * 获取元素属性
+   */
+  async getAttribute(selector: string, attribute: string): Promise<string> {
+    try {
+      const element = await this.page.waitForSelector(selector, { timeout: 10000 });
+      const value = await element.getAttribute(attribute);
+      return value || '';
+    } catch (error) {
+      throw new Error(`Get attribute failed: ${error.message}`);
+    }
+  }
+}
+```
+
+### 2.3 MCP Server 实现
+
+完整的 Playwright MCP Server 实现：
+
+```typescript
+import { Browser, BrowserContext, Page } from 'playwright';
+import { chromium } from 'playwright';
+
+/**
+ * Playwright MCP Server
+ * 提供浏览器自动化能力
+ */
+class PlaywrightMCPServer {
+  private browserManager: BrowserManager;
+  private pageManager: PageManager | null = null;
+  private elementManager: ElementManager | null = null;
+  private tools: Map<string, any> = new Map();
+
+  constructor() {
+    this.browserManager = new BrowserManager();
+    this.registerTools();
+  }
+
+  /**
+   * 注册所有工具
+   */
+  private registerTools(): void {
+    // 浏览器控制工具
+    this.registerTool({
+      name: 'browser_navigate',
+      description: 'Navigate to a URL',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          url: {
+            type: 'string',
+            description: 'The URL to navigate to'
+          }
+        },
+        required: ['url']
+      }
+    }, this.handleNavigate.bind(this));
+
+    this.registerTool({
+      name: 'browser_snapshot',
+      description: 'Capture accessibility snapshot of the current page. This returns the DOM structure which is better than a screenshot for understanding page content.',
+      inputSchema: {
+        type: 'object',
+        properties: {}
+      }
+    }, this.handleSnapshot.bind(this));
+
+    this.registerTool({
+      name: 'browser_click',
+      description: 'Click on an element',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          element: {
+            type: 'string',
+            description: 'Human-readable element description'
+          },
+          ref: {
+            type: 'string',
+            description: 'Element reference from snapshot'
+          }
+        },
+        required: ['element', 'ref']
+      }
+    }, this.handleClick.bind(this));
+
+    this.registerTool({
+      name: 'browser_type',
+      description: 'Type text into an editable element',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          element: {
+            type: 'string',
+            description: 'Human-readable element description'
+          },
+          ref: {
+            type: 'string',
+            description: 'Element reference from snapshot'
+          },
+          text: {
+            type: 'string',
+            description: 'Text to type'
+          },
+          submit: {
+            type: 'boolean',
+            description: 'Press Enter after typing'
+          }
+        },
+        required: ['element', 'ref', 'text']
+      }
+    }, this.handleType.bind(this));
+
+    this.registerTool({
+      name: 'browser_select_option',
+      description: 'Select an option in a dropdown',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          element: {
+            type: 'string',
+            description: 'Human-readable element description'
+          },
+          ref: {
+            type: 'string',
+            description: 'Element reference from snapshot'
+          },
+          values: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'Values to select'
+          }
+        },
+        required: ['element', 'ref', 'values']
+      }
+    }, this.handleSelectOption.bind(this));
+
+    this.registerTool({
+      name: 'browser_take_screenshot',
+      description: 'Take a screenshot of the current page',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          filename: {
+            type: 'string',
+            description: 'Filename for the screenshot'
+          },
+          fullPage: {
+            type: 'boolean',
+            description: 'Take full page screenshot'
+          }
+        }
+      }
+    }, this.handleScreenshot.bind(this));
+
+    this.registerTool({
+      name: 'browser_console_messages',
+      description: 'Get all console messages from the page',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          onlyErrors: {
+            type: 'boolean',
+            description: 'Only return error messages'
+          }
+        }
+      }
+    }, this.handleConsoleMessages.bind(this));
+
+    this.registerTool({
+      name: 'browser_network_requests',
+      description: 'Get all network requests since loading the page',
+      inputSchema: {
+        type: 'object',
+        properties: {}
+      }
+    }, this.handleNetworkRequests.bind(this));
+
+    this.registerTool({
+      name: 'browser_evaluate',
+      description: 'Execute JavaScript code in the page context',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          function: {
+            type: 'string',
+            description: 'JavaScript function to execute'
+          }
+        },
+        required: ['function']
+      }
+    }, this.handleEvaluate.bind(this));
+
+    this.registerTool({
+      name: 'browser_close',
+      description: 'Close the browser',
+      inputSchema: {
+        type: 'object',
+        properties: {}
+      }
+    }, this.handleClose.bind(this));
+
+    console.error(`[Playwright MCP] Registered ${this.tools.size} tools`);
+  }
+
+  /**
+   * 注册工具
+   */
+  private registerTool(tool: any, handler: (params: any) => Promise<string>): void {
+    this.tools.set(tool.name, { tool, handler });
+  }
+
+  /**
+   * 确保浏览器已启动
+   */
+  private async ensureBrowser(): Promise<void> {
+    if (!this.browserManager.getPage) {
+      await this.browserManager.launch();
+      const page = this.browserManager.getPage();
+      this.pageManager = new PageManager(page);
+      this.elementManager = new ElementManager(page);
+    }
+  }
+
+  // ========== 工具处理函数 ==========
+
+  async handleNavigate(params: { url: string }): Promise<string> {
+    await this.ensureBrowser();
+    return await this.pageManager!.navigate(params.url);
+  }
+
+  async handleSnapshot(params: {}): Promise<string> {
+    await this.ensureBrowser();
+    const page = this.browserManager.getPage();
+
+    // 获取 accessibility tree
+    const snapshot = await page.accessibility.snapshot();
+
+    // 格式化输出
+    return this.formatAccessibilityTree(snapshot);
+  }
+
+  private formatAccessibilityTree(node: any, indent = 0): string {
+    if (!node) return '';
+
+    const spaces = '  '.repeat(indent);
+    let output = `${spaces}[${node.role}]`;
+
+    if (node.name) {
+      output += ` ${node.name}`;
+    }
+
+    if (node.value) {
+      output += ` (value: ${node.value})`;
+    }
+
+    output += '\n';
+
+    if (node.children) {
+      for (const child of node.children) {
+        output += this.formatAccessibilityTree(child, indent + 1);
+      }
+    }
+
+    return output;
+  }
+
+  async handleClick(params: { element: string; ref: string }): Promise<string> {
+    await this.ensureBrowser();
+    return await this.elementManager!.click(params.ref);
+  }
+
+  async handleType(params: { element: string; ref: string; text: string; submit?: boolean }): Promise<string> {
+    await this.ensureBrowser();
+    return await this.elementManager!.type(params.ref, params.text, { submit: params.submit });
+  }
+
+  async handleSelectOption(params: { element: string; ref: string; values: string[] }): Promise<string> {
+    await this.ensureBrowser();
+    return await this.elementManager!.select(params.ref, params.values);
+  }
+
+  async handleScreenshot(params: { filename?: string; fullPage?: boolean }): Promise<string> {
+    await this.ensureBrowser();
+    const page = this.browserManager.getPage();
+
+    const filename = params.filename || `screenshot-${Date.now()}.png`;
+
+    await page.screenshot({
+      path: filename,
+      fullPage: params.fullPage || false
+    });
+
+    return `Screenshot saved to ${filename}`;
+  }
+
+  async handleConsoleMessages(params: { onlyErrors?: boolean }): Promise<string> {
+    await this.ensureBrowser();
+    return this.pageManager!.getConsoleMessages(params.onlyErrors);
+  }
+
+  async handleNetworkRequests(params: {}): Promise<string> {
+    await this.ensureBrowser();
+    return this.pageManager!.getNetworkRequests();
+  }
+
+  async handleEvaluate(params: { function: string }): Promise<string> {
+    await this.ensureBrowser();
+    const page = this.browserManager.getPage();
+
+    try {
+      const result = await page.evaluate(params.function);
+      return JSON.stringify(result, null, 2);
+    } catch (error) {
+      throw new Error(`Evaluate failed: ${error.message}`);
+    }
+  }
+
+  async handleClose(params: {}): Promise<string> {
+    await this.browserManager.close();
+    this.pageManager = null;
+    this.elementManager = null;
+    return 'Browser closed';
+  }
+
+  // ========== MCP 协议处理 ==========
+
+  async handleToolsList(): Promise<{ tools: any[] }> {
+    const tools = Array.from(this.tools.values()).map(t => t.tool);
+    return { tools };
+  }
+
+  async handleToolCall(params: { name: string; arguments: any }): Promise<any> {
+    const toolEntry = this.tools.get(params.name);
+
+    if (!toolEntry) {
+      throw new Error(`Tool not found: ${params.name}`);
+    }
+
+    try {
+      const result = await toolEntry.handler(params.arguments);
+
+      return {
+        content: [
+          {
+            type: 'text',
+            text: result
+          }
+        ],
+        isError: false
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: 'text',
+            text: `Error: ${error.message}`
+          }
+        ],
+        isError: true
+      };
+    }
+  }
+
+  async start(): Promise<void> {
+    // 实现 MCP Server 启动逻辑
+    // （与前文 Git MCP Server 类似）
+    console.error('[Playwright MCP] Server started');
+  }
+}
+
+// 导出
+export { PlaywrightMCPServer };
+```
+
+
+## 四、元素交互操作
+
+### 4.1 点击操作
+
+```typescript
+/**
+ * 点击操作的完整实现
+ */
+class ClickHandler {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 普通点击
+   */
+  async click(selector: string): Promise<void> {
+    await this.page.click(selector, {
+      timeout: 5000,
+      force: false  // 不强制点击（确保元素可点击）
+    });
+  }
+
+  /**
+   * 双击
+   */
+  async doubleClick(selector: string): Promise<void> {
+    await this.page.dblclick(selector);
+  }
+
+  /**
+   * 右键点击
+   */
+  async rightClick(selector: string): Promise<void> {
+    await this.page.click(selector, { button: 'right' });
+  }
+
+  /**
+   * 带修饰键的点击
+   */
+  async clickWithModifier(
+    selector: string,
+    modifiers: ('Alt' | 'Control' | 'Meta' | 'Shift')[]
+  ): Promise<void> {
+    await this.page.click(selector, { modifiers });
+  }
+
+  /**
+   * 点击并等待导航
+   */
+  async clickAndWaitForNavigation(selector: string): Promise<void> {
+    await Promise.all([
+      this.page.waitForNavigation(),
+      this.page.click(selector)
+    ]);
+  }
+
+  /**
+   * 点击并等待请求
+   */
+  async clickAndWaitForRequest(
+    selector: string,
+    urlPattern: string | RegExp
+  ): Promise<Request> {
+    const [request] = await Promise.all([
+      this.page.waitForRequest(urlPattern),
+      this.page.click(selector)
+    ]);
+    return request;
+  }
+
+  /**
+   * 点击并等待响应
+   */
+  async clickAndWaitForResponse(
+    selector: string,
+    urlPattern: string | RegExp
+  ): Promise<Response> {
+    const [response] = await Promise.all([
+      this.page.waitForResponse(urlPattern),
+      this.page.click(selector)
+    ]);
+    return response;
+  }
+}
+```
+
+### 4.2 输入操作
+
+```typescript
+/**
+ * 输入操作的完整实现
+ */
+class InputHandler {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 快速填充（推荐）
+   */
+  async fill(selector: string, value: string): Promise<void> {
+    // 清空并填充
+    await this.page.fill(selector, value);
+  }
+
+  /**
+   * 逐字符输入（模拟真实输入）
+   */
+  async type(selector: string, text: string, delay = 100): Promise<void> {
+    // 先清空
+    await this.page.fill(selector, '');
+
+    // 逐字符输入
+    await this.page.type(selector, text, { delay });
+  }
+
+  /**
+   * 按键操作
+   */
+  async press(selector: string, key: string): Promise<void> {
+    await this.page.press(selector, key);
+  }
+
+  /**
+   * 组合键
+   */
+  async pressSequence(selector: string, keys: string[]): Promise<void> {
+    for (const key of keys) {
+      await this.page.press(selector, key);
+    }
+  }
+
+  /**
+   * 清空输入框
+   */
+  async clear(selector: string): Promise<void> {
+    await this.page.fill(selector, '');
+  }
+
+  /**
+   * 输入并提交（按 Enter）
+   */
+  async typeAndSubmit(selector: string, text: string): Promise<void> {
+    await this.fill(selector, text);
+    await this.press(selector, 'Enter');
+  }
+
+  /**
+   * 文件上传
+   */
+  async uploadFile(selector: string, filePaths: string | string[]): Promise<void> {
+    const paths = Array.isArray(filePaths) ? filePaths : [filePaths];
+    await this.page.setInputFiles(selector, paths);
+  }
+
+  /**
+   * 清除文件上传
+   */
+  async clearFiles(selector: string): Promise<void> {
+    await this.page.setInputFiles(selector, []);
+  }
+}
+```
+
+### 4.3 表单操作
+
+```typescript
+/**
+ * 表单操作的完整实现
+ */
+class FormHandler {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 勾选复选框
+   */
+  async check(selector: string): Promise<void> {
+    await this.page.check(selector);
+  }
+
+  /**
+   * 取消勾选复选框
+   */
+  async uncheck(selector: string): Promise<void> {
+    await this.page.uncheck(selector);
+  }
+
+  /**
+   * 设置复选框状态
+   */
+  async setChecked(selector: string, checked: boolean): Promise<void> {
+    if (checked) {
+      await this.check(selector);
+    } else {
+      await this.uncheck(selector);
+    }
+  }
+
+  /**
+   * 选择单选按钮
+   */
+  async selectRadio(name: string, value: string): Promise<void> {
+    await this.page.check(`input[type="radio"][name="${name}"][value="${value}"]`);
+  }
+
+  /**
+   * 选择下拉选项（单选）
+   */
+  async selectOption(selector: string, value: string): Promise<void> {
+    await this.page.selectOption(selector, value);
+  }
+
+  /**
+   * 选择下拉选项（多选）
+   */
+  async selectMultipleOptions(selector: string, values: string[]): Promise<void> {
+    await this.page.selectOption(selector, values);
+  }
+
+  /**
+   * 填充整个表单
+   */
+  async fillForm(formData: Record<string, any>): Promise<void> {
+    for (const [key, value] of Object.entries(formData)) {
+      if (typeof value === 'boolean') {
+        // 复选框
+        await this.setChecked(`[name="${key}"]`, value);
+      } else if (Array.isArray(value)) {
+        // 多选下拉
+        await this.selectMultipleOptions(`[name="${key}"]`, value);
+      } else {
+        // 普通输入
+        await this.page.fill(`[name="${key}"]`, String(value));
+      }
+    }
+  }
+
+  /**
+   * 提交表单
+   */
+  async submit(formSelector: string): Promise<void> {
+    await this.page.evaluate((selector) => {
+      const form = document.querySelector(selector) as HTMLFormElement;
+      if (form) {
+        form.submit();
+      }
+    }, formSelector);
+  }
+
+  /**
+   * 获取表单数据
+   */
+  async getFormData(formSelector: string): Promise<Record<string, any>> {
+    return await this.page.evaluate((selector) => {
+      const form = document.querySelector(selector) as HTMLFormElement;
+      if (!form) return {};
+
+      const formData = new FormData(form);
+      const data: Record<string, any> = {};
+
+      for (const [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+
+      return data;
+    }, formSelector);
+  }
+}
+```
+
+
+## 六、截图和 PDF 生成
+
+### 6.1 截图功能
+
+```typescript
+/**
+ * 截图工具
+ */
+class ScreenshotTool {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 基础截图
+   */
+  async takeScreenshot(path: string): Promise<void> {
+    await this.page.screenshot({ path });
+  }
+
+  /**
+   * 全页截图
+   */
+  async takeFullPageScreenshot(path: string): Promise<void> {
+    await this.page.screenshot({
+      path,
+      fullPage: true
+    });
+  }
+
+  /**
+   * 元素截图
+   */
+  async takeElementScreenshot(selector: string, path: string): Promise<void> {
+    const element = await this.page.locator(selector);
+    await element.screenshot({ path });
+  }
+
+  /**
+   * 指定区域截图
+   */
+  async takeClipScreenshot(
+    path: string,
+    clip: { x: number; y: number; width: number; height: number }
+  ): Promise<void> {
+    await this.page.screenshot({
+      path,
+      clip
+    });
+  }
+
+  /**
+   * 截图为 Buffer（用于进一步处理）
+   */
+  async screenshotToBuffer(): Promise<Buffer> {
+    return await this.page.screenshot({ type: 'png' });
+  }
+
+  /**
+   * 截图为 Base64
+   */
+  async screenshotToBase64(): Promise<string> {
+    const buffer = await this.screenshotToBuffer();
+    return buffer.toString('base64');
+  }
+
+  /**
+   * 隐藏元素后截图
+   */
+  async screenshotWithHiddenElements(
+    path: string,
+    hideSelectors: string[]
+  ): Promise<void> {
+    // 隐藏元素
+    await this.page.evaluate((selectors) => {
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+          (el as HTMLElement).style.visibility = 'hidden';
+        });
+      });
+    }, hideSelectors);
+
+    // 截图
+    await this.page.screenshot({ path });
+
+    // 恢复元素
+    await this.page.evaluate((selectors) => {
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(el => {
+          (el as HTMLElement).style.visibility = 'visible';
+        });
+      });
+    }, hideSelectors);
+  }
+
+  /**
+   * 自动等待并截图
+   */
+  async screenshotWhenStable(path: string, maxWait = 5000): Promise<void> {
+    // 等待网络空闲
+    await this.page.waitForLoadState('networkidle', { timeout: maxWait });
+
+    // 等待一小段时间确保动画完成
+    await this.page.waitForTimeout(500);
+
+    // 截图
+    await this.page.screenshot({ path });
+  }
+}
+```
+
+### 6.2 PDF 生成
+
+```typescript
+/**
+ * PDF 生成工具
+ */
+class PdfGenerator {
+  private page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  /**
+   * 基础 PDF 生成
+   */
+  async generatePdf(path: string): Promise<void> {
+    await this.page.pdf({ path });
+  }
+
+  /**
+   * 自定义格式 PDF
+   */
+  async generateCustomPdf(
+    path: string,
+    options: {
+      format?: 'A4' | 'Letter' | 'Legal';
+      landscape?: boolean;
+      printBackground?: boolean;
+      margin?: {
+        top?: string;
+        right?: string;
+        bottom?: string;
+        left?: string;
+      };
+    } = {}
+  ): Promise<void> {
+    await this.page.pdf({
+      path,
+      format: options.format || 'A4',
+      landscape: options.landscape || false,
+      printBackground: options.printBackground !== false,
+      margin: options.margin || {
+        top: '1cm',
+        right: '1cm',
+        bottom: '1cm',
+        left: '1cm'
+      }
+    });
+  }
+
+  /**
+   * 多页 PDF
+   */
+  async generateMultiPagePdf(
+    urls: string[],
+    outputPath: string
+  ): Promise<void> {
+    const PDFDocument = require('pdf-lib').PDFDocument;
+    const mergedPdf = await PDFDocument.create();
+
+    for (const url of urls) {
+      // 导航到页面
+      await this.page.goto(url);
+
+      // 生成临时 PDF
+      const pdfBuffer = await this.page.pdf();
+
+      // 加载 PDF
+      const pdf = await PDFDocument.load(pdfBuffer);
+      const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+
+      // 添加页面
+      copiedPages.forEach((page) => {
+        mergedPdf.addPage(page);
+      });
+    }
+
+    // 保存合并后的 PDF
+    const mergedPdfBytes = await mergedPdf.save();
+    require('fs').writeFileSync(outputPath, mergedPdfBytes);
+  }
+
+  /**
+   * 带页眉页脚的 PDF
+   */
+  async generatePdfWithHeaderFooter(
+    path: string,
+    options: {
+      headerTemplate?: string;
+      footerTemplate?: string;
+      displayHeaderFooter?: boolean;
+    } = {}
+  ): Promise<void> {
+    await this.page.pdf({
+      path,
+      format: 'A4',
+      displayHeaderFooter: options.displayHeaderFooter !== false,
+      headerTemplate: options.headerTemplate || '<div></div>',
+      footerTemplate: options.footerTemplate || `
+        <div style="font-size: 10px; text-align: center; width: 100%;">
+          Page <span class="pageNumber"></span> of <span class="totalPages"></span>
+        </div>
+      `,
+      margin: {
+        top: '2cm',
+        bottom: '2cm'
+      }
+    });
+  }
+}
+```
+
+
+## 八、最佳实践和 FAQ
+
+### 8.1 最佳实践
+
+#### **1. 使用等待而非延时**
+
+```typescript
+// ❌ 不好：使用固定延时
+await page.waitForTimeout(3000);
+await page.click('.button');
+
+// ✅ 好：等待元素可交互
+await page.waitForSelector('.button', { state: 'visible' });
+await page.click('.button');
+
+// ✅ 更好：Playwright 自动等待
+await page.click('.button');  // Playwright 会自动等待元素可点击
+```
+
+#### **2. 使用有意义的选择器**
+
+```typescript
+// ❌ 不好：使用脆弱的选择器
+await page.click('body > div:nth-child(3) > button:nth-child(2)');
+
+// ✅ 好：使用语义化选择器
+await page.click('button[data-testid="submit-button"]');
+
+// ✅ 更好：使用 Role 和 Text
+await page.click('role=button[name="Submit"]');
+```
+
+#### **3. 页面对象模式**
+
+```typescript
+/**
+ * 页面对象模式
+ * 封装页面的结构和行为
+ */
+class LoginPage {
+  private page: Page;
+
+  // 选择器定义
+  private selectors = {
+    usernameInput: 'input[name="username"]',
+    passwordInput: 'input[name="password"]',
+    submitButton: 'button[type="submit"]',
+    errorMessage: '.error-message'
+  };
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  async navigate() {
+    await this.page.goto('/login');
+  }
+
+  async login(username: string, password: string) {
+    await this.page.fill(this.selectors.usernameInput, username);
+    await this.page.fill(this.selectors.passwordInput, password);
+    await this.page.click(this.selectors.submitButton);
+  }
+
+  async getErrorMessage(): Promise<string> {
+    const element = await this.page.locator(this.selectors.errorMessage);
+    return await element.textContent() || '';
+  }
+}
+
+// 使用
+const loginPage = new LoginPage(page);
+await loginPage.navigate();
+await loginPage.login('testuser', 'testpass');
+```
+
+#### **4. 错误处理和重试**
+
+```typescript
+/**
+ * 带重试的操作
+ */
+async function clickWithRetry(
+  page: Page,
+  selector: string,
+  maxRetries = 3
+): Promise<void> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      await page.click(selector, { timeout: 5000 });
+      return;
+    } catch (error) {
+      if (i === maxRetries - 1) {
+        throw error;
+      }
+      console.error(`Click failed, retrying (${i + 1}/${maxRetries})...`);
+      await page.waitForTimeout(1000);
+    }
+  }
+}
+```
+
+#### **5. 清理资源**
+
+```typescript
+/**
+ * 确保浏览器关闭
+ */
+class BrowserSession {
+  private browser: Browser | null = null;
+
+  async start() {
+    this.browser = await chromium.launch();
+  }
+
+  async close() {
+    if (this.browser) {
+      await this.browser.close();
+      this.browser = null;
+    }
+  }
+
+  async execute<T>(fn: (page: Page) => Promise<T>): Promise<T> {
+    await this.start();
+
+    try {
+      const page = await this.browser!.newPage();
+      return await fn(page);
+    } finally {
+      await this.close();
+    }
+  }
+}
+
+// 使用
+const session = new BrowserSession();
+await session.execute(async (page) => {
+  await page.goto('https://example.com');
+  // 执行操作...
+});
+// 自动清理
+```
+
+### 8.2 常见问题 FAQ
+
+#### **Q1: 元素找不到怎么办？**
+
+**排查步骤**：
+1. 检查元素是否在 iframe 中
+2. 检查元素是否需要等待加载
+3. 使用 Playwright Inspector 调试
+4. 检查选择器是否正确
+
+```typescript
+// 调试技巧
+await page.pause();  // 暂停并打开 Playwright Inspector
+
+// 检查元素是否存在
+const exists = await page.locator(selector).count() > 0;
+console.log(`Element exists: ${exists}`);
+
+// 等待更长时间
+await page.waitForSelector(selector, { timeout: 30000 });
+```
+
+#### **Q2: 如何处理 iframe？**
+
+```typescript
+// 获取 iframe
+const frame = page.frameLocator('iframe[name="myframe"]');
+
+// 在 iframe 中操作
+await frame.locator('button').click();
+
+// 或者使用 frame 对象
+const frameElement = await page.frame({ name: 'myframe' });
+await frameElement?.click('button');
+```
+
+#### **Q3: 如何处理弹窗？**
+
+```typescript
+// 监听并自动处理
+page.on('dialog', async (dialog) => {
+  console.log(`Dialog message: ${dialog.message()}`);
+  await dialog.accept();  // 或 dialog.dismiss()
+});
+
+// 手动处理
+const [dialog] = await Promise.all([
+  page.waitForEvent('dialog'),
+  page.click('.trigger-dialog')
+]);
+
+await dialog.accept('input text');
+```
+
+#### **Q4: 如何模拟移动设备？**
+
+```typescript
+const { devices } = require('playwright');
+
+// 使用预定义设备
+const iPhone = devices['iPhone 12'];
+const context = await browser.newContext({
+  ...iPhone,
+  locale: 'en-US',
+  geolocation: { latitude: 37.7749, longitude: -122.4194 },
+  permissions: ['geolocation']
+});
+
+const page = await context.newPage();
+```
+
+#### **Q5: 如何处理文件下载？**
+
+```typescript
+// 等待下载
+const [download] = await Promise.all([
+  page.waitForEvent('download'),
+  page.click('a[download]')
+]);
+
+// 保存文件
+const path = await download.path();
+console.log(`Downloaded to: ${path}`);
+
+// 或者保存到指定位置
+await download.saveAs('/path/to/save/file.pdf');
+```
+
+
+## 十、总结
+
+浏览器自动化是 Claude Code 的强大能力之一，通过 Playwright MCP Server，AI 能够像人类一样操作浏览器，执行复杂的 Web 自动化任务。
+
+### 关键要点
+
+✅ **Playwright 强大而灵活**：支持多浏览器、自动等待、网络拦截等高级功能
+✅ **Accessibility Tree 是核心**：提供简洁的页面结构，便于 AI 理解和操作
+✅ **MCP 协议标准化**：统一的接口，易于扩展和维护
+✅ **实战应用广泛**：测试、爬虫、监控、自动化运维等
+
+### 核心流程
+
+```mermaid
+graph LR
+    A[启动浏览器] --> B[导航到页面]
+    B --> C[获取页面快照]
+    C --> D[AI分析页面]
+    D --> E[定位元素]
+    E --> F[执行操作]
+    F --> G[验证结果]
+    G --> H[生成报告]
+
+    style A fill:#e1f5ff
+    style D fill:#ffe1f5
+    style H fill:#e1ffe1
+```
+
+### 下一步学习
+
+1. 阅读下一篇文章，深入了解其他 MCP 工具
+2. 尝试编写自己的自动化脚本
+3. 将浏览器自动化集成到 CI/CD 流程
+
+---
+
+**浏览器自动化让 AI 能够真正与 Web 世界交互，开启无限可能！** 🚀

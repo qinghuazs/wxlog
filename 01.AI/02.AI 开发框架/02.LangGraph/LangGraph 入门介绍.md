@@ -1,0 +1,193 @@
+---
+title: LangGraph 入门介绍
+date: 2025-09-30
+permalink: /ai/langgraph/introduction.html
+categories:
+  - AI
+  - LangGraph
+---
+
+# LangGraph 入门介绍
+
+## 什么是 LangGraph？
+
+LangGraph 是一个用于构建有状态、多步骤 LLM 应用程序的框架。它是 LangChain 生态系统的一部分，专门设计用于构建复杂的 AI Agent 工作流和图结构的应用程序。
+
+### 核心特点
+
+1. **图结构设计**：将应用逻辑组织为图（Graph），节点代表计算步骤，边代表控制流
+2. **状态管理**：内置强大的状态管理机制，可以在整个执行过程中维护和更新状态
+3. **循环支持**：支持复杂的循环和条件逻辑，这是传统 Chain 难以实现的
+4. **人机协作**：支持人工介入和审批流程
+5. **可持久化**：支持状态持久化和恢复，实现长时间运行的工作流
+
+## 为什么需要 LangGraph？
+
+### 传统 LangChain 的局限性
+
+```python
+# 传统的 LangChain 顺序链
+from langchain.chains import LLMChain, SimpleSequentialChain
+
+chain1 = LLMChain(llm=llm, prompt=prompt1)
+chain2 = LLMChain(llm=llm, prompt=prompt2)
+
+# 只能顺序执行，缺乏灵活性
+sequential_chain = SimpleSequentialChain(chains=[chain1, chain2])
+```
+
+传统的 Chain 模式存在以下问题：
+- 只能顺序执行，难以实现复杂的控制流
+- 没有内置的状态管理机制
+- 不支持循环和条件分支
+- 难以实现人工审批和介入
+
+### LangGraph 的优势
+
+```python
+# LangGraph 的图结构设计
+from langgraph.graph import StateGraph, END
+
+# 定义状态
+class AgentState(TypedDict):
+    messages: List[str]
+    current_step: str
+
+# 构建图
+workflow = StateGraph(AgentState)
+
+# 添加节点
+workflow.add_node("agent", agent_node)
+workflow.add_node("tool", tool_node)
+
+# 添加边（支持条件边）
+workflow.add_edge("agent", "tool")
+workflow.add_conditional_edges(
+    "tool",
+    should_continue,  # 条件函数
+    {
+        "continue": "agent",
+        "end": END
+    }
+)
+```
+
+## LangGraph vs 其他框架
+
+| 特性 | LangGraph | 传统 LangChain | AutoGPT | CrewAI |
+|------|-----------|----------------|---------|---------|
+| 图结构支持 | ✅ | ❌ | ❌ | ❌ |
+| 状态管理 | ✅ 强大 | ❌ | ✅ 基础 | ✅ 基础 |
+| 循环控制 | ✅ | ❌ | ✅ | ✅ |
+| 人工介入 | ✅ | ❌ | ❌ | ✅ |
+| 可视化 | ✅ | ❌ | ❌ | ❌ |
+| 持久化 | ✅ | ❌ | ✅ | ❌ |
+
+## 应用场景
+
+LangGraph 特别适合以下场景：
+
+1. **复杂的多步骤任务**
+   - 研究助手：搜索 → 分析 → 总结 → 生成报告
+   - 代码生成：理解需求 → 设计 → 编码 → 测试 → 优化
+
+2. **需要迭代改进的流程**
+   - 内容创作：初稿 → 评审 → 修改 → 最终版
+   - 数据分析：探索 → 假设 → 验证 → 结论
+
+3. **人机协作工作流**
+   - 审批流程：AI 生成 → 人工审核 → AI 执行
+   - 客服系统：AI 处理 → 复杂问题转人工 → AI 跟进
+
+4. **自主 AI Agent**
+   - 任务规划和执行
+   - 工具调用和决策
+   - 错误处理和重试
+
+## 快速开始示例
+
+```python
+from typing import TypedDict, List
+from langgraph.graph import StateGraph, END
+from langchain_openai import ChatOpenAI
+
+# 1. 定义状态
+class State(TypedDict):
+    messages: List[str]
+
+# 2. 定义节点函数
+def chatbot(state: State):
+    messages = state["messages"]
+    response = llm.invoke(messages)
+    return {"messages": messages + [response]}
+
+def should_end(state: State):
+    last_message = state["messages"][-1]
+    if "goodbye" in last_message.lower():
+        return "end"
+    return "continue"
+
+# 3. 构建图
+workflow = StateGraph(State)
+workflow.add_node("chatbot", chatbot)
+
+# 4. 添加边
+workflow.add_conditional_edges(
+    "chatbot",
+    should_end,
+    {
+        "continue": "chatbot",
+        "end": END
+    }
+)
+
+# 5. 设置入口
+workflow.set_entry_point("chatbot")
+
+# 6. 编译和运行
+app = workflow.compile()
+result = app.invoke({"messages": ["你好！"]})
+```
+
+## 安装和环境配置
+
+```bash
+# 安装 LangGraph
+pip install langgraph
+
+# 安装相关依赖
+pip install langchain langchain-openai python-dotenv
+
+# 如果需要可视化
+pip install pygraphviz
+```
+
+环境变量配置：
+```python
+# .env 文件
+OPENAI_API_KEY=your_api_key_here
+LANGCHAIN_API_KEY=your_langchain_api_key  # 可选，用于追踪
+```
+
+## 下一步学习路线
+
+1. **基础概念**（下一篇）
+   - 理解图、节点、边的概念
+   - 掌握状态管理机制
+   - 学习条件边和循环
+
+2. **实战练习**
+   - 构建简单的聊天机器人
+   - 实现多工具调用的 Agent
+   - 创建数据处理管道
+
+3. **高级特性**
+   - 子图和嵌套图
+   - 持久化和检查点
+   - 分布式执行
+
+## 总结
+
+LangGraph 提供了一种全新的方式来构建 LLM 应用，通过图结构和状态管理，让我们能够构建更复杂、更灵活的 AI 系统。它不是要替代 LangChain，而是作为补充，专门解决复杂工作流的问题。
+
+在接下来的文章中，我们将深入探讨 LangGraph 的核心概念和实际应用，帮助你掌握这个强大的工具。

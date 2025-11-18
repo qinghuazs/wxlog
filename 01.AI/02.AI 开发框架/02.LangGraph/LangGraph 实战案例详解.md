@@ -1,0 +1,1070 @@
+---
+title: LangGraph 实战案例详解
+date: 2025-09-30
+permalink: /ai/langgraph/practical-examples.html
+categories:
+  - AI
+  - LangGraph
+---
+
+# LangGraph 实战案例详解
+
+## 案例1：智能客服系统
+
+### 需求分析
+
+构建一个智能客服系统，能够：
+- 理解用户意图
+- 查询知识库
+- 调用相关工具（查订单、退款等）
+- 人工介入机制
+- 会话历史管理
+
+### 实现代码
+
+```python
+from typing import TypedDict, List, Dict, Annotated, Literal
+from operator import add
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint import SqliteSaver
+from langchain_openai import ChatOpenAI
+from langchain.tools import Tool
+from datetime import datetime
+
+# 1. 定义状态
+class CustomerServiceState(TypedDict):
+    # 会话消息
+    messages: Annotated[List[Dict], add]
+    # 用户信息
+    user_info: Dict
+    # 当前意图
+    intent: str
+    # 知识库结果
+    kb_results: List[str]
+    # 工具调用结果
+    tool_results: Dict
+    # 是否需要人工
+    needs_human: bool
+    # 会话状态
+    status: Literal["active", "resolved", "escalated"]
+    # 满意度评分
+    satisfaction_score: float
+
+# 2. 创建工具
+def order_query_tool(order_id: str) -> Dict:
+    """查询订单工具"""
+    # 模拟订单查询
+    return {
+        "order_id": order_id,
+        "status": "shipped",
+        "tracking": "SF123456789",
+        "estimated_delivery": "2025-10-03"
+    }
+
+def refund_tool(order_id: str, reason: str) -> Dict:
+    """退款处理工具"""
+    return {
+        "refund_id": f"REF{order_id}",
+        "status": "processing",
+        "amount": 99.99,
+        "eta": "3-5 business days"
+    }
+
+# 3. 定义节点函数
+llm = ChatOpenAI(model="gpt-4", temperature=0.3)
+
+def intent_recognition_node(state: CustomerServiceState):
+    """意图识别节点"""
+    messages = state["messages"]
+    last_message = messages[-1]["content"] if messages else ""
+
+    prompt = f"""
+    分析用户消息，识别意图：
+    用户消息: {last_message}
+
+    可能的意图:
+    - order_query: 查询订单
+    - refund_request: 退款请求
+    - technical_support: 技术支持
+    - general_inquiry: 一般咨询
+    - complaint: 投诉
+
+    返回最匹配的意图。
+    """
+
+    response = llm.invoke(prompt)
+    intent = response.content.strip().lower()
+
+    # 判断是否需要人工介入
+    needs_human = intent in ["complaint", "complex_technical"]
+
+    return {
+        "intent": intent,
+        "needs_human": needs_human
+    }
+
+def knowledge_base_node(state: CustomerServiceState):
+    """知识库查询节点"""
+    intent = state.get("intent", "")
+    last_message = state["messages"][-1]["content"] if state["messages"] else ""
+
+    # 模拟知识库查询
+    kb_mapping = {
+        "order_query": [
+            "您可以在'我的订单'页面查看订单状态",
+            "订单通常在1-3个工作日内发货",
+            "可以通过订单号查询物流信息"
+        ],
+        "refund_request": [
+            "退款将在3-5个工作日内处理",
+            "退款将原路返回到您的支付账户",
+            "部分商品可能不支持退款，请查看退款政策"
+        ],
+        "technical_support": [
+            "请尝试重启应用",
+            "确保您的应用是最新版本",
+            "清除缓存可能解决部分问题"
+        ]
+    }
+
+    kb_results = kb_mapping.get(intent, ["抱歉，没有找到相关信息"])
+
+    return {"kb_results": kb_results}
+
+def tool_execution_node(state: CustomerServiceState):
+    """工具执行节点"""
+    intent = state.get("intent", "")
+    messages = state["messages"]
+    last_message = messages[-1]["content"] if messages else ""
+
+    tool_results = {}
+
+    if intent == "order_query":
+        # 提取订单号（简化处理）
+        import re
+        order_match = re.search(r"SF\d+", last_message)
+        if order_match:
+            order_id = order_match.group()
+            tool_results = order_query_tool(order_id)
+
+    elif intent == "refund_request":
+        # 模拟退款处理
+        tool_results = refund_tool("12345", "quality issue")
+
+    return {"tool_results": tool_results}
+
+def response_generation_node(state: CustomerServiceState):
+    """生成响应节点"""
+    intent = state.get("intent", "")
+    kb_results = state.get("kb_results", [])
+    tool_results = state.get("tool_results", {})
+
+    # 构建响应
+    response_parts = []
+
+    # 添加知识库信息
+    if kb_results:
+        response_parts.append("根据我们的知识库：")
+        response_parts.extend(kb_results)
+
+    # 添加工具结果
+    if tool_results:
+        if "order_id" in tool_results:
+            response_parts.append(f"\n订单 {tool_results['order_id']} 状态：")
+            response_parts.append(f"- 状态: {tool_results['status']}")
+            response_parts.append(f"- 物流单号: {tool_results['tracking']}")
+            response_parts.append(f"- 预计送达: {tool_results['estimated_delivery']}")
+        elif "refund_id" in tool_results:
+            response_parts.append(f"\n退款申请 {tool_results['refund_id']}：")
+            response_parts.append(f"- 状态: {tool_results['status']}")
+            response_parts.append(f"- 金额: ￥{tool_results['amount']}")
+            response_parts.append(f"- 预计到账: {tool_results['eta']}")
+
+    # 生成最终响应
+    if response_parts:
+        response = "\n".join(response_parts)
+    else:
+        response = "我理解您的问题，让我为您查询相关信息..."
+
+    return {
+        "messages": [{"role": "assistant", "content": response}]
+    }
+
+def human_escalation_node(state: CustomerServiceState):
+    """人工介入节点"""
+    return {
+        "status": "escalated",
+        "messages": [{
+            "role": "system",
+            "content": "您的问题已转接到人工客服，请稍候..."
+        }]
+    }
+
+def satisfaction_node(state: CustomerServiceState):
+    """满意度评估节点"""
+    # 简化的满意度计算
+    has_tool_results = bool(state.get("tool_results"))
+    has_kb_results = len(state.get("kb_results", [])) > 0
+    is_escalated = state.get("status") == "escalated"
+
+    if is_escalated:
+        score = 0.6
+    elif has_tool_results:
+        score = 0.9
+    elif has_kb_results:
+        score = 0.7
+    else:
+        score = 0.5
+
+    return {
+        "satisfaction_score": score,
+        "status": "resolved" if score > 0.7 else state.get("status", "active")
+    }
+
+# 4. 构建工作流
+def build_customer_service_workflow():
+    workflow = StateGraph(CustomerServiceState)
+
+    # 添加节点
+    workflow.add_node("intent_recognition", intent_recognition_node)
+    workflow.add_node("knowledge_base", knowledge_base_node)
+    workflow.add_node("tool_execution", tool_execution_node)
+    workflow.add_node("response_generation", response_generation_node)
+    workflow.add_node("human_escalation", human_escalation_node)
+    workflow.add_node("satisfaction", satisfaction_node)
+
+    # 设置入口
+    workflow.set_entry_point("intent_recognition")
+
+    # 定义条件路由
+    def route_after_intent(state):
+        if state.get("needs_human"):
+            return "escalate"
+        return "continue"
+
+    # 添加边
+    workflow.add_conditional_edges(
+        "intent_recognition",
+        route_after_intent,
+        {
+            "escalate": "human_escalation",
+            "continue": "knowledge_base"
+        }
+    )
+
+    workflow.add_edge("knowledge_base", "tool_execution")
+    workflow.add_edge("tool_execution", "response_generation")
+    workflow.add_edge("response_generation", "satisfaction")
+    workflow.add_edge("human_escalation", END)
+    workflow.add_edge("satisfaction", END)
+
+    # 编译with持久化
+    checkpointer = SqliteSaver.from_conn_string("customer_service.db")
+    return workflow.compile(checkpointer=checkpointer)
+
+# 5. 使用示例
+app = build_customer_service_workflow()
+
+# 模拟用户对话
+initial_state = {
+    "messages": [{"role": "user", "content": "我想查询订单SF123456789的状态"}],
+    "user_info": {"user_id": "USER001", "vip_level": "gold"},
+    "intent": "",
+    "kb_results": [],
+    "tool_results": {},
+    "needs_human": False,
+    "status": "active",
+    "satisfaction_score": 0.0
+}
+
+config = {"configurable": {"thread_id": "session_001"}}
+result = app.invoke(initial_state, config)
+
+print(f"意图: {result['intent']}")
+print(f"响应: {result['messages'][-1]['content']}")
+print(f"满意度: {result['satisfaction_score']}")
+```
+
+## 案例2：研究助手 Agent
+
+### 需求分析
+
+构建一个研究助手，能够：
+- 搜索和收集信息
+- 分析和总结内容
+- 生成研究报告
+- 迭代改进结果
+
+### 实现代码
+
+```python
+from typing import TypedDict, List, Dict, Annotated
+from operator import add
+from langgraph.graph import StateGraph, END
+from langchain_openai import ChatOpenAI
+from langchain.tools import DuckDuckGoSearchRun
+from datetime import datetime
+
+# 1. 定义状态
+class ResearchState(TypedDict):
+    # 研究主题
+    topic: str
+    # 研究问题列表
+    questions: List[str]
+    # 搜索结果
+    search_results: Annotated[List[Dict], add]
+    # 分析结果
+    analysis: Dict
+    # 报告草稿
+    draft_report: str
+    # 最终报告
+    final_report: str
+    # 迭代次数
+    iteration: int
+    # 质量分数
+    quality_score: float
+
+# 2. 定义节点
+llm = ChatOpenAI(model="gpt-4", temperature=0.7)
+search_tool = DuckDuckGoSearchRun()
+
+def question_generation_node(state: ResearchState):
+    """生成研究问题"""
+    topic = state["topic"]
+
+    prompt = f"""
+    为研究主题生成5个关键研究问题：
+    主题: {topic}
+
+    要求：
+    1. 问题应该具体且可研究
+    2. 涵盖不同角度
+    3. 有助于深入理解主题
+
+    以列表形式返回，每行一个问题。
+    """
+
+    response = llm.invoke(prompt)
+    questions = [q.strip() for q in response.content.split("\n") if q.strip()]
+
+    return {"questions": questions[:5]}
+
+def research_node(state: ResearchState):
+    """执行研究（搜索信息）"""
+    questions = state.get("questions", [])
+    search_results = []
+
+    for question in questions[:3]:  # 限制搜索数量
+        try:
+            result = search_tool.run(question)
+            search_results.append({
+                "question": question,
+                "result": result,
+                "timestamp": datetime.now().isoformat()
+            })
+        except Exception as e:
+            search_results.append({
+                "question": question,
+                "error": str(e)
+            })
+
+    return {"search_results": search_results}
+
+def analysis_node(state: ResearchState):
+    """分析搜索结果"""
+    search_results = state.get("search_results", [])
+    topic = state["topic"]
+
+    # 合并所有搜索结果
+    all_content = "\n\n".join([
+        f"问题: {r['question']}\n结果: {r.get('result', 'No result')}"
+        for r in search_results
+    ])
+
+    prompt = f"""
+    分析以下关于"{topic}"的研究结果：
+
+    {all_content}
+
+    请提供：
+    1. 主要发现
+    2. 关键见解
+    3. 数据和事实
+    4. 潜在问题或争议
+
+    结构化输出分析结果。
+    """
+
+    response = llm.invoke(prompt)
+
+    analysis = {
+        "summary": response.content,
+        "key_findings": extract_key_findings(response.content),
+        "timestamp": datetime.now().isoformat()
+    }
+
+    return {"analysis": analysis}
+
+def extract_key_findings(text: str) -> List[str]:
+    """提取关键发现（简化版）"""
+    lines = text.split("\n")
+    findings = [line.strip() for line in lines if line.strip() and len(line.strip()) > 20]
+    return findings[:5]
+
+def report_generation_node(state: ResearchState):
+    """生成研究报告"""
+    topic = state["topic"]
+    questions = state.get("questions", [])
+    analysis = state.get("analysis", {})
+
+    prompt = f"""
+    基于以下信息生成研究报告：
+
+    主题: {topic}
+    研究问题: {", ".join(questions)}
+    分析结果: {analysis.get("summary", "")}
+
+    报告结构：
+    1. 执行摘要
+    2. 研究背景
+    3. 主要发现
+    4. 详细分析
+    5. 结论和建议
+
+    生成专业、结构化的研究报告。
+    """
+
+    response = llm.invoke(prompt)
+    draft_report = response.content
+
+    return {"draft_report": draft_report}
+
+def quality_assessment_node(state: ResearchState):
+    """评估报告质量"""
+    draft_report = state.get("draft_report", "")
+
+    prompt = f"""
+    评估以下研究报告的质量（0-1分）：
+
+    {draft_report[:1000]}  # 只评估前1000字符
+
+    评估标准：
+    1. 完整性
+    2. 准确性
+    3. 结构清晰度
+    4. 深度
+
+    只返回一个0到1之间的分数。
+    """
+
+    response = llm.invoke(prompt)
+
+    try:
+        # 提取分数
+        score_text = response.content.strip()
+        score = float(''.join(c for c in score_text if c.isdigit() or c == '.'))
+        score = min(max(score, 0), 1)  # 确保在0-1之间
+    except:
+        score = 0.7  # 默认分数
+
+    iteration = state.get("iteration", 0) + 1
+
+    return {
+        "quality_score": score,
+        "iteration": iteration
+    }
+
+def refinement_node(state: ResearchState):
+    """改进报告"""
+    draft_report = state.get("draft_report", "")
+    analysis = state.get("analysis", {})
+
+    prompt = f"""
+    改进以下研究报告：
+
+    当前报告：
+    {draft_report}
+
+    改进重点：
+    1. 增加更多数据支撑
+    2. 加强逻辑连贯性
+    3. 提供更具体的建议
+
+    生成改进后的报告。
+    """
+
+    response = llm.invoke(prompt)
+    refined_report = response.content
+
+    return {"final_report": refined_report}
+
+# 3. 构建工作流
+def build_research_workflow():
+    workflow = StateGraph(ResearchState)
+
+    # 添加节点
+    workflow.add_node("generate_questions", question_generation_node)
+    workflow.add_node("research", research_node)
+    workflow.add_node("analyze", analysis_node)
+    workflow.add_node("generate_report", report_generation_node)
+    workflow.add_node("assess_quality", quality_assessment_node)
+    workflow.add_node("refine", refinement_node)
+
+    # 设置入口
+    workflow.set_entry_point("generate_questions")
+
+    # 添加边
+    workflow.add_edge("generate_questions", "research")
+    workflow.add_edge("research", "analyze")
+    workflow.add_edge("analyze", "generate_report")
+    workflow.add_edge("generate_report", "assess_quality")
+
+    # 条件边：根据质量决定是否需要改进
+    def quality_router(state):
+        score = state.get("quality_score", 0)
+        iteration = state.get("iteration", 0)
+
+        if score >= 0.8 or iteration >= 3:
+            return "finalize"
+        return "refine"
+
+    workflow.add_conditional_edges(
+        "assess_quality",
+        quality_router,
+        {
+            "refine": "refine",
+            "finalize": END
+        }
+    )
+
+    # 改进后重新评估
+    workflow.add_edge("refine", "assess_quality")
+
+    return workflow.compile()
+
+# 4. 使用示例
+app = build_research_workflow()
+
+initial_state = {
+    "topic": "人工智能在医疗诊断中的应用",
+    "questions": [],
+    "search_results": [],
+    "analysis": {},
+    "draft_report": "",
+    "final_report": "",
+    "iteration": 0,
+    "quality_score": 0.0
+}
+
+result = app.invoke(initial_state)
+
+print(f"研究主题: {result['topic']}")
+print(f"生成问题数: {len(result['questions'])}")
+print(f"搜索结果数: {len(result['search_results'])}")
+print(f"质量分数: {result['quality_score']}")
+print(f"迭代次数: {result['iteration']}")
+print("\n最终报告预览:")
+print(result.get('final_report', result.get('draft_report', ''))[:500])
+```
+
+## 案例3：代码审查助手
+
+### 需求分析
+
+构建一个代码审查助手，能够：
+- 分析代码质量
+- 检测潜在问题
+- 提供改进建议
+- 生成审查报告
+
+### 实现代码
+
+```python
+from typing import TypedDict, List, Dict, Annotated, Optional
+from operator import add
+from langgraph.graph import StateGraph, END
+from langchain_openai import ChatOpenAI
+import ast
+import re
+
+# 1. 定义状态
+class CodeReviewState(TypedDict):
+    # 代码内容
+    code: str
+    # 编程语言
+    language: str
+    # 代码分析结果
+    analysis: Dict
+    # 发现的问题
+    issues: Annotated[List[Dict], add]
+    # 改进建议
+    suggestions: Annotated[List[str], add]
+    # 重构后的代码
+    refactored_code: Optional[str]
+    # 审查报告
+    review_report: str
+    # 严重程度评分
+    severity_score: int
+
+# 2. 定义分析工具
+def analyze_code_structure(code: str, language: str) -> Dict:
+    """分析代码结构"""
+    analysis = {
+        "lines_of_code": len(code.split('\n')),
+        "num_functions": 0,
+        "num_classes": 0,
+        "complexity": "medium"
+    }
+
+    if language == "python":
+        try:
+            tree = ast.parse(code)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef):
+                    analysis["num_functions"] += 1
+                elif isinstance(node, ast.ClassDef):
+                    analysis["num_classes"] += 1
+        except:
+            pass
+
+    return analysis
+
+# 3. 定义节点
+llm = ChatOpenAI(model="gpt-4", temperature=0.3)
+
+def code_analysis_node(state: CodeReviewState):
+    """代码分析节点"""
+    code = state["code"]
+    language = state.get("language", "python")
+
+    # 结构分析
+    structure_analysis = analyze_code_structure(code, language)
+
+    # LLM 分析
+    prompt = f"""
+    分析以下{language}代码：
+
+    ```{language}
+    {code}
+    ```
+
+    请分析：
+    1. 代码复杂度
+    2. 可读性
+    3. 性能特征
+    4. 设计模式使用
+
+    返回JSON格式的分析结果。
+    """
+
+    response = llm.invoke(prompt)
+
+    analysis = {
+        **structure_analysis,
+        "llm_analysis": response.content,
+        "timestamp": datetime.now().isoformat()
+    }
+
+    return {"analysis": analysis}
+
+def issue_detection_node(state: CodeReviewState):
+    """问题检测节点"""
+    code = state["code"]
+    language = state.get("language", "python")
+
+    issues = []
+
+    # 通用问题检测
+    if len(code.split('\n')) > 100:
+        issues.append({
+            "type": "complexity",
+            "severity": "medium",
+            "message": "函数或类过长，建议拆分",
+            "line": None
+        })
+
+    # Python 特定检测
+    if language == "python":
+        # 检测未使用的导入
+        imports = re.findall(r'import (\w+)', code)
+        for imp in imports:
+            if imp not in code.replace(f'import {imp}', ''):
+                issues.append({
+                    "type": "unused_import",
+                    "severity": "low",
+                    "message": f"未使用的导入: {imp}",
+                    "line": None
+                })
+
+        # 检测潜在的异常处理问题
+        if "except:" in code or "except Exception:" in code:
+            issues.append({
+                "type": "broad_exception",
+                "severity": "medium",
+                "message": "过于宽泛的异常捕获",
+                "line": None
+            })
+
+    # LLM 深度检测
+    prompt = f"""
+    检测以下代码中的问题：
+
+    ```{language}
+    {code}
+    ```
+
+    查找：
+    1. 潜在的bug
+    2. 安全漏洞
+    3. 性能问题
+    4. 代码异味
+
+    为每个问题返回：类型、严重性（low/medium/high）、描述。
+    """
+
+    response = llm.invoke(prompt)
+
+    # 解析LLM响应并添加到issues（简化处理）
+    llm_issues = parse_llm_issues(response.content)
+    issues.extend(llm_issues)
+
+    return {"issues": issues}
+
+def parse_llm_issues(content: str) -> List[Dict]:
+    """解析LLM检测的问题（简化版）"""
+    issues = []
+    lines = content.split('\n')
+    for line in lines:
+        if any(keyword in line.lower() for keyword in ['bug', 'issue', 'problem', 'vulnerability']):
+            issues.append({
+                "type": "llm_detected",
+                "severity": "medium",
+                "message": line.strip(),
+                "line": None
+            })
+    return issues[:5]  # 限制数量
+
+def suggestion_generation_node(state: CodeReviewState):
+    """生成改进建议"""
+    code = state["code"]
+    issues = state.get("issues", [])
+    analysis = state.get("analysis", {})
+
+    prompt = f"""
+    基于以下分析结果和问题，为代码提供改进建议：
+
+    代码分析：
+    {analysis}
+
+    发现的问题：
+    {issues}
+
+    请提供具体、可操作的改进建议。
+    """
+
+    response = llm.invoke(prompt)
+
+    suggestions = [
+        s.strip()
+        for s in response.content.split('\n')
+        if s.strip() and not s.strip().startswith('#')
+    ]
+
+    return {"suggestions": suggestions[:10]}
+
+def code_refactoring_node(state: CodeReviewState):
+    """代码重构节点"""
+    code = state["code"]
+    suggestions = state.get("suggestions", [])
+    language = state.get("language", "python")
+
+    if not suggestions:
+        return {"refactored_code": code}
+
+    prompt = f"""
+    基于以下建议重构代码：
+
+    原始代码：
+    ```{language}
+    {code}
+    ```
+
+    改进建议：
+    {chr(10).join(suggestions[:5])}
+
+    生成重构后的代码，保持功能不变但提高质量。
+    """
+
+    response = llm.invoke(prompt)
+
+    # 提取代码块
+    refactored_code = extract_code_block(response.content, language)
+
+    return {"refactored_code": refactored_code}
+
+def extract_code_block(content: str, language: str) -> str:
+    """从响应中提取代码块"""
+    pattern = f"```{language}?(.*?)```"
+    match = re.search(pattern, content, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return content
+
+def report_generation_node(state: CodeReviewState):
+    """生成审查报告"""
+    analysis = state.get("analysis", {})
+    issues = state.get("issues", [])
+    suggestions = state.get("suggestions", [])
+
+    # 计算严重程度分数
+    severity_score = calculate_severity_score(issues)
+
+    # 生成报告
+    report = f"""
+# 代码审查报告
+
+## 概览
+- 代码行数: {analysis.get('lines_of_code', 'N/A')}
+- 函数数量: {analysis.get('num_functions', 'N/A')}
+- 类数量: {analysis.get('num_classes', 'N/A')}
+- 复杂度: {analysis.get('complexity', 'N/A')}
+
+## 严重程度评分
+{severity_score}/10 (越低越好)
+
+## 发现的问题 ({len(issues)})
+"""
+
+    for i, issue in enumerate(issues, 1):
+        report += f"""
+### 问题 {i}
+- 类型: {issue['type']}
+- 严重性: {issue['severity']}
+- 描述: {issue['message']}
+"""
+
+    report += f"""
+## 改进建议 ({len(suggestions)})
+"""
+
+    for i, suggestion in enumerate(suggestions, 1):
+        report += f"{i}. {suggestion}\n"
+
+    if state.get("refactored_code"):
+        report += """
+## 重构建议
+代码已生成重构版本，主要改进包括更好的结构、性能优化和可读性提升。
+"""
+
+    return {
+        "review_report": report,
+        "severity_score": severity_score
+    }
+
+def calculate_severity_score(issues: List[Dict]) -> int:
+    """计算严重程度分数"""
+    score = 0
+    severity_weights = {"low": 1, "medium": 3, "high": 5}
+
+    for issue in issues:
+        score += severity_weights.get(issue.get("severity", "low"), 1)
+
+    # 归一化到0-10
+    return min(score, 10)
+
+# 4. 构建工作流
+def build_code_review_workflow():
+    workflow = StateGraph(CodeReviewState)
+
+    # 添加节点
+    workflow.add_node("analyze", code_analysis_node)
+    workflow.add_node("detect_issues", issue_detection_node)
+    workflow.add_node("generate_suggestions", suggestion_generation_node)
+    workflow.add_node("refactor", code_refactoring_node)
+    workflow.add_node("generate_report", report_generation_node)
+
+    # 设置流程
+    workflow.set_entry_point("analyze")
+    workflow.add_edge("analyze", "detect_issues")
+    workflow.add_edge("detect_issues", "generate_suggestions")
+
+    # 条件：是否需要重构
+    def should_refactor(state):
+        issues = state.get("issues", [])
+        high_severity = any(i.get("severity") == "high" for i in issues)
+        many_issues = len(issues) > 5
+
+        if high_severity or many_issues:
+            return "refactor"
+        return "report"
+
+    workflow.add_conditional_edges(
+        "generate_suggestions",
+        should_refactor,
+        {
+            "refactor": "refactor",
+            "report": "generate_report"
+        }
+    )
+
+    workflow.add_edge("refactor", "generate_report")
+    workflow.add_edge("generate_report", END)
+
+    return workflow.compile()
+
+# 5. 使用示例
+app = build_code_review_workflow()
+
+sample_code = """
+import os
+import sys
+import json
+
+def process_data(data):
+    result = []
+    for i in range(len(data)):
+        if data[i] > 0:
+            result.append(data[i] * 2)
+    return result
+
+class DataProcessor:
+    def __init__(self):
+        self.data = []
+
+    def load_data(self, filename):
+        try:
+            with open(filename, 'r') as f:
+                self.data = json.load(f)
+        except:
+            print("Error loading file")
+
+    def process(self):
+        return process_data(self.data)
+
+if __name__ == "__main__":
+    processor = DataProcessor()
+    processor.load_data("data.json")
+    result = processor.process()
+    print(result)
+"""
+
+initial_state = {
+    "code": sample_code,
+    "language": "python",
+    "analysis": {},
+    "issues": [],
+    "suggestions": [],
+    "refactored_code": None,
+    "review_report": "",
+    "severity_score": 0
+}
+
+result = app.invoke(initial_state)
+
+print("=== 代码审查完成 ===")
+print(f"发现问题数: {len(result['issues'])}")
+print(f"严重程度评分: {result['severity_score']}/10")
+print("\n=== 审查报告 ===")
+print(result['review_report'])
+```
+
+## 最佳实践总结
+
+### 1. 状态设计原则
+
+```python
+# 好的状态设计
+class WellDesignedState(TypedDict):
+    # 清晰的字段命名
+    user_input: str
+    processing_results: Dict
+
+    # 使用Annotated定义更新策略
+    history: Annotated[List[Dict], add]
+
+    # 包含元数据
+    metadata: Dict
+
+    # 状态标志
+    is_complete: bool
+    error: Optional[str]
+```
+
+### 2. 节点设计模式
+
+```python
+def well_designed_node(state: State) -> State:
+    """好的节点设计"""
+    # 1. 验证输入
+    if not state.get("required_field"):
+        return {"error": "Missing required field"}
+
+    # 2. 执行核心逻辑
+    try:
+        result = process(state["data"])
+    except Exception as e:
+        return {"error": str(e)}
+
+    # 3. 返回最小更新
+    return {"result": result}
+```
+
+### 3. 错误处理
+
+```python
+def error_handling_workflow():
+    workflow = StateGraph(State)
+
+    # 错误处理节点
+    def error_handler(state):
+        error = state.get("error")
+        # 记录错误
+        log_error(error)
+        # 尝试恢复
+        return {"status": "recovered", "error": None}
+
+    # 添加错误处理路径
+    workflow.add_conditional_edges(
+        "process",
+        lambda s: "error" if s.get("error") else "continue",
+        {
+            "error": "error_handler",
+            "continue": "next_step"
+        }
+    )
+```
+
+### 4. 性能优化
+
+```python
+# 使用并行处理
+def parallel_workflow():
+    workflow = StateGraph(State)
+
+    # 并行执行的节点
+    workflow.add_edge("split", "process_a")
+    workflow.add_edge("split", "process_b")
+    workflow.add_edge("split", "process_c")
+
+    # 聚合结果
+    workflow.add_edge(["process_a", "process_b", "process_c"], "merge")
+
+    return workflow.compile()
+```
+
+## 总结
+
+通过这些实战案例，我们展示了 LangGraph 在不同场景下的应用：
+
+1. **智能客服系统**：展示了意图识别、工具调用和人工介入
+2. **研究助手**：展示了迭代改进和质量控制
+3. **代码审查助手**：展示了复杂分析和报告生成
+
+关键要点：
+- 合理设计状态结构
+- 模块化节点功能
+- 使用条件路由实现灵活流程
+- 添加错误处理和质量控制
+- 利用检查点实现持久化
+
+下一篇我们将探讨 LangGraph 的高级特性和优化技巧。

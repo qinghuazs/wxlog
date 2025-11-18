@@ -1,0 +1,1114 @@
+---
+title: LangGraph 测试策略与最佳实践
+date: 2025-09-30
+permalink: /ai/langgraph/testing-strategy.html
+categories:
+  - AI
+  - LangGraph
+---
+
+# LangGraph 测试策略与最佳实践
+
+## 概述
+
+全面的测试策略是保证 LangGraph 应用质量的基石。本文档提供从单元测试到集成测试的完整测试方案。
+
+```mermaid
+graph TB
+    subgraph "测试金字塔"
+        A[单元测试] --> B[集成测试]
+        B --> C[端到端测试]
+        C --> D[性能测试]
+
+        E[节点测试] --> A
+        F[边测试] --> A
+        G[状态测试] --> A
+
+        H[工作流测试] --> B
+        I[外部服务测试] --> B
+
+        J[完整场景测试] --> C
+        K[用户旅程测试] --> C
+    end
+
+    style A fill:#9f9,stroke:#333,stroke-width:2px
+    style B fill:#99f,stroke:#333,stroke-width:2px
+    style C fill:#f99,stroke:#333,stroke-width:2px
+```
+
+## 1. 单元测试策略
+
+### 1.1 节点单元测试
+
+```python
+# test_nodes.py
+import pytest
+from unittest.mock import Mock, patch, AsyncMock
+from typing import Dict
+import asyncio
+
+class TestNodes:
+    """节点单元测试"""
+
+    def test_simple_node(self):
+        """测试简单节点"""
+        def process_node(state: Dict) -> Dict:
+            input_value = state.get("input", "")
+            return {"output": input_value.upper()}
+
+        # 测试正常情况
+        state = {"input": "hello"}
+        result = process_node(state)
+        assert result["output"] == "HELLO"
+
+        # 测试边界情况
+        state = {"input": ""}
+        result = process_node(state)
+        assert result["output"] == ""
+
+        # 测试缺失输入
+        state = {}
+        result = process_node(state)
+        assert result["output"] == ""
+
+    def test_node_with_validation(self):
+        """测试带验证的节点"""
+        def validation_node(state: Dict) -> Dict:
+            if "required_field" not in state:
+                raise ValueError("Missing required field")
+
+            if not isinstance(state["required_field"], str):
+                raise TypeError("Required field must be string")
+
+            return {"validated": True}
+
+        # 测试正常情况
+        state = {"required_field": "value"}
+        result = validation_node(state)
+        assert result["validated"] is True
+
+        # 测试缺失字段
+        with pytest.raises(ValueError, match="Missing required field"):
+            validation_node({})
+
+        # 测试类型错误
+        with pytest.raises(TypeError, match="must be string"):
+            validation_node({"required_field": 123})
+
+    @patch('langchain_openai.ChatOpenAI')
+    def test_llm_node(self, mock_llm_class):
+        """测试 LLM 节点"""
+        # 设置 mock
+        mock_llm = Mock()
+        mock_llm.invoke.return_value = Mock(content="Generated response")
+        mock_llm_class.return_value = mock_llm
+
+        def llm_node(state: Dict) -> Dict:
+            from langchain_openai import ChatOpenAI
+            llm = ChatOpenAI()
+            response = llm.invoke(state["prompt"])
+            return {"response": response.content}
+
+        # 测试
+        state = {"prompt": "Test prompt"}
+        result = llm_node(state)
+
+        assert result["response"] == "Generated response"
+        mock_llm.invoke.assert_called_once_with("Test prompt")
+
+    @pytest.mark.asyncio
+    async def test_async_node(self):
+        """测试异步节点"""
+        async def async_node(state: Dict) -> Dict:
+            await asyncio.sleep(0.01)  # 模拟异步操作
+            return {"async_result": state.get("input", "") + "_processed"}
+
+        state = {"input": "test"}
+        result = await async_node(state)
+        assert result["async_result"] == "test_processed"
+
+    def test_node_error_handling(self):
+        """测试节点错误处理"""
+        def error_handling_node(state: Dict) -> Dict:
+            try:
+                # 可能出错的操作
+                result = 10 / state.get("divisor", 0)
+                return {"result": result}
+            except ZeroDivisionError:
+                return {"error": "Division by zero"}
+            except Exception as e:
+                return {"error": str(e)}
+
+        # 测试正常情况
+        assert error_handling_node({"divisor": 2})["result"] == 5
+
+        # 测试除零错误
+        assert error_handling_node({"divisor": 0})["error"] == "Division by zero"
+
+        # 测试其他错误
+        assert error_handling_node({})["error"] == "Division by zero"
+```
+
+### 1.2 状态测试
+
+```python
+# test_state.py
+from typing import TypedDict, Annotated, List
+from operator import add
+
+class TestState:
+    """状态管理测试"""
+
+    def test_state_definition(self):
+        """测试状态定义"""
+        class WorkflowState(TypedDict):
+            simple_field: str
+            list_field: Annotated[List[str], add]
+            dict_field: dict
+
+        # 验证类型
+        assert WorkflowState.__annotations__["simple_field"] == str
+        assert hasattr(WorkflowState.__annotations__["list_field"], "__metadata__")
+
+    def test_state_update_mechanism(self):
+        """测试状态更新机制"""
+        from langgraph.graph import StateGraph
+
+        class State(TypedDict):
+            counter: int
+            messages: Annotated[List[str], add]
+
+        workflow = StateGraph(State)
+
+        def increment_node(state):
+            return {"counter": state.get("counter", 0) + 1}
+
+        def message_node(state):
+            return {"messages": ["New message"]}
+
+        workflow.add_node("increment", increment_node)
+        workflow.add_node("message", message_node)
+        workflow.set_entry_point("increment")
+        workflow.add_edge("increment", "message")
+        workflow.add_edge("message", "__end__")
+
+        app = workflow.compile()
+
+        # 测试状态更新
+        initial_state = {"counter": 0, "messages": ["Initial"]}
+        result = app.invoke(initial_state)
+
+        assert result["counter"] == 1
+        assert "Initial" in result["messages"]
+        assert "New message" in result["messages"]
+
+    def test_custom_reducer(self):
+        """测试自定义 reducer"""
+        def custom_merge(old, new):
+            """自定义合并逻辑"""
+            if isinstance(old, dict) and isinstance(new, dict):
+                return {**old, **new}
+            return new
+
+        class State(TypedDict):
+            data: Annotated[dict, custom_merge]
+
+        # 测试合并逻辑
+        old_data = {"a": 1, "b": 2}
+        new_data = {"b": 3, "c": 4}
+        result = custom_merge(old_data, new_data)
+
+        assert result == {"a": 1, "b": 3, "c": 4}
+```
+
+### 1.3 边测试
+
+```python
+# test_edges.py
+class TestEdges:
+    """边和路由测试"""
+
+    def test_conditional_edge(self):
+        """测试条件边"""
+        def router(state: Dict) -> str:
+            score = state.get("score", 0)
+            if score >= 80:
+                return "high"
+            elif score >= 60:
+                return "medium"
+            else:
+                return "low"
+
+        # 测试不同分数的路由
+        assert router({"score": 90}) == "high"
+        assert router({"score": 70}) == "medium"
+        assert router({"score": 50}) == "low"
+        assert router({}) == "low"  # 默认情况
+
+    def test_edge_validation(self):
+        """测试边的有效性"""
+        from langgraph.graph import StateGraph
+
+        workflow = StateGraph(Dict)
+        workflow.add_node("start", lambda s: s)
+        workflow.add_node("end", lambda s: s)
+
+        # 测试有效边
+        workflow.add_edge("start", "end")
+
+        # 测试无效边（节点不存在）
+        with pytest.raises(ValueError):
+            workflow.add_edge("start", "non_existent")
+
+    def test_parallel_edges(self):
+        """测试并行边"""
+        from langgraph.graph import StateGraph
+
+        workflow = StateGraph(Dict)
+
+        results = []
+
+        def node_a(state):
+            results.append("a")
+            return state
+
+        def node_b(state):
+            results.append("b")
+            return state
+
+        def node_c(state):
+            results.append("c")
+            return state
+
+        workflow.add_node("split", lambda s: s)
+        workflow.add_node("a", node_a)
+        workflow.add_node("b", node_b)
+        workflow.add_node("c", node_c)
+        workflow.add_node("join", lambda s: s)
+
+        workflow.set_entry_point("split")
+        workflow.add_edge("split", "a")
+        workflow.add_edge("split", "b")
+        workflow.add_edge("split", "c")
+        workflow.add_edge("a", "join")
+        workflow.add_edge("b", "join")
+        workflow.add_edge("c", "join")
+        workflow.add_edge("join", "__end__")
+
+        app = workflow.compile()
+        app.invoke({})
+
+        # 验证所有节点都被执行
+        assert "a" in results
+        assert "b" in results
+        assert "c" in results
+```
+
+## 2. 集成测试策略
+
+### 2.1 工作流集成测试
+
+```python
+# test_workflow_integration.py
+import pytest
+from langgraph.graph import StateGraph, END
+from langgraph.checkpoint import MemorySaver
+
+class TestWorkflowIntegration:
+    """工作流集成测试"""
+
+    def test_complete_workflow(self):
+        """测试完整工作流"""
+        from typing import TypedDict, Annotated, List
+        from operator import add
+
+        class State(TypedDict):
+            input: str
+            steps: Annotated[List[str], add]
+            output: str
+
+        workflow = StateGraph(State)
+
+        def step1(state):
+            return {"steps": ["Step 1 completed"]}
+
+        def step2(state):
+            return {"steps": ["Step 2 completed"]}
+
+        def step3(state):
+            return {
+                "steps": ["Step 3 completed"],
+                "output": "Workflow completed"
+            }
+
+        workflow.add_node("step1", step1)
+        workflow.add_node("step2", step2)
+        workflow.add_node("step3", step3)
+
+        workflow.set_entry_point("step1")
+        workflow.add_edge("step1", "step2")
+        workflow.add_edge("step2", "step3")
+        workflow.add_edge("step3", END)
+
+        app = workflow.compile()
+
+        # 执行测试
+        result = app.invoke({"input": "test", "steps": [], "output": ""})
+
+        # 验证结果
+        assert len(result["steps"]) == 3
+        assert "Step 1 completed" in result["steps"]
+        assert "Step 2 completed" in result["steps"]
+        assert "Step 3 completed" in result["steps"]
+        assert result["output"] == "Workflow completed"
+
+    def test_workflow_with_checkpoints(self):
+        """测试带检查点的工作流"""
+        class State(TypedDict):
+            counter: int
+
+        workflow = StateGraph(State)
+
+        def increment(state):
+            return {"counter": state["counter"] + 1}
+
+        workflow.add_node("increment", increment)
+        workflow.set_entry_point("increment")
+        workflow.add_edge("increment", END)
+
+        # 使用检查点
+        checkpointer = MemorySaver()
+        app = workflow.compile(checkpointer=checkpointer)
+
+        config = {"configurable": {"thread_id": "test_thread"}}
+
+        # 第一次执行
+        result1 = app.invoke({"counter": 0}, config)
+        assert result1["counter"] == 1
+
+        # 第二次执行（从检查点恢复）
+        result2 = app.invoke({"counter": 10}, config)
+        assert result2["counter"] == 11
+
+    def test_workflow_error_recovery(self):
+        """测试工作流错误恢复"""
+        class State(TypedDict):
+            attempts: int
+            success: bool
+
+        workflow = StateGraph(State)
+
+        def flaky_node(state):
+            attempts = state.get("attempts", 0) + 1
+            if attempts < 3:
+                raise Exception("Simulated failure")
+            return {"attempts": attempts, "success": True}
+
+        def retry_decision(state):
+            if state.get("attempts", 0) < 3:
+                return "retry"
+            return "end"
+
+        workflow.add_node("process", flaky_node)
+        workflow.set_entry_point("process")
+
+        workflow.add_conditional_edges(
+            "process",
+            retry_decision,
+            {
+                "retry": "process",
+                "end": END
+            }
+        )
+
+        app = workflow.compile()
+
+        # 测试重试机制
+        with pytest.raises(Exception):
+            app.invoke({"attempts": 0, "success": False})
+```
+
+### 2.2 外部服务集成测试
+
+```python
+# test_external_integration.py
+from unittest.mock import patch, Mock
+import responses
+import redis
+from sqlalchemy import create_engine
+
+class TestExternalIntegration:
+    """外部服务集成测试"""
+
+    @responses.activate
+    def test_api_integration(self):
+        """测试外部 API 集成"""
+        # 模拟 API 响应
+        responses.add(
+            responses.GET,
+            "https://api.example.com/data",
+            json={"status": "success", "data": "test_data"},
+            status=200
+        )
+
+        def api_node(state):
+            import requests
+            response = requests.get("https://api.example.com/data")
+            return {"api_response": response.json()}
+
+        result = api_node({})
+        assert result["api_response"]["status"] == "success"
+        assert result["api_response"]["data"] == "test_data"
+
+    @patch('redis.Redis')
+    def test_redis_integration(self, mock_redis_class):
+        """测试 Redis 集成"""
+        mock_redis = Mock()
+        mock_redis.get.return_value = b'{"cached": "data"}'
+        mock_redis.set.return_value = True
+        mock_redis_class.return_value = mock_redis
+
+        def cache_node(state):
+            import json
+            r = redis.Redis()
+
+            # 尝试获取缓存
+            cached = r.get("test_key")
+            if cached:
+                return {"data": json.loads(cached)}
+
+            # 设置缓存
+            data = {"new": "data"}
+            r.set("test_key", json.dumps(data))
+            return {"data": data}
+
+        result = cache_node({})
+        assert result["data"]["cached"] == "data"
+        mock_redis.get.assert_called_once_with("test_key")
+
+    def test_database_integration(self):
+        """测试数据库集成"""
+        # 使用内存数据库
+        engine = create_engine("sqlite:///:memory:")
+
+        # 创建测试表
+        engine.execute("""
+            CREATE TABLE test_table (
+                id INTEGER PRIMARY KEY,
+                name TEXT
+            )
+        """)
+
+        def db_node(state):
+            # 插入数据
+            engine.execute(
+                "INSERT INTO test_table (name) VALUES (?)",
+                state["name"]
+            )
+
+            # 查询数据
+            result = engine.execute("SELECT * FROM test_table").fetchall()
+            return {"records": [dict(r) for r in result]}
+
+        result = db_node({"name": "test_name"})
+        assert len(result["records"]) == 1
+        assert result["records"][0]["name"] == "test_name"
+```
+
+## 3. 端到端测试
+
+### 3.1 完整场景测试
+
+```python
+# test_e2e_scenarios.py
+class TestE2EScenarios:
+    """端到端场景测试"""
+
+    def test_chatbot_scenario(self):
+        """测试聊天机器人场景"""
+        from create_chatbot_workflow import create_chatbot
+
+        app = create_chatbot()
+
+        # 模拟完整对话
+        conversation = [
+            ("Hello", "greeting"),
+            ("What's the weather?", "weather_query"),
+            ("Tell me a joke", "entertainment"),
+            ("Goodbye", "farewell")
+        ]
+
+        state = {"messages": [], "context": {}}
+
+        for user_input, expected_intent in conversation:
+            state["messages"].append({"role": "user", "content": user_input})
+            result = app.invoke(state)
+
+            # 验证意图识别
+            assert result.get("intent") == expected_intent
+
+            # 验证响应存在
+            assert len(result["messages"]) > len(state["messages"])
+
+            state = result
+
+    def test_document_processing_pipeline(self):
+        """测试文档处理管道"""
+        from create_doc_pipeline import create_pipeline
+
+        app = create_pipeline()
+
+        # 准备测试文档
+        test_document = {
+            "content": "This is a test document with multiple sentences. " * 10,
+            "metadata": {"source": "test", "type": "text"}
+        }
+
+        # 执行管道
+        result = app.invoke({
+            "document": test_document,
+            "steps_completed": []
+        })
+
+        # 验证所有步骤完成
+        expected_steps = ["parse", "chunk", "embed", "store", "index"]
+        for step in expected_steps:
+            assert step in result["steps_completed"]
+
+        # 验证输出
+        assert "chunks" in result
+        assert "embeddings" in result
+        assert result["indexed"] is True
+```
+
+### 3.2 用户旅程测试
+
+```python
+# test_user_journeys.py
+class TestUserJourneys:
+    """用户旅程测试"""
+
+    def test_research_assistant_journey(self):
+        """测试研究助手用户旅程"""
+        from research_assistant import ResearchAssistant
+
+        assistant = ResearchAssistant()
+
+        # 用户旅程：研究一个主题
+        journey_steps = [
+            {
+                "action": "set_topic",
+                "input": {"topic": "Climate Change"},
+                "expected": lambda r: r["topic_set"] is True
+            },
+            {
+                "action": "generate_questions",
+                "input": {},
+                "expected": lambda r: len(r["questions"]) >= 3
+            },
+            {
+                "action": "search_sources",
+                "input": {},
+                "expected": lambda r: len(r["sources"]) >= 5
+            },
+            {
+                "action": "analyze_sources",
+                "input": {},
+                "expected": lambda r: "analysis" in r
+            },
+            {
+                "action": "generate_report",
+                "input": {},
+                "expected": lambda r: len(r["report"]) > 100
+            }
+        ]
+
+        state = {}
+        for step in journey_steps:
+            result = assistant.execute_action(
+                step["action"],
+                {**state, **step["input"]}
+            )
+
+            # 验证预期结果
+            assert step["expected"](result), f"Failed at step: {step['action']}"
+
+            state = result
+```
+
+## 4. 测试工具和框架
+
+### 4.1 测试夹具（Fixtures）
+
+```python
+# conftest.py
+import pytest
+from langgraph.graph import StateGraph
+from langgraph.checkpoint import MemorySaver
+from unittest.mock import Mock
+
+@pytest.fixture
+def simple_workflow():
+    """简单工作流夹具"""
+    workflow = StateGraph(dict)
+    workflow.add_node("start", lambda s: {"started": True})
+    workflow.add_node("end", lambda s: {"completed": True})
+    workflow.set_entry_point("start")
+    workflow.add_edge("start", "end")
+    workflow.add_edge("end", "__end__")
+    return workflow.compile()
+
+@pytest.fixture
+def mock_llm():
+    """Mock LLM 夹具"""
+    mock = Mock()
+    mock.invoke.return_value = Mock(content="Mocked response")
+    return mock
+
+@pytest.fixture
+def test_state():
+    """测试状态夹具"""
+    return {
+        "input": "test",
+        "messages": [],
+        "metadata": {},
+        "error": None
+    }
+
+@pytest.fixture
+def memory_checkpointer():
+    """内存检查点夹具"""
+    return MemorySaver()
+
+@pytest.fixture
+def temp_database(tmp_path):
+    """临时数据库夹具"""
+    from sqlalchemy import create_engine
+    db_path = tmp_path / "test.db"
+    engine = create_engine(f"sqlite:///{db_path}")
+    return engine
+```
+
+### 4.2 测试助手类
+
+```python
+# test_helpers.py
+from typing import Dict, List, Any
+import asyncio
+import time
+
+class WorkflowTestHelper:
+    """工作流测试助手"""
+
+    @staticmethod
+    def create_test_workflow(nodes: List[str]) -> Any:
+        """创建测试工作流"""
+        workflow = StateGraph(dict)
+
+        for i, node_name in enumerate(nodes):
+            workflow.add_node(
+                node_name,
+                lambda s, n=node_name: {f"{n}_executed": True}
+            )
+
+            if i == 0:
+                workflow.set_entry_point(node_name)
+            else:
+                workflow.add_edge(nodes[i-1], node_name)
+
+        if nodes:
+            workflow.add_edge(nodes[-1], "__end__")
+
+        return workflow.compile()
+
+    @staticmethod
+    def assert_node_executed(result: Dict, node_name: str):
+        """断言节点已执行"""
+        assert f"{node_name}_executed" in result
+        assert result[f"{node_name}_executed"] is True
+
+    @staticmethod
+    def measure_execution_time(workflow, input_state):
+        """测量执行时间"""
+        start = time.perf_counter()
+        result = workflow.invoke(input_state)
+        elapsed = time.perf_counter() - start
+        return result, elapsed
+
+    @staticmethod
+    async def run_concurrent_tests(workflow, inputs: List[Dict]) -> List[Dict]:
+        """运行并发测试"""
+        tasks = [workflow.ainvoke(inp) for inp in inputs]
+        return await asyncio.gather(*tasks)
+
+class MockDataGenerator:
+    """模拟数据生成器"""
+
+    @staticmethod
+    def generate_messages(count: int) -> List[Dict]:
+        """生成测试消息"""
+        return [
+            {"role": "user" if i % 2 == 0 else "assistant", "content": f"Message {i}"}
+            for i in range(count)
+        ]
+
+    @staticmethod
+    def generate_documents(count: int) -> List[Dict]:
+        """生成测试文档"""
+        return [
+            {
+                "id": f"doc_{i}",
+                "content": f"Document content {i}",
+                "metadata": {"index": i}
+            }
+            for i in range(count)
+        ]
+```
+
+## 5. 测试覆盖率和质量保证
+
+### 5.1 覆盖率配置
+
+```python
+# pytest.ini
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--cov=langgraph_app",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80",
+    "-v"
+]
+
+# coverage配置
+[tool.coverage.run]
+source = ["langgraph_app"]
+omit = [
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:"
+]
+```
+
+### 5.2 测试质量检查
+
+```python
+# test_quality.py
+import ast
+import os
+from pathlib import Path
+
+class TestQualityChecker:
+    """测试质量检查器"""
+
+    def analyze_test_coverage(self, test_dir: str) -> Dict:
+        """分析测试覆盖率"""
+        stats = {
+            "total_tests": 0,
+            "test_files": 0,
+            "assertions": 0,
+            "mocks": 0
+        }
+
+        for test_file in Path(test_dir).glob("**/test_*.py"):
+            stats["test_files"] += 1
+
+            with open(test_file, 'r') as f:
+                tree = ast.parse(f.read())
+
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef) and node.name.startswith("test_"):
+                    stats["total_tests"] += 1
+
+                if isinstance(node, ast.Assert):
+                    stats["assertions"] += 1
+
+                if isinstance(node, ast.Name) and "mock" in node.id.lower():
+                    stats["mocks"] += 1
+
+        return stats
+
+    def check_test_naming(self, test_dir: str) -> List[str]:
+        """检查测试命名规范"""
+        issues = []
+
+        for test_file in Path(test_dir).glob("**/test_*.py"):
+            with open(test_file, 'r') as f:
+                tree = ast.parse(f.read())
+
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef):
+                    if node.name.startswith("test_"):
+                        # 检查测试名称是否描述性
+                        if len(node.name) < 10:
+                            issues.append(f"Test name too short: {node.name}")
+
+                        # 检查是否有文档字符串
+                        if not ast.get_docstring(node):
+                            issues.append(f"Missing docstring: {node.name}")
+
+        return issues
+```
+
+## 6. 持续集成测试
+
+### 6.1 CI/CD 测试配置
+
+```yaml
+# .github/workflows/test.yml
+name: Test Suite
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+
+    - name: Run unit tests
+      run: |
+        pytest tests/unit --cov=langgraph_app --cov-report=xml
+
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+
+    - name: Run integration tests
+      env:
+        REDIS_URL: redis://localhost:6379
+        DATABASE_URL: postgresql://postgres:test@localhost:5432/test
+      run: |
+        pytest tests/integration -v
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+        playwright install chromium
+
+    - name: Start application
+      run: |
+        python app.py &
+        sleep 10  # 等待应用启动
+
+    - name: Run E2E tests
+      run: |
+        pytest tests/e2e -v --browser chromium
+```
+
+## 7. 测试最佳实践
+
+### 7.1 测试组织结构
+
+```python
+"""
+推荐的测试目录结构
+"""
+
+test_structure = """
+tests/
+├── unit/                 # 单元测试
+│   ├── test_nodes.py
+│   ├── test_edges.py
+│   ├── test_state.py
+│   └── test_utils.py
+├── integration/          # 集成测试
+│   ├── test_workflow.py
+│   ├── test_external.py
+│   └── test_database.py
+├── e2e/                  # 端到端测试
+│   ├── test_scenarios.py
+│   └── test_user_journeys.py
+├── performance/          # 性能测试
+│   ├── test_load.py
+│   └── test_stress.py
+├── fixtures/            # 测试夹具
+│   ├── workflows.py
+│   └── data.py
+├── mocks/              # 模拟对象
+│   ├── llm_mocks.py
+│   └── api_mocks.py
+└── conftest.py         # Pytest 配置
+"""
+```
+
+### 7.2 测试编写指南
+
+```python
+class TestingGuidelines:
+    """测试编写指南"""
+
+    @staticmethod
+    def test_naming_convention():
+        """测试命名规范"""
+        # ✅ 好的命名
+        def test_node_returns_expected_output_when_given_valid_input():
+            pass
+
+        # ❌ 不好的命名
+        def test_node():
+            pass
+
+    @staticmethod
+    def test_structure():
+        """测试结构 - AAA模式"""
+        def test_example():
+            # Arrange - 准备
+            input_data = {"key": "value"}
+            expected_output = {"result": "processed"}
+
+            # Act - 执行
+            actual_output = process_function(input_data)
+
+            # Assert - 断言
+            assert actual_output == expected_output
+
+    @staticmethod
+    def test_isolation():
+        """测试隔离"""
+        # 每个测试应该独立运行
+        # 使用 fixtures 和 mocks 避免依赖
+        pass
+
+    @staticmethod
+    def test_coverage():
+        """测试覆盖"""
+        # 测试正常路径
+        # 测试异常路径
+        # 测试边界条件
+        pass
+```
+
+## 8. 测试检查清单
+
+```python
+"""
+LangGraph 测试检查清单
+"""
+
+testing_checklist = {
+    "单元测试": [
+        "✓ 所有节点函数都有测试",
+        "✓ 状态更新逻辑已测试",
+        "✓ 路由条件已覆盖",
+        "✓ 错误处理已验证"
+    ],
+    "集成测试": [
+        "✓ 完整工作流已测试",
+        "✓ 外部服务集成已验证",
+        "✓ 检查点功能已测试",
+        "✓ 并发场景已覆盖"
+    ],
+    "性能测试": [
+        "✓ 负载测试已执行",
+        "✓ 内存泄漏已检查",
+        "✓ 响应时间已验证",
+        "✓ 资源使用已监控"
+    ],
+    "测试质量": [
+        "✓ 测试覆盖率 > 80%",
+        "✓ 无跳过的测试",
+        "✓ 测试运行时间 < 5分钟",
+        "✓ 测试文档完整"
+    ],
+    "CI/CD": [
+        "✓ 自动化测试已配置",
+        "✓ 测试报告已生成",
+        "✓ 覆盖率已上传",
+        "✓ 失败通知已设置"
+    ]
+}
+```
+
+## 总结
+
+完善的测试策略确保 LangGraph 应用的质量和稳定性：
+
+1. **分层测试**：从单元测试到端到端测试的完整覆盖
+2. **自动化测试**：集成到 CI/CD 流程中
+3. **测试工具**：利用 pytest、mock、fixtures 等工具
+4. **质量保证**：监控测试覆盖率和测试质量
+5. **最佳实践**：遵循测试编写规范和组织结构
+
+通过系统的测试策略，可以及早发现问题，确保应用的可靠性和可维护性。
