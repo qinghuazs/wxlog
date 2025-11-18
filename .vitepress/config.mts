@@ -46,6 +46,7 @@ export default withMermaid(defineConfig({
     '01.AI/01.AI开发工具/01. ClaudeCode/Claude Code MCP 服务加载机制详解.md': 'ai/claude-code/mcp-loading-mechanism.md',
     // 架构详解系列
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/01.整体架构设计.md': 'ai/claude-code/architecture-01-overall-architecture.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/02.核心引擎实现.md': 'ai/claude-code/architecture-02-core-engine.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/03 Context Management.md': 'ai/claude-code/architecture-03-context-management.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/04 Session Management.md': 'ai/claude-code/architecture-04-session-management.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/05 Tool System Architecture.md': 'ai/claude-code/architecture-05-tool-system-architecture.md',
@@ -234,6 +235,7 @@ export default withMermaid(defineConfig({
               collapsed: true,
               items: [
                 { text: '整体架构设计', link: '/ai/claude-code/architecture-01-overall-architecture' },
+                { text: '核心引擎实现', link: '/ai/claude-code/architecture-02-core-engine' },
                 { text: '上下文管理系统', link: '/ai/claude-code/architecture-03-context-management' },
                 { text: '会话与状态管理', link: '/ai/claude-code/architecture-04-session-management' },
                 { text: '工具系统架构', link: '/ai/claude-code/architecture-05-tool-system-architecture' },
@@ -363,6 +365,7 @@ export default withMermaid(defineConfig({
               collapsed: true,
               items: [
                 { text: '整体架构设计', link: '/ai/claude-code/architecture-01-overall-architecture' },
+                { text: '核心引擎实现', link: '/ai/claude-code/architecture-02-core-engine' },
                 { text: '上下文管理系统', link: '/ai/claude-code/architecture-03-context-management' },
                 { text: '会话与状态管理', link: '/ai/claude-code/architecture-04-session-management' },
                 { text: '工具系统架构', link: '/ai/claude-code/architecture-05-tool-system-architecture' },

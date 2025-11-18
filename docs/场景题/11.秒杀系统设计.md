@@ -182,7 +182,7 @@ public class SeckillController {
 ```
 
 #### 3.2.3 分布式缓存 (Redis Cluster)
-```redis
+```bash
 # 库存缓存设计
 HSET seckill:stock:1001 total 1000 sold 0 version 1
 
