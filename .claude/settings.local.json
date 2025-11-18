@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(git add:*)",
+      "Bash(for:*)",
+      "Bash(do sed -i 's/^## 第一部分:/## 一、/g; s/^## 第二部分:/## 二、/g; s/^## 第三部分:/## 三、/g; s/^## 第四部分:/## 四、/g; s/^## 第五部分:/## 五、/g; s/^## 第六部分:/## 六、/g' \"$file\")"
     ],
     "deny": [],
     "ask": []

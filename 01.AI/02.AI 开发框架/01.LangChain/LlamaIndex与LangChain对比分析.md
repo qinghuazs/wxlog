@@ -1,9 +1,12 @@
 ---
-title: Llamaindex Vs Langchain
-date: 2025-11-18
+title: LlamaIndex与LangChain对比分析
+date: 2025-01-23
 permalink: /ai/langchain/llamaindex-vs-langchain.html
+tags:
+  - LangChain
+  - LlamaIndex
 categories:
-  - AI
+  - LangChain
 ---
 
 # LlamaIndex与LangChain对比分析

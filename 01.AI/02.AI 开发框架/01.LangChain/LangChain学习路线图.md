@@ -1,12 +1,15 @@
 ---
-title: Learning Roadmap
-date: 2025-11-18
+title: LangChain学习路线图
+date: 2025-01-09
 permalink: /ai/langchain/learning-roadmap.html
+tags:
+  - LangChain
+  - 学习路线
 categories:
-  - AI
+  - LangChain
 ---
 
-# LangChain 学习路线图
+# LangChain学习路线图
 
 ## 📚 课程概述
 
