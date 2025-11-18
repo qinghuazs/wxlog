@@ -1,18 +1,14 @@
 ---
-title: Agent工作流引擎详解
-date: 2025-01-12
-permalink: /ai/claude-code/agent-workflow-engine.html
+title: Claude Code架构详解（十一）：Agent工作流引擎
+date: 2025-01-14
+permalink: /ai/claude-code/architecture-11-agent-workflow-engine.html
 tags:
   - Claude Code
-  - Agent
-  - 工作流引擎
-  - Multi-Agent
 categories:
-  - AI
   - Claude Code
 ---
 
-# Agent工作流引擎详解
+# Agent工作流引擎
 
 ## 1. 引言：Agent系统概述
 

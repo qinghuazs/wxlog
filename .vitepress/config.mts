@@ -53,7 +53,7 @@ export default withMermaid(defineConfig({
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/06.文件操作工具实现.md': 'ai/claude-code/architecture-06-file-operations.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/07.代码搜索与分析工具.md': 'ai/claude-code/architecture-07-code-search-analysis.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/08.终端集成实现.md': 'ai/claude-code/architecture-08-terminal-integration.md',
-    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/09 Mcp Protocol.md': 'ai/claude-code/architecture-09-mcp-protocol.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/09.MCP协议实现.md': 'ai/claude-code/architecture-09-mcp-protocol.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/10 Browser Automation.md': 'ai/claude-code/architecture-10-browser-automation.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/12 Multimodal Interaction.md': 'ai/claude-code/architecture-12-multimodal-interaction.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/20 Build Your Own Ai Assistant.md': 'ai/claude-code/architecture-20-build-your-own-ai-assistant.md',
