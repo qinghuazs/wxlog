@@ -29,7 +29,12 @@
       "Bash(temp_rewrites.txt)",
       "Bash(new_config.mts)",
       "Bash(xargs -I {} sh -c 'echo \"\"\"\"File: {}\"\"\"\" && grep \"\"\"\"permalink:\"\"\"\" \"\"\"\"{}\"\"\"\" | head -1')",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(if ! grep -q \".vitepress/cache\" .gitignore)",
+      "Bash(then echo -e \"\\n# VitePress 缓存\\n.vitepress/cache\\n.vitepress/dist\")",
+      "Bash(.gitignore)",
+      "Bash(else echo \".gitignore 中已存在缓存配置\")",
+      "Bash(fi)"
     ],
     "deny": [],
     "ask": []

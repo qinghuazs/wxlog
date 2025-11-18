@@ -6,6 +6,24 @@ export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
 
+  // 启用缓存目录
+  cacheDir: '.vitepress/cache',
+
+  // Vite 性能优化
+  vite: {
+    optimizeDeps: {
+      include: ['vitepress-plugin-mermaid']
+    },
+    server: {
+      hmr: {
+        overlay: false // 减少 HMR 开销
+      }
+    },
+    build: {
+      chunkSizeWarningLimit: 1000
+    }
+  },
+
   rewrites: {
     // === docs 目录 ===
     // MySQL
@@ -196,6 +214,135 @@ export default withMermaid(defineConfig({
     ],
 
     sidebar: {
+      '/ai/': [
+        {
+          text: 'Claude Code',
+          collapsed: false,
+          items: [
+            { text: '模型切换', link: '/docs/ai/Claude Code/01.模型切换' },
+            { text: 'Claude-Code命令行操作手册', link: '/docs/ai/Claude Code/Claude-Code命令行操作手册' },
+            { text: 'MCP高级配置和常见问题', link: '/docs/ai/Claude Code/MCP高级配置和常见问题' },
+            {
+              text: 'A2A',
+              collapsed: false,
+              items: [
+                { text: 'A2A 进行详细的解读', link: '/docs/ai/Claude Code/A2A/A2A 对 A2A 进行详细的解读' }
+              ]
+            },
+            {
+              text: '架构详解',
+              collapsed: true,
+              items: [
+                { text: '整体架构设计', link: '/ai/claude-code/architecture-01-overall-architecture' },
+                { text: '上下文管理系统', link: '/ai/claude-code/architecture-03-context-management' },
+                { text: '会话与状态管理', link: '/ai/claude-code/architecture-04-session-management' },
+                { text: '工具系统架构', link: '/ai/claude-code/architecture-05-tool-system-architecture' },
+                { text: '文件操作工具实现', link: '/ai/claude-code/architecture-file-operations' },
+                { text: '代码搜索与分析工具', link: '/ai/claude-code/architecture-code-search-analysis' },
+                { text: 'MCP协议深入解析', link: '/ai/claude-code/architecture-09-mcp-protocol' },
+                { text: '浏览器自动化集成', link: '/ai/claude-code/architecture-10-browser-automation' },
+                { text: '多模态交互实现', link: '/ai/claude-code/architecture-12-multimodal-interaction' },
+                { text: '性能优化', link: '/ai/claude-code/architecture-performance-optimization' },
+                { text: '测试与质量保证', link: '/ai/claude-code/architecture-testing-quality-assurance' },
+                { text: 'MCP Server开发实战', link: '/ai/claude-code/architecture-18-mcp-server-practice' },
+                { text: '构建自己的AI编程助手', link: '/ai/claude-code/architecture-20-build-your-own-ai-assistant' },
+              ]
+            }
+          ]
+        },
+        {
+          text: 'CodeAgent',
+          collapsed: true,
+          items: [
+            { text: '命令指令参数表', link: '/docs/ai/codeagent/00.命令指令参数表' },
+            { text: '架构概述', link: '/docs/ai/codeagent/01.架构概述' },
+            { text: 'VSCode工具详解', link: '/docs/ai/codeagent/02.VSCode工具详解' },
+            { text: 'AI编程基础实践', link: '/docs/ai/codeagent/03.AI编程基础实践' },
+            { text: '代码安全实践指南', link: '/docs/ai/codeagent/04.代码安全实践指南' },
+          ]
+        },
+        {
+          text: 'LangChain',
+          collapsed: true,
+          items: [
+            { text: 'README', link: '/docs/ai/langchain/README' },
+            { text: 'LlamaIndex与LangChain对比分析', link: '/docs/ai/langchain/LlamaIndex与LangChain对比分析' },
+            { text: '召回(Recall)质量评测', link: '/docs/ai/langchain/召回(Recall)质量评测' },
+            { text: '第1章-企业级智能的概念', link: '/docs/ai/langchain/第1章-企业级智能的概念' },
+            { text: '第2章-Messages与Prompts', link: '/docs/ai/langchain/第2章-Messages与Prompts' },
+            { text: '第3章-Models层', link: '/docs/ai/langchain/第3章-Models层' },
+            { text: '第4章-Chains链式', link: '/docs/ai/langchain/第4章-Chains链式' },
+            { text: '第5章-Documents文档处理', link: '/docs/ai/langchain/第5章-Documents文档处理' },
+            { text: '第6章-Memory记忆系统', link: '/docs/ai/langchain/第6章-Memory记忆系统' },
+            { text: '第7章-Tools工具集成', link: '/docs/ai/langchain/第7章-Tools工具集成' },
+            { text: '第8章-Agents代理器', link: '/docs/ai/langchain/第8章-Agents代理器' },
+            { text: '第9章-Embeddings与VectorStores', link: '/docs/ai/langchain/第9章-Embeddings与VectorStores' },
+            { text: '第10章-RAG系统设计', link: '/docs/ai/langchain/第10章-RAG系统设计' },
+            { text: '第11章-Callbacks与监控系统', link: '/docs/ai/langchain/第11章-Callbacks与监控系统' },
+            { text: '第16章-企业级部署与优化', link: '/docs/ai/langchain/第16章-企业级部署与优化' },
+            { text: '综合实战-企业级RAG系统', link: '/docs/ai/langchain/综合实战-企业级RAG系统' },
+          ]
+        },
+        {
+          text: 'LangGraph',
+          collapsed: true,
+          items: [
+            { text: '目录概览', link: '/docs/ai/langgraph/00.目录概览' },
+            { text: '快速开始指南', link: '/docs/ai/langgraph/01.快速开始指南' },
+            { text: '核心概念讲解', link: '/docs/ai/langgraph/02.核心概念讲解' },
+            { text: '图构建实践', link: '/docs/ai/langgraph/03.图构建实践' },
+            { text: '状态管理详解', link: '/docs/ai/langgraph/04.状态管理详解' },
+            { text: '路由与条件分支', link: '/docs/ai/langgraph/05.路由与条件分支' },
+            { text: '节点开发指南', link: '/docs/ai/langgraph/06.节点开发指南' },
+            { text: '项目实战应用', link: '/docs/ai/langgraph/07.项目实战应用' },
+            { text: '错误处理机制', link: '/docs/ai/langgraph/08.错误处理机制' },
+            { text: '性能优化指南', link: '/docs/ai/langgraph/09.性能优化指南' },
+            { text: '高级特性探索', link: '/docs/ai/langgraph/10.高级特性探索' },
+            { text: 'LangChain集成', link: '/docs/ai/langgraph/11.LangChain集成' },
+            { text: '流式响应系统', link: '/docs/ai/langgraph/12.流式响应系统' },
+            { text: '检查点与回滚', link: '/docs/ai/langgraph/13.检查点与回滚' },
+            { text: '企业级应用', link: '/docs/ai/langgraph/14.企业级应用' },
+            { text: 'API参考手册', link: '/docs/ai/langgraph/15.API参考手册' },
+          ]
+        },
+        {
+          text: 'MCP',
+          collapsed: true,
+          items: [
+            { text: 'MCP的底层原理', link: '/docs/ai/mcp/01.MCP的底层原理' },
+            { text: '通过SpringAI构建一个MCP', link: '/docs/ai/mcp/02.通过SpringAI构建一个MCP' },
+            { text: '深入分析playwright_mcp', link: '/docs/ai/mcp/03.深入分析playwright_mcp' },
+          ]
+        },
+        {
+          text: 'Dify',
+          collapsed: true,
+          items: [
+            { text: '安装dify', link: '/docs/ai/dify/01.安装dify' },
+          ]
+        },
+        {
+          text: 'Ollama',
+          collapsed: true,
+          items: [
+            { text: 'ollama安装', link: '/docs/ai/ollma/ollama安装' },
+            { text: '模型调优', link: '/docs/ai/ollma/模型调优' },
+          ]
+        },
+        {
+          text: '提示词',
+          collapsed: true,
+          items: [
+            {
+              text: 'UI',
+              items: [
+                { text: '小红书配图页面', link: '/docs/ai/prompts/UI/01.小红书配图页面' },
+              ]
+            }
+          ]
+        }
+      ],
+
       '/docs/ai/': [
         {
           text: 'Claude Code',
