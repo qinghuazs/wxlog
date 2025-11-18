@@ -6,6 +6,22 @@ export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
 
+  // 路径重写：中文文件名 -> 英文 URL
+  rewrites: {
+    // MySQL
+    'docs/database/mysql/提示词.md': 'docs/database/mysql/prompts.md',
+    // Kafka
+    'docs/kafka/00.提示词.md': 'docs/kafka/00.prompts.md',
+    // TailwindCSS
+    'docs/htmlcssjs/TailwindCSS/00提示词.md': 'docs/htmlcssjs/TailwindCSS/00prompts.md',
+    // Redis
+    'docs/database/redis/数据结构/:page': 'docs/database/redis/data-structures/:page',
+    // 区块链
+    'docs/区块链/:dir/:page': 'docs/blockchain/:dir/:page',
+    // AI 提示词
+    'docs/ai/提示词/:dir/:page': 'docs/ai/prompts/:dir/:page',
+  },
+
   // Markdown 配置
   markdown: {
     theme: {
@@ -31,21 +47,21 @@ export default withMermaid(defineConfig({
           { text: 'SpringBoot', link: '/docs/spring/SpringBoot/01.SpringBoot日志配置' },
           { text: 'SpringCloud', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
           { text: 'MyBatis', link: '/docs/mybatis/first' },
-          { text: 'Kafka', link: '/docs/kafka/00.提示词' },
+          { text: 'Kafka', link: '/docs/kafka/00.prompts' },
         ]
       },
       {
         text: '数据库',
         items: [
-          { text: 'MySQL', link: '/docs/database/mysql/提示词' },
-          { text: 'Redis', link: '/docs/database/redis/数据结构/01.sds' },
+          { text: 'MySQL', link: '/docs/database/mysql/prompts' },
+          { text: 'Redis', link: '/docs/database/redis/data-structures/01.sds' },
         ]
       },
       {
         text: '前端技术',
         items: [
           { text: 'React', link: '/docs/htmlcssjs/React/01useclient' },
-          { text: 'TailwindCSS', link: '/docs/htmlcssjs/TailwindCSS/00提示词' },
+          { text: 'TailwindCSS', link: '/docs/htmlcssjs/TailwindCSS/00prompts' },
           { text: 'Daisyui', link: '/docs/htmlcssjs/Daisyui/03hero' },
           { text: 'Monaco', link: '/docs/htmlcssjs/monaco/01EditorProps' },
           { text: 'VuePress', link: '/docs/htmlcssjs/vuepress/主题开发与发布流程' },
@@ -73,7 +89,7 @@ export default withMermaid(defineConfig({
         text: '系统设计',
         items: [
           { text: '场景题', link: '/system-design/short-url.html' },
-          { text: '区块链', link: '/docs/区块链/核心知识/00.比特币知识学习路线路' },
+          { text: '区块链', link: '/docs/blockchain/基础知识/00.比特币知识学习路线路' },
         ]
       },
       {
@@ -226,7 +242,7 @@ export default withMermaid(defineConfig({
             {
               text: 'UI',
               items: [
-                { text: '小红书配图页面', link: '/docs/ai/提示词/UI/01.小红书配图页面' },
+                { text: '小红书配图页面', link: '/docs/ai/prompts/UI/01.小红书配图页面' },
               ]
             }
           ]
@@ -425,7 +441,7 @@ export default withMermaid(defineConfig({
           text: 'MySQL',
           collapsed: false,
           items: [
-            { text: '提示词', link: '/docs/database/mysql/提示词' },
+            { text: '提示词', link: '/docs/database/mysql/prompts' },
             {
               text: '原理',
               items: [
@@ -477,8 +493,8 @@ export default withMermaid(defineConfig({
             {
               text: '数据结构',
               items: [
-                { text: 'sds', link: '/docs/database/redis/数据结构/01.sds' },
-                { text: 'Redis 持久化详解全', link: '/docs/database/redis/数据结构/02.Redis 持久化详解全' },
+                { text: 'sds', link: '/docs/database/redis/data-structures/01.sds' },
+                { text: 'Redis 持久化详解全', link: '/docs/database/redis/data-structures/02.Redis 持久化详解全' },
               ]
             },
             {
@@ -496,7 +512,7 @@ export default withMermaid(defineConfig({
           text: 'Kafka',
           collapsed: false,
           items: [
-            { text: '提示词', link: '/docs/kafka/00.提示词' },
+            { text: '提示词', link: '/docs/kafka/00.prompts' },
             { text: 'Kafka概述介绍', link: '/docs/kafka/01Kafka概述介绍' },
             { text: 'Kafka安装部署', link: '/docs/kafka/02Kafka安装部署' },
             { text: 'Kafka安装部署2', link: '/docs/kafka/02Kafka安装部署2' },
@@ -665,7 +681,7 @@ export default withMermaid(defineConfig({
             {
               text: 'TailwindCSS',
               items: [
-                { text: '提示词', link: '/docs/htmlcssjs/TailwindCSS/00提示词' },
+                { text: '提示词', link: '/docs/htmlcssjs/TailwindCSS/00prompts' },
                 { text: 'all', link: '/docs/htmlcssjs/TailwindCSS/01all' },
                 { text: 'buttong', link: '/docs/htmlcssjs/TailwindCSS/02buttong' },
                 { text: 'background', link: '/docs/htmlcssjs/TailwindCSS/03background' },
@@ -707,24 +723,24 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/区块链/': [
+      '/docs/blockchain/': [
         {
           text: '区块链',
           collapsed: false,
           items: [
             {
-              text: '核心知识',
+              text: '基础知识',
               items: [
-                { text: '比特币知识学习路线路', link: '/docs/区块链/核心知识/00.比特币知识学习路线路' },
-                { text: '比特币系统中用到的密码学原理', link: '/docs/区块链/核心知识/01.比特币系统中用到的密码学原理' },
-                { text: '比特币系统中用到的数据结构', link: '/docs/区块链/核心知识/02.比特币系统中用到的数据结构' },
-                { text: '比特币协议栈', link: '/docs/区块链/核心知识/03.比特币协议栈' },
-                { text: '比特币挖矿原理', link: '/docs/区块链/核心知识/04.比特币挖矿原理' },
-                { text: '比特币白皮书精华解读', link: '/docs/区块链/核心知识/05.比特币白皮书精华解读' },
-                { text: '比特币网络协议详解', link: '/docs/区块链/核心知识/06.比特币网络协议详解' },
-                { text: '比特币钱包地址实现', link: '/docs/区块链/核心知识/07.比特币钱包地址实现' },
-                { text: '共识机制原理对比', link: '/docs/区块链/核心知识/08.共识机制原理对比' },
-                { text: '比特币脚本编程语言', link: '/docs/区块链/核心知识/09.比特币脚本编程语言' },
+                { text: '比特币知识学习路线路', link: '/docs/blockchain/基础知识/00.比特币知识学习路线路' },
+                { text: '比特币系统中用到的密码学原理', link: '/docs/blockchain/基础知识/01.比特币系统中用到的密码学原理' },
+                { text: '比特币系统中用到的数据结构', link: '/docs/blockchain/基础知识/02.比特币系统中用到的数据结构' },
+                { text: '比特币协议栈', link: '/docs/blockchain/基础知识/03.比特币协议栈' },
+                { text: '比特币挖矿原理', link: '/docs/blockchain/基础知识/04.比特币挖矿原理' },
+                { text: '比特币白皮书精华解读', link: '/docs/blockchain/基础知识/05.比特币白皮书精华解读' },
+                { text: '比特币网络协议详解', link: '/docs/blockchain/基础知识/06.比特币网络协议详解' },
+                { text: '比特币钱包地址实现', link: '/docs/blockchain/基础知识/07.比特币钱包地址实现' },
+                { text: '共识机制原理对比', link: '/docs/blockchain/基础知识/08.共识机制原理对比' },
+                { text: '比特币脚本编程语言', link: '/docs/blockchain/基础知识/09.比特币脚本编程语言' },
                 // ... 更多区块链文章
               ]
             }

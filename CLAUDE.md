@@ -2,6 +2,24 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 文件信息
+
+完成文档编写后，需要补充文档的具体信息，类似：
+```
+---
+title: 比特币系统用到的数据结构
+date: 2025-09-29
+permalink: /blog/bitcoin-data-structures.html
+categories:
+  - Blockchain
+  - Bitcoin
+---
+```
+permalink都以 `.html` 结尾
+
+## 完成文档编程后，需要在 .vitepress/config.mts 中添加导航连接，并使用rewrites将中文文件名导航到英文 URL，英文 URL 和源文件中的 permalink 保持一直。
+
+
 ## Project Overview
 
 This is a VitePress-based technical blog called "冬眠日记" (Winter Sleep Diary). It contains comprehensive documentation covering backend development (Java, Spring, Kafka, Redis, MySQL), frontend technologies (React, TailwindCSS), AI/LLM topics (LangChain, LangGraph, Claude Code, MCP), blockchain, system design, and algorithm solutions.
