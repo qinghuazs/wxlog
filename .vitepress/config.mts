@@ -47,7 +47,7 @@ export default withMermaid(defineConfig({
     // 架构详解系列
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/01.整体架构设计.md': 'ai/claude-code/architecture-01-overall-architecture.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/02.核心引擎实现.md': 'ai/claude-code/architecture-02-core-engine.md',
-    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/03 Context Management.md': 'ai/claude-code/architecture-03-context-management.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/03.上下文管理系统.md': 'ai/claude-code/architecture-03-context-management.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/04 Session Management.md': 'ai/claude-code/architecture-04-session-management.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/05 Tool System Architecture.md': 'ai/claude-code/architecture-05-tool-system-architecture.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/09 Mcp Protocol.md': 'ai/claude-code/architecture-09-mcp-protocol.md',

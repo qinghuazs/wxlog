@@ -8,7 +8,7 @@ categories:
 
 ### 查看进程pid
 
-```shell
+```bash
 jps
 ```
 

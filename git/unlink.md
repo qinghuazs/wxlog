@@ -12,7 +12,7 @@ categories:
 
 或者在项目根目录打开终端或者命令行工具
 
-```shell
+```bash
 ls -a 
 
 rm -rf .git 
@@ -22,12 +22,12 @@ rm -rf .git
 
 在项目根目录打开终端或者命令行工具
 
-```shell
+```bash
 git remote remove origin
 ```
 检查是否取消成功
 
-```shell
+```bash
 git remote -v
 ```
 如果输出为空，则表示成功

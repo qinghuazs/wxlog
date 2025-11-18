@@ -54,7 +54,7 @@ select @@optimizer_switch;
 
 查询结果
 
-```shell
+```bash
 index_merge=on,index_merge_union=on,index_merge_sort_union=on,index_merge_intersection=on,engine_condition_pushdown=on,index_condition_pushdown=on,mrr=on,mrr_cost_based=on,block_nested_loop=on,batched_key_access=off,materialization=on,semijoin=on,loosescan=on,firstmatch=on,duplicateweedout=on,subquery_materialization_cost_based=on,use_index_extensions=on,condition_fanout_filter=on,derived_merge=on,use_invisible_indexes=off,skip_scan=on,join_card_est_using_histogram=on,limit_offset_pushdown=on,detach_range_condition=on,prefer_ordering_index=on,equal_propagation=on
 ```
 

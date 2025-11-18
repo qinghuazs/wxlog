@@ -121,7 +121,7 @@ cost 的对应单位是毫秒（ms）
 
 ## 查看类属性
 
-```shell
+```bash
 vmtool --action getInstances --className com.company.yonbip.ctm.bankconnection.base.NJCAContext  --express 'instances[0]'
 ```
 

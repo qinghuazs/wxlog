@@ -8,20 +8,20 @@ categories:
 
 ### 回滚某个提交
 
-```shell
+```bash
 git revert <commit_hash>
 ```
 git revert 命令通过创建一个新的 commit 来撤销指定 commit 的改动。这种方法的好处是不会改变历史记录的顺序，而是添加一个新的 commit 来撤销之前的改动。
 
 多个commit可以用空格分割
 
-```shell
+```bash
 git revert <commit_hash1> <commit_hash2>
 ```
 
 ### 软重置
 
-```shell
+```bash
 git reset --soft HEAD~1
 ```
 
@@ -31,7 +31,7 @@ git reset --soft HEAD~1
 
 如果您想删除最新的提交并将更改移到工作目录（不在暂存区），则可以使用`--mixed`选项，这也是`git reset`的默认行为：
 
-```shell
+```bash
 git reset --mixed HEAD~1
 # or simply
 git reset HEAD~1
@@ -51,7 +51,7 @@ git reset --hard HEAD~1
 
 ### 修改最近一次提交的 commit log
 
-```shell
+```bash
 git commit --amend
 ```
 

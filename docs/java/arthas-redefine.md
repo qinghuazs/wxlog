@@ -19,7 +19,7 @@ retransform <classFile>
 
 获取到类的 classLoaderHash
 
-```shell
+```bash
 $ sc -d com.company.yonbip.ctm.bam.bankAccountSync.service.open.BankEnterpriseAccountSyncOpenHandleService
 ```
 
@@ -27,7 +27,7 @@ classLoaderHash 可能有多个，一般会有 2 个，一个是类对象本身�
 
 反编译成 Java 代码
 
-```shell
+```bash
 $ jad --source-only com.company.yonbip.ctm.bam.bankAccountSync.service.open.BankEnterpriseAccountSyncOpenHandleService > /tmp/BankEnterpriseAccountSyncOpenHandleService.java
 ```
 
@@ -35,7 +35,7 @@ $ jad --source-only com.company.yonbip.ctm.bam.bankAccountSync.service.open.Bank
 
 编译修改后的源码
 
-```shell
+```bash
 $ mc -c 6f02402a /tmp/BankEnterpriseAccountSyncOpenHandleService.java -d /tmp
 ```
 
@@ -43,7 +43,7 @@ $ mc -c 6f02402a /tmp/BankEnterpriseAccountSyncOpenHandleService.java -d /tmp
 
 使用 `redefine` 命令加载新的 class 文件
 
-```shell
+```bash
 $ redefine /tmp/com/company/yonbip/ctm/bam/bankAccountSync/service/open/BankEnterpriseAccountSyncOpenHandleService.class
 ```
 
