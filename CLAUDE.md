@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 思考过程用中文展示
+
 ## 文件信息
 
 完成文档编写后，需要补充文档的具体信息，类似：
