@@ -42,8 +42,6 @@ export default withMermaid(defineConfig({
     // === 01.AI 目录 ===
     // Claude Code
     '01.AI/01.AI开发工具/01. ClaudeCode/Agent工作流引擎详解.md': 'ai/claude-code/agent-workflow-engine.md',
-    '01.AI/01.AI开发工具/01. ClaudeCode/Claude Code A2A 机制详解.md': 'ai/claude-code/a2a-mechanism.md',
-    '01.AI/01.AI开发工具/01. ClaudeCode/Claude Code MCP 服务加载机制详解.md': 'ai/claude-code/mcp-loading-mechanism.md',
     // 架构详解系列
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/01.整体架构设计.md': 'ai/claude-code/architecture-01-overall-architecture.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/02.核心引擎实现.md': 'ai/claude-code/architecture-02-core-engine.md',
@@ -64,6 +62,8 @@ export default withMermaid(defineConfig({
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/17.自定义工具开发实战.md': 'ai/claude-code/architecture-17-custom-tool-development.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/18.MCP-Server开发实战.md': 'ai/claude-code/architecture-18-mcp-server-practice.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/20.构建自己的AI编程助手.md': 'ai/claude-code/architecture-20-build-your-own-ai-assistant.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/21.Claude Code A2A 机制详解.md': 'ai/claude-code/architecture-21-a2a-mechanism.md',
+    '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/22.Claude Code MCP 服务加载机制详解.md': 'ai/claude-code/architecture-22-mcp-loading-mechanism.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/Claude Code 测试与质量保证.md': 'ai/claude-code/architecture-testing-quality-assurance.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/Completion Summary.md': 'ai/claude-code/architecture-completion-summary.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/Performance Optimization.md': 'ai/claude-code/architecture-performance-optimization.md',
@@ -262,6 +262,8 @@ export default withMermaid(defineConfig({
                 { text: '自定义工具开发实战', link: '/ai/claude-code/architecture-17-custom-tool-development' },
                 { text: 'MCP Server开发实战', link: '/ai/claude-code/architecture-18-mcp-server-practice' },
                 { text: '构建自己的AI编程助手', link: '/ai/claude-code/architecture-20-build-your-own-ai-assistant' },
+                { text: 'A2A 机制详解', link: '/ai/claude-code/architecture-21-a2a-mechanism' },
+                { text: 'MCP 服务加载机制详解', link: '/ai/claude-code/architecture-22-mcp-loading-mechanism' },
               ]
             }
           ]
@@ -409,6 +411,8 @@ export default withMermaid(defineConfig({
                 { text: '自定义工具开发实战', link: '/ai/claude-code/architecture-17-custom-tool-development' },
                 { text: 'MCP Server开发实战', link: '/ai/claude-code/architecture-18-mcp-server-practice' },
                 { text: '构建自己的AI编程助手', link: '/ai/claude-code/architecture-20-build-your-own-ai-assistant' },
+                { text: 'A2A 机制详解', link: '/ai/claude-code/architecture-21-a2a-mechanism' },
+                { text: 'MCP 服务加载机制详解', link: '/ai/claude-code/architecture-22-mcp-loading-mechanism' },
               ]
             }
           ]
