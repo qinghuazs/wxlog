@@ -16,7 +16,9 @@
       "Bash(echo:*)",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npm run docs:dev:*)",
+      "Bash(package.json)"
     ],
     "deny": [],
     "ask": []
