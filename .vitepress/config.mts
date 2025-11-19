@@ -49,6 +49,23 @@ export default withMermaid(defineConfig({
     // Docker
     '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
 
+    // === 04.中间件 目录 ===
+    // MySQL
+    '04.中间件/01.数据库/01.MySQL/01.实现原理/01.索引.md': 'mysql/index.md',
+    '04.中间件/01.数据库/01.MySQL/01.实现原理/02.mvcc.md': 'mysql/mvcc.md',
+    '04.中间件/01.数据库/01.MySQL/01.实现原理/03.Group By 的执行原理.md': 'mysql/group-by.md',
+    '04.中间件/01.数据库/01.MySQL/01.实现原理/04.SQL 解析.md': 'mysql/sql-parse.md',
+    '04.中间件/01.数据库/01.MySQL/01.实现原理/05.SQL 查询优化.md': 'mysql/sql-optimization.md',
+    '04.中间件/01.数据库/01.MySQL/02.应用操作/01.数据类型.md': 'mysql/data-types.md',
+    '04.中间件/01.数据库/01.MySQL/02.应用操作/02.创建用户后为用户授权.md': 'mysql/user-grant.md',
+    '04.中间件/01.数据库/01.MySQL/03.性能优化/01.Explain的使用.md': 'mysql/explain.md',
+    '04.中间件/01.数据库/01.MySQL/04.问题处理/01.死锁.md': 'mysql/deadlock.md',
+    // Redis
+    '04.中间件/01.数据库/02.Redis/01.配置应用/01.安装部署.md': 'redis/installation.md',
+    '04.中间件/01.数据库/02.Redis/02.数据结构/01.sds.md': 'redis/sds.md',
+    '04.中间件/01.数据库/02.Redis/02.数据结构/02.Redis 代码整体架构.md': 'redis/architecture.md',
+    '04.中间件/01.数据库/02.Redis/03.高级特性/01.哨兵模式.md': 'redis/sentinel.md',
+
     // === 02.系统设计 目录 ===
     // 注册中心
     '02.系统设计/01.注册中心/01.注册中心的设计.md': 'system-design/service-registry.md',
@@ -204,10 +221,10 @@ export default withMermaid(defineConfig({
         ]
       },
       {
-        text: '数据库',
+        text: '中间件',
         items: [
-          { text: 'MySQL', link: '/docs/database/mysql/prompts' },
-          { text: 'Redis', link: '/docs/database/redis/data-structures/01.sds' },
+          { text: 'MySQL', link: '/mysql/index' },
+          { text: 'Redis', link: '/redis/sds' },
         ]
       },
       {
@@ -751,76 +768,6 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/database/': [
-        {
-          text: 'MySQL',
-          collapsed: false,
-          items: [
-            { text: '提示词', link: '/docs/database/mysql/prompts' },
-            {
-              text: '原理',
-              items: [
-                { text: '数据类型', link: '/docs/database/mysql/原理/01.数据类型' },
-                { text: 'mvcc', link: '/docs/database/mysql/原理/02.mvcc' },
-                { text: 'Group By 的执行原理', link: '/docs/database/mysql/原理/03.Group By 的执行原理' },
-                { text: 'SQL 解析', link: '/docs/database/mysql/原理/04.SQL 解析' },
-                { text: 'SQL 查询优化', link: '/docs/database/mysql/原理/05.SQL 查询优化' },
-              ]
-            },
-            {
-              text: '应用',
-              items: [
-                { text: '索引', link: '/docs/database/mysql/应用/01.索引' },
-                { text: '创建用户及为用户授权', link: '/docs/database/mysql/应用/02.创建用户及为用户授权' },
-              ]
-            },
-            {
-              text: '性能优化类',
-              items: [
-                { text: 'Explain的使用', link: '/docs/database/mysql/性能优化类/01.Explain的使用' },
-              ]
-            },
-            {
-              text: '问题处理',
-              items: [
-                { text: '死锁', link: '/docs/database/mysql/问题处理/01.死锁' },
-              ]
-            }
-          ]
-        },
-        {
-          text: 'Redis',
-          collapsed: false,
-          items: [
-            {
-              text: 'C语言基础',
-              items: [
-                { text: '文件事件', link: '/docs/database/redis/C语言基础/01.文件事件' },
-              ]
-            },
-            {
-              text: '安装部署配置',
-              items: [
-                { text: 'MacOS安装 Redis', link: '/docs/database/redis/安装部署配置/01.MacOS安装 Redis' },
-                { text: 'Redis Docker 部署', link: '/docs/database/redis/安装部署配置/02.Redis Docker 部署' },
-              ]
-            },
-            {
-              text: '数据结构',
-              items: [
-                { text: 'sds', link: '/docs/database/redis/data-structures/01.sds' },
-                { text: 'Redis 持久化详解全', link: '/docs/database/redis/data-structures/02.Redis 持久化详解全' },
-              ]
-            },
-            {
-              text: '高可用',
-              items: [
-                { text: '哨兵模式', link: '/docs/database/redis/高可用/01.哨兵模式' },
-              ]
-            }
-          ]
-        }
-      ],
 
       '/docs/kafka/': [
         {
@@ -1203,6 +1150,67 @@ export default withMermaid(defineConfig({
           collapsed: false,
           items: [
             { text: 'CentOS安装Docker', link: '/docker/centos-install' },
+          ]
+        }
+      ],
+
+      '/mysql/': [
+        {
+          text: '实现原理',
+          collapsed: false,
+          items: [
+            { text: '索引', link: '/mysql/index' },
+            { text: 'MVCC', link: '/mysql/mvcc' },
+            { text: 'Group By 的执行原理', link: '/mysql/group-by' },
+            { text: 'SQL 解析', link: '/mysql/sql-parse' },
+            { text: 'SQL 查询优化', link: '/mysql/sql-optimization' },
+          ]
+        },
+        {
+          text: '应用操作',
+          collapsed: false,
+          items: [
+            { text: '数据类型', link: '/mysql/data-types' },
+            { text: '创建用户后为用户授权', link: '/mysql/user-grant' },
+          ]
+        },
+        {
+          text: '性能优化',
+          collapsed: false,
+          items: [
+            { text: 'Explain的使用', link: '/mysql/explain' },
+          ]
+        },
+        {
+          text: '问题处理',
+          collapsed: false,
+          items: [
+            { text: '死锁', link: '/mysql/deadlock' },
+          ]
+        }
+      ],
+
+      '/redis/': [
+        {
+          text: '配置应用',
+          collapsed: false,
+          items: [
+            { text: '安装部署', link: '/redis/installation' },
+          ]
+        },
+        {
+          text: '数据结构',
+          collapsed: false,
+          items: [
+            { text: 'SDS (Simple Dynamic String)', link: '/redis/sds' },
+            { text: 'Redis 代码整体架构', link: '/redis/architecture' },
+          ]
+        },
+        {
+          text: '高级特性',
+          collapsed: false,
+          items: [
+            { text: '哨兵模式', link: '/redis/sentinel' },
           ]
         }
       ],
