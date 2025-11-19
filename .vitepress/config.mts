@@ -273,8 +273,6 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'Java', link: '/java/hashmap' },
           { text: 'Spring', link: '/spring/bean-loading' },
-          { text: 'SpringBoot', link: '/springboot/logback' },
-          { text: 'SpringCloud', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
           { text: 'MyBatis', link: '/java/mybatis-interceptor' },
         ]
       },
@@ -568,12 +566,9 @@ export default withMermaid(defineConfig({
             { text: 'AOP实现机制', link: '/spring/aop' },
             { text: 'Spring扩展点', link: '/spring/extension' },
           ]
-        }
-      ],
-
-      '/springboot/': [
+        },
         {
-          text: '配置',
+          text: 'SpringBoot配置',
           collapsed: false,
           items: [
             { text: '日志配置', link: '/springboot/logback' },
@@ -582,14 +577,86 @@ export default withMermaid(defineConfig({
           ]
         },
         {
-          text: '事务管理',
+          text: 'SpringBoot事务',
           collapsed: false,
           items: [
             { text: 'PlatformTransactionManager', link: '/springboot/PlatformTransactionManager' },
           ]
         },
         {
-          text: '扩展机制',
+          text: 'SpringBoot扩展',
+          collapsed: false,
+          items: [
+            { text: 'SpringBoot Starter', link: '/springboot/starter' },
+            { text: 'Endpoint扩展', link: '/springboot/endpoint' },
+          ]
+        },
+        {
+          text: 'SpringCloud',
+          collapsed: true,
+          items: [
+            {
+              text: 'Gateway',
+              items: [
+                { text: 'Spring Cloud Gateway', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
+                { text: 'Spring Cloud Gateway的使用', link: '/docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用' },
+                { text: '动态路由', link: '/docs/spring/SpringCloud/Gateway/03.动态路由' },
+              ]
+            },
+            {
+              text: 'OpenFeign',
+              items: [
+                { text: 'Spring Cloud OpenFeign', link: '/docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign' },
+              ]
+            },
+            {
+              text: '熔断器',
+              items: [
+                { text: 'Resilience4J', link: '/docs/spring/SpringCloud/熔断器/01. Resilience4J' },
+                { text: 'Resilience4J熔断器使用', link: '/docs/spring/SpringCloud/熔断器/02.Resilience4J熔断器使用' },
+                { text: 'Resilience4J限流器使用', link: '/docs/spring/SpringCloud/熔断器/03.Resilience4J限流器使用' },
+              ]
+            },
+            {
+              text: '注册中心',
+              items: [
+                { text: 'Eureka', link: '/docs/spring/SpringCloud/注册中心/01.Eureka' },
+                { text: 'Eureka核心机制', link: '/docs/spring/SpringCloud/注册中心/02.Eureka核心机制' },
+                { text: 'Consul', link: '/docs/spring/SpringCloud/注册中心/03.Consul' },
+                { text: 'Consul高级特性', link: '/docs/spring/SpringCloud/注册中心/04.Consul高级特性' },
+                { text: 'Raft算法', link: '/docs/spring/SpringCloud/注册中心/05.Raft算法' },
+              ]
+            },
+            {
+              text: '负载均衡',
+              items: [
+                { text: 'Ribbon', link: '/docs/spring/SpringCloud/负载均衡/01.Ribbon' },
+                { text: 'Spring Cloud LoadBalancer', link: '/docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer' },
+              ]
+            }
+          ]
+        }
+      ],
+
+      '/springboot/': [
+        {
+          text: 'SpringBoot配置',
+          collapsed: false,
+          items: [
+            { text: '日志配置', link: '/springboot/logback' },
+            { text: '数据库连接配置', link: '/springboot/database-connection-configuration' },
+            { text: 'Redis配置', link: '/springboot/redis-configuration' },
+          ]
+        },
+        {
+          text: 'SpringBoot事务',
+          collapsed: false,
+          items: [
+            { text: 'PlatformTransactionManager', link: '/springboot/PlatformTransactionManager' },
+          ]
+        },
+        {
+          text: 'SpringBoot扩展',
           collapsed: false,
           items: [
             { text: 'SpringBoot Starter', link: '/springboot/starter' },
@@ -600,86 +667,46 @@ export default withMermaid(defineConfig({
 
       '/docs/spring/': [
         {
-          text: 'Spring',
+          text: 'SpringCloud',
           collapsed: false,
           items: [
             {
-              text: 'Bean',
+              text: 'Gateway',
               items: [
-                { text: 'Spring Bean 的加载过程', link: '/docs/spring/Bean/01.Spring Bean 的加载过程' },
+                { text: 'Spring Cloud Gateway', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
+                { text: 'Spring Cloud Gateway的使用', link: '/docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用' },
+                { text: '动态路由', link: '/docs/spring/SpringCloud/Gateway/03.动态路由' },
               ]
             },
             {
-              text: 'SpringBasic',
+              text: 'OpenFeign',
               items: [
-                { text: 'Spring AOP实现机制', link: '/docs/spring/SpringBasic/01.Spring AOP实现机制' },
-                { text: 'Spring扩展点', link: '/docs/spring/SpringBasic/02.Spring扩展点' },
+                { text: 'Spring Cloud OpenFeign', link: '/docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign' },
               ]
             },
             {
-              text: 'SpringBoot',
+              text: '熔断器',
               items: [
-                { text: 'SpringBoot日志配置', link: '/docs/spring/SpringBoot/01.SpringBoot日志配置' },
-                { text: 'SpringBoot Starter', link: '/docs/spring/SpringBoot/02.SpringBoot Starter' },
-                { text: 'Endpoint', link: '/docs/spring/SpringBoot/03.Endpoint' },
+                { text: 'Resilience4J', link: '/docs/spring/SpringCloud/熔断器/01. Resilience4J' },
+                { text: 'Resilience4J熔断器使用', link: '/docs/spring/SpringCloud/熔断器/02.Resilience4J熔断器使用' },
+                { text: 'Resilience4J限流器使用', link: '/docs/spring/SpringCloud/熔断器/03.Resilience4J限流器使用' },
               ]
             },
             {
-              text: 'SpringCloud',
-              collapsed: true,
+              text: '注册中心',
               items: [
-                {
-                  text: 'Gateway',
-                  items: [
-                    { text: 'Spring Cloud Gateway', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
-                    { text: 'Spring Cloud Gateway的使用', link: '/docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用' },
-                    { text: '动态路由', link: '/docs/spring/SpringCloud/Gateway/03.动态路由' },
-                  ]
-                },
-                {
-                  text: 'OpenFeign',
-                  items: [
-                    { text: 'Spring Cloud OpenFeign', link: '/docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign' },
-                  ]
-                },
-                {
-                  text: '熔断器',
-                  items: [
-                    { text: 'Resilience4J', link: '/docs/spring/SpringCloud/熔断器/01. Resilience4J' },
-                    { text: 'Resilience4J熔断器使用', link: '/docs/spring/SpringCloud/熔断器/02.Resilience4J熔断器使用' },
-                    { text: 'Resilience4J限流器使用', link: '/docs/spring/SpringCloud/熔断器/03.Resilience4J限流器使用' },
-                  ]
-                },
-                {
-                  text: '注册中心',
-                  items: [
-                    { text: 'Eureka', link: '/docs/spring/SpringCloud/注册中心/01.Eureka' },
-                    { text: 'Eureka核心机制', link: '/docs/spring/SpringCloud/注册中心/02.Eureka核心机制' },
-                    { text: 'Consul', link: '/docs/spring/SpringCloud/注册中心/03.Consul' },
-                    { text: 'Consul高级特性', link: '/docs/spring/SpringCloud/注册中心/04.Consul高级特性' },
-                    { text: 'Raft算法', link: '/docs/spring/SpringCloud/注册中心/05.Raft算法' },
-                  ]
-                },
-                {
-                  text: '负载均衡',
-                  items: [
-                    { text: 'Ribbon', link: '/docs/spring/SpringCloud/负载均衡/01.Ribbon' },
-                    { text: 'Spring Cloud LoadBalancer', link: '/docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer' },
-                  ]
-                }
+                { text: 'Eureka', link: '/docs/spring/SpringCloud/注册中心/01.Eureka' },
+                { text: 'Eureka核心机制', link: '/docs/spring/SpringCloud/注册中心/02.Eureka核心机制' },
+                { text: 'Consul', link: '/docs/spring/SpringCloud/注册中心/03.Consul' },
+                { text: 'Consul高级特性', link: '/docs/spring/SpringCloud/注册中心/04.Consul高级特性' },
+                { text: 'Raft算法', link: '/docs/spring/SpringCloud/注册中心/05.Raft算法' },
               ]
             },
             {
-              text: '事务管理',
+              text: '负载均衡',
               items: [
-                { text: 'PlatformTransactionManager', link: '/docs/spring/事务管理/01.PlatformTransactionManager' },
-              ]
-            },
-            {
-              text: '缓存',
-              items: [
-                { text: '数据库连接池配置', link: '/docs/spring/缓存/01.数据库连接池配置' },
-                { text: 'Redis缓存配置', link: '/docs/spring/缓存/02.Redis缓存配置' },
+                { text: 'Ribbon', link: '/docs/spring/SpringCloud/负载均衡/01.Ribbon' },
+                { text: 'Spring Cloud LoadBalancer', link: '/docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer' },
               ]
             }
           ]
