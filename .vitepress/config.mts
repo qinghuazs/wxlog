@@ -231,7 +231,6 @@ export default withMermaid(defineConfig({
           { text: 'SpringBoot', link: '/docs/spring/SpringBoot/01.SpringBoot日志配置' },
           { text: 'SpringCloud', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
           { text: 'MyBatis', link: '/docs/mybatis/first' },
-          { text: 'Kafka', link: '/kafka/introduction' },
         ]
       },
       {
@@ -239,6 +238,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'MySQL', link: '/mysql/index' },
           { text: 'Redis', link: '/redis/sds' },
+          { text: 'Kafka', link: '/kafka/introduction' },
         ]
       },
       {
