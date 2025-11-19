@@ -238,15 +238,6 @@ export default withMermaid(defineConfig({
                 { text: '模型切换', link: '/ai/claude-code/model-switch' },
               ]
             },
-            { text: 'Claude-Code命令行操作手册', link: '/docs/ai/Claude Code/Claude-Code命令行操作手册' },
-            { text: 'MCP高级配置和常见问题', link: '/docs/ai/Claude Code/MCP高级配置和常见问题' },
-            {
-              text: 'A2A',
-              collapsed: false,
-              items: [
-                { text: 'A2A 进行详细的解读', link: '/docs/ai/Claude Code/A2A/A2A 对 A2A 进行详细的解读' }
-              ]
-            },
             {
               text: '架构详解',
               collapsed: true,
