@@ -232,15 +232,15 @@ export default withMermaid(defineConfig({
     '05.开发语言及框架/01.Java/04.JVM/02.Java虚拟机配置.md': 'java/jvm-memory-config.md',
     '05.开发语言及框架/01.Java/04.JVM/03.元空间 MetaSpace.md': 'java/jvm-metaspace.md',
     // Spring
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.数据库连接的配置.md': 'springboot/database-connection-configuration.md',
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.SpringBoot日志配置.md': 'springboot/logback.md',
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/02.Redis的配置.md': 'springboot/redis-configuration.md',
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/02.事务管理/01.PlatformTransactionManager.md': 'springboot/PlatformTransactionManager.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.数据库连接的配置.md': 'spring/database-connection-configuration.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.SpringBoot日志配置.md': 'spring/logback.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/02.Redis的配置.md': 'spring/redis-configuration.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/02.事务管理/01.PlatformTransactionManager.md': 'spring/PlatformTransactionManager.md',
     '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/03.Bean 管理/01.Spring Bean 的加载过程.md': 'spring/bean-loading.md',
     '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/01.Spring AOP实现机制.md': 'spring/aop.md',
     '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/02.Spring扩展点.md': 'spring/extension.md',
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/02.SpringBoot Starter.md': 'springboot/starter.md',
-    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/03.Endpoint.md': 'springboot/endpoint.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/02.SpringBoot Starter.md': 'spring/starter.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/03.Endpoint.md': 'spring/endpoint.md',
     // JWT
     '05.开发语言及框架/01.Java/06.JWT/工作流程.md': 'java/jwt-workflow.md',
     '05.开发语言及框架/01.Java/06.JWT/JWT实战应用.md': 'java/jwt-practice.md',
@@ -592,24 +592,24 @@ export default withMermaid(defineConfig({
           text: 'SpringBoot配置',
           collapsed: false,
           items: [
-            { text: '日志配置', link: '/springboot/logback' },
-            { text: '数据库连接配置', link: '/springboot/database-connection-configuration' },
-            { text: 'Redis配置', link: '/springboot/redis-configuration' },
+            { text: '日志配置', link: '/spring/logback' },
+            { text: '数据库连接配置', link: '/spring/database-connection-configuration' },
+            { text: 'Redis配置', link: '/spring/redis-configuration' },
           ]
         },
         {
           text: 'SpringBoot事务',
           collapsed: false,
           items: [
-            { text: 'PlatformTransactionManager', link: '/springboot/PlatformTransactionManager' },
+            { text: 'PlatformTransactionManager', link: '/spring/PlatformTransactionManager' },
           ]
         },
         {
           text: 'SpringBoot扩展',
           collapsed: false,
           items: [
-            { text: 'SpringBoot Starter', link: '/springboot/starter' },
-            { text: 'Endpoint扩展', link: '/springboot/endpoint' },
+            { text: 'SpringBoot Starter', link: '/spring/starter' },
+            { text: 'Endpoint扩展', link: '/spring/endpoint' },
           ]
         },
         {
