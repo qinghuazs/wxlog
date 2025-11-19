@@ -665,53 +665,6 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/spring/': [
-        {
-          text: 'SpringCloud',
-          collapsed: false,
-          items: [
-            {
-              text: 'Gateway',
-              items: [
-                { text: 'Spring Cloud Gateway', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
-                { text: 'Spring Cloud Gateway的使用', link: '/docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用' },
-                { text: '动态路由', link: '/docs/spring/SpringCloud/Gateway/03.动态路由' },
-              ]
-            },
-            {
-              text: 'OpenFeign',
-              items: [
-                { text: 'Spring Cloud OpenFeign', link: '/docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign' },
-              ]
-            },
-            {
-              text: '熔断器',
-              items: [
-                { text: 'Resilience4J', link: '/docs/spring/SpringCloud/熔断器/01. Resilience4J' },
-                { text: 'Resilience4J熔断器使用', link: '/docs/spring/SpringCloud/熔断器/02.Resilience4J熔断器使用' },
-                { text: 'Resilience4J限流器使用', link: '/docs/spring/SpringCloud/熔断器/03.Resilience4J限流器使用' },
-              ]
-            },
-            {
-              text: '注册中心',
-              items: [
-                { text: 'Eureka', link: '/docs/spring/SpringCloud/注册中心/01.Eureka' },
-                { text: 'Eureka核心机制', link: '/docs/spring/SpringCloud/注册中心/02.Eureka核心机制' },
-                { text: 'Consul', link: '/docs/spring/SpringCloud/注册中心/03.Consul' },
-                { text: 'Consul高级特性', link: '/docs/spring/SpringCloud/注册中心/04.Consul高级特性' },
-                { text: 'Raft算法', link: '/docs/spring/SpringCloud/注册中心/05.Raft算法' },
-              ]
-            },
-            {
-              text: '负载均衡',
-              items: [
-                { text: 'Ribbon', link: '/docs/spring/SpringCloud/负载均衡/01.Ribbon' },
-                { text: 'Spring Cloud LoadBalancer', link: '/docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer' },
-              ]
-            }
-          ]
-        }
-      ],
 
 
       '/kafka/': [
