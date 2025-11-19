@@ -39,6 +39,14 @@ export default withMermaid(defineConfig({
     // AI 提示词
     'docs/ai/提示词/:dir/:page': 'docs/ai/prompts/:dir/:page',
 
+    // === 03.工具 目录 ===
+    // Git
+    '03.工具/02.Git/01.git推送本地提交到远程仓库.md': 'git/remote.md',
+    '03.工具/02.Git/02.git分支常用命令.md': 'git/branch.md',
+    '03.工具/02.Git/03.本地项目取消git仓库关联.md': 'git/unlink.md',
+    '03.工具/02.Git/04.git重置本地的修改.md': 'git/revert.md',
+    '03.工具/02.Git/05.代码提交规范.md': 'git/commit.md',
+
     // === 01.AI 目录 ===
     // Claude Code
     '01.AI/01.AI开发工具/01. ClaudeCode/Agent工作流引擎详解.md': 'ai/claude-code/agent-workflow-engine.md',
@@ -1111,6 +1119,20 @@ export default withMermaid(defineConfig({
             { text: '保险行业小程序赚钱', link: '/miniprogram/monetization' },
             { text: '小程序备案通过查询', link: '/miniprogram/beian-progress' },
             { text: '重新迭代', link: '/miniprogram/development-process' },
+          ]
+        }
+      ],
+
+      '/git/': [
+        {
+          text: 'Git',
+          collapsed: false,
+          items: [
+            { text: '推送本地提交到远程仓库', link: '/git/remote' },
+            { text: 'Git分支常用命令', link: '/git/branch' },
+            { text: '本地项目取消git仓库关联', link: '/git/unlink' },
+            { text: 'git重置本地的修改', link: '/git/revert' },
+            { text: 'git commit规范', link: '/git/commit' },
           ]
         }
       ],
