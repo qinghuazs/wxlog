@@ -163,7 +163,7 @@ public class TestController {
 
 使用 Postman 测试，输出结果如下：
 
-```she
+```bash
 Zombie(name=qinghuazs, age=11)
 ```
 
