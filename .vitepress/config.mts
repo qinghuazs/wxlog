@@ -46,6 +46,8 @@ export default withMermaid(defineConfig({
     '03.工具/02.Git/03.本地项目取消git仓库关联.md': 'git/unlink.md',
     '03.工具/02.Git/04.git重置本地的修改.md': 'git/revert.md',
     '03.工具/02.Git/05.代码提交规范.md': 'git/commit.md',
+    // Docker
+    '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
 
     // === 01.AI 目录 ===
     // Claude Code
@@ -216,7 +218,7 @@ export default withMermaid(defineConfig({
       {
         text: '工具',
         items: [
-          { text: 'Docker', link: '/docs/docker/01.CentOS安装Docker' },
+          { text: 'Docker', link: '/docker/centos-install' },
           { text: 'Git', link: '/git/remote' },
         ]
       },
@@ -1133,6 +1135,16 @@ export default withMermaid(defineConfig({
             { text: '本地项目取消git仓库关联', link: '/git/unlink' },
             { text: 'git重置本地的修改', link: '/git/revert' },
             { text: 'git commit规范', link: '/git/commit' },
+          ]
+        }
+      ],
+
+      '/docker/': [
+        {
+          text: 'Docker',
+          collapsed: false,
+          items: [
+            { text: 'CentOS安装Docker', link: '/docker/centos-install' },
           ]
         }
       ],
