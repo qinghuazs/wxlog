@@ -72,6 +72,7 @@ export default withMermaid(defineConfig({
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/代码搜索与分析工具.md': 'ai/claude-code/architecture-code-search-analysis.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/文件操作工具实现.md': 'ai/claude-code/architecture-file-operations.md',
     // 其他 Claude Code 文件
+    '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/02.ClaudeCode命令/00.Claude Code安装.md': 'ai/claude-code/installation.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/02.ClaudeCode命令/01.模型切换.md': 'ai/claude-code/model-switch.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/安全机制设计.md': 'ai/claude-code/security-design.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/终端集成实现.md': 'ai/claude-code/terminal-integration.md',
@@ -233,6 +234,7 @@ export default withMermaid(defineConfig({
             { text: '安装配置',
               collapsed: true,
               items: [
+                { text: 'Claude Code安装', link: '/ai/claude-code/installation' },
                 { text: '模型切换', link: '/ai/claude-code/model-switch' },
               ]
             },
@@ -384,6 +386,7 @@ export default withMermaid(defineConfig({
           text: 'Claude Code',
           collapsed: false,
           items: [
+            { text: 'Claude Code安装', link: '/ai/claude-code/installation' },
             { text: '模型切换', link: '/ai/claude-code/model-switch' },
             { text: 'Claude-Code命令行操作手册', link: '/docs/ai/Claude Code/Claude-Code命令行操作手册' },
             { text: 'MCP高级配置和常见问题', link: '/docs/ai/Claude Code/MCP高级配置和常见问题' },
