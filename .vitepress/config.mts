@@ -182,7 +182,7 @@ export default withMermaid(defineConfig({
       {
         text: 'AI',
         items: [
-          { text: 'Claude Code', link: '/docs/ai/Claude Code/01.模型切换' },
+          { text: 'Claude Code', link: '/ai/claude-code/model-switch' },
           { text: 'CodeAgent', link: '/docs/ai/codeagent/00.命令指令参数表' },
           { text: 'LangChain', link: '/docs/ai/langchain/README' },
           { text: 'LangGraph', link: '/docs/ai/langgraph/00.目录概览' },
@@ -230,7 +230,12 @@ export default withMermaid(defineConfig({
           text: 'Claude Code',
           collapsed: false,
           items: [
-            { text: '模型切换', link: '/docs/ai/Claude Code/01.模型切换' },
+            { text: '安装配置',
+              collapsed: true,
+              items: [
+                { text: '模型切换', link: '/ai/claude-code/model-switch' },
+              ]
+            },
             { text: 'Claude-Code命令行操作手册', link: '/docs/ai/Claude Code/Claude-Code命令行操作手册' },
             { text: 'MCP高级配置和常见问题', link: '/docs/ai/Claude Code/MCP高级配置和常见问题' },
             {
@@ -379,7 +384,7 @@ export default withMermaid(defineConfig({
           text: 'Claude Code',
           collapsed: false,
           items: [
-            { text: '模型切换', link: '/docs/ai/Claude Code/01.模型切换' },
+            { text: '模型切换', link: '/ai/claude-code/model-switch' },
             { text: 'Claude-Code命令行操作手册', link: '/docs/ai/Claude Code/Claude-Code命令行操作手册' },
             { text: 'MCP高级配置和常见问题', link: '/docs/ai/Claude Code/MCP高级配置和常见问题' },
             {
