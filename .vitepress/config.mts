@@ -217,7 +217,7 @@ export default withMermaid(defineConfig({
         text: '工具',
         items: [
           { text: 'Docker', link: '/docs/docker/01.CentOS安装Docker' },
-          { text: 'Git', link: '/docs/工具/git/01.从项目中取消git版库跟踪' },
+          { text: 'Git', link: '/git/remote' },
         ]
       },
       {
