@@ -72,6 +72,7 @@ export default withMermaid(defineConfig({
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/代码搜索与分析工具.md': 'ai/claude-code/architecture-code-search-analysis.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/01.架构详解/文件操作工具实现.md': 'ai/claude-code/architecture-file-operations.md',
     // 其他 Claude Code 文件
+    '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/02.ClaudeCode命令/01.模型切换.md': 'ai/claude-code/model-switch.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/安全机制设计.md': 'ai/claude-code/security-design.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/终端集成实现.md': 'ai/claude-code/terminal-integration.md',
     // LangChain
