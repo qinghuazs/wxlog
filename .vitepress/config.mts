@@ -252,24 +252,24 @@ export default withMermaid(defineConfig({
 
     // === SpringCloud ===
     // Gateway
-    'docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway.md': 'springcloud/gateway.md',
-    'docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用.md': 'springcloud/gateway-usage.md',
-    'docs/spring/SpringCloud/Gateway/03.文章汇总.md': 'springcloud/gateway-articles.md',
+    'docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway.md': 'spring/gateway.md',
+    'docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用.md': 'spring/gateway-usage.md',
+    'docs/spring/SpringCloud/Gateway/03.文章汇总.md': 'spring/gateway-articles.md',
     // OpenFeign
-    'docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign.md': 'springcloud/openfeign.md',
+    'docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign.md': 'spring/openfeign.md',
     // 断路器
-    'docs/spring/SpringCloud/断路器/01. Resilience4J.md': 'springcloud/resilience4j.md',
-    'docs/spring/SpringCloud/断路器/02.Resilience4J熔断器使用.md': 'springcloud/resilience4j-circuit-breaker.md',
-    'docs/spring/SpringCloud/断路器/03.Resilience4J限流器使用.md': 'springcloud/resilience4j-rate-limiter.md',
+    'docs/spring/SpringCloud/断路器/01. Resilience4J.md': 'spring/resilience4j.md',
+    'docs/spring/SpringCloud/断路器/02.Resilience4J熔断器使用.md': 'spring/resilience4j-circuit-breaker.md',
+    'docs/spring/SpringCloud/断路器/03.Resilience4J限流器使用.md': 'spring/resilience4j-rate-limiter.md',
     // 注册中心
-    'docs/spring/SpringCloud/注册中心/01.Eureka.md': 'springcloud/eureka.md',
-    'docs/spring/SpringCloud/注册中心/02.Eureka的面试题.md': 'springcloud/eureka-interview.md',
-    'docs/spring/SpringCloud/注册中心/03.Consul.md': 'springcloud/consul.md',
-    'docs/spring/SpringCloud/注册中心/04.Consul面试题.md': 'springcloud/consul-interview.md',
-    'docs/spring/SpringCloud/注册中心/05.Raft算法.md': 'springcloud/raft.md',
+    'docs/spring/SpringCloud/注册中心/01.Eureka.md': 'spring/eureka.md',
+    'docs/spring/SpringCloud/注册中心/02.Eureka的面试题.md': 'spring/eureka-interview.md',
+    'docs/spring/SpringCloud/注册中心/03.Consul.md': 'spring/consul.md',
+    'docs/spring/SpringCloud/注册中心/04.Consul面试题.md': 'spring/consul-interview.md',
+    'docs/spring/SpringCloud/注册中心/05.Raft算法.md': 'spring/raft.md',
     // 负载均衡
-    'docs/spring/SpringCloud/负载均衡/01.Ribbon.md': 'springcloud/ribbon.md',
-    'docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer.md': 'springcloud/loadbalancer.md',
+    'docs/spring/SpringCloud/负载均衡/01.Ribbon.md': 'spring/ribbon.md',
+    'docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer.md': 'spring/loadbalancer.md',
   },
 
   // Markdown 配置
@@ -619,117 +619,42 @@ export default withMermaid(defineConfig({
             {
               text: 'Gateway',
               items: [
-                { text: 'Spring Cloud Gateway', link: '/springcloud/gateway' },
-                { text: 'Gateway使用', link: '/springcloud/gateway-usage' },
-                { text: '文章汇总', link: '/springcloud/gateway-articles' },
+                { text: 'Spring Cloud Gateway', link: '/spring/gateway' },
+                { text: 'Gateway使用', link: '/spring/gateway-usage' },
+                { text: '文章汇总', link: '/spring/gateway-articles' },
               ]
             },
             {
               text: 'OpenFeign',
               items: [
-                { text: 'Spring Cloud OpenFeign', link: '/springcloud/openfeign' },
+                { text: 'Spring Cloud OpenFeign', link: '/spring/openfeign' },
               ]
             },
             {
               text: '断路器',
               items: [
-                { text: 'Resilience4J', link: '/springcloud/resilience4j' },
-                { text: 'Resilience4J熔断器使用', link: '/springcloud/resilience4j-circuit-breaker' },
-                { text: 'Resilience4J限流器使用', link: '/springcloud/resilience4j-rate-limiter' },
+                { text: 'Resilience4J', link: '/spring/resilience4j' },
+                { text: 'Resilience4J熔断器使用', link: '/spring/resilience4j-circuit-breaker' },
+                { text: 'Resilience4J限流器使用', link: '/spring/resilience4j-rate-limiter' },
               ]
             },
             {
               text: '注册中心',
               items: [
-                { text: 'Eureka', link: '/springcloud/eureka' },
-                { text: 'Eureka面试题', link: '/springcloud/eureka-interview' },
-                { text: 'Consul', link: '/springcloud/consul' },
-                { text: 'Consul面试题', link: '/springcloud/consul-interview' },
-                { text: 'Raft算法', link: '/springcloud/raft' },
+                { text: 'Eureka', link: '/spring/eureka' },
+                { text: 'Eureka面试题', link: '/spring/eureka-interview' },
+                { text: 'Consul', link: '/spring/consul' },
+                { text: 'Consul面试题', link: '/spring/consul-interview' },
+                { text: 'Raft算法', link: '/spring/raft' },
               ]
             },
             {
               text: '负载均衡',
               items: [
-                { text: 'Ribbon', link: '/springcloud/ribbon' },
-                { text: 'Spring Cloud LoadBalancer', link: '/springcloud/loadbalancer' },
+                { text: 'Ribbon', link: '/spring/ribbon' },
+                { text: 'Spring Cloud LoadBalancer', link: '/spring/loadbalancer' },
               ]
             }
-          ]
-        }
-      ],
-
-      '/springcloud/': [
-        {
-          text: 'SpringCloud',
-          collapsed: false,
-          items: [
-            {
-              text: 'Gateway',
-              items: [
-                { text: 'Spring Cloud Gateway', link: '/springcloud/gateway' },
-                { text: 'Gateway使用', link: '/springcloud/gateway-usage' },
-                { text: '文章汇总', link: '/springcloud/gateway-articles' },
-              ]
-            },
-            {
-              text: 'OpenFeign',
-              items: [
-                { text: 'Spring Cloud OpenFeign', link: '/springcloud/openfeign' },
-              ]
-            },
-            {
-              text: '断路器',
-              items: [
-                { text: 'Resilience4J', link: '/springcloud/resilience4j' },
-                { text: 'Resilience4J熔断器使用', link: '/springcloud/resilience4j-circuit-breaker' },
-                { text: 'Resilience4J限流器使用', link: '/springcloud/resilience4j-rate-limiter' },
-              ]
-            },
-            {
-              text: '注册中心',
-              items: [
-                { text: 'Eureka', link: '/springcloud/eureka' },
-                { text: 'Eureka面试题', link: '/springcloud/eureka-interview' },
-                { text: 'Consul', link: '/springcloud/consul' },
-                { text: 'Consul面试题', link: '/springcloud/consul-interview' },
-                { text: 'Raft算法', link: '/springcloud/raft' },
-              ]
-            },
-            {
-              text: '负载均衡',
-              items: [
-                { text: 'Ribbon', link: '/springcloud/ribbon' },
-                { text: 'Spring Cloud LoadBalancer', link: '/springcloud/loadbalancer' },
-              ]
-            }
-          ]
-        }
-      ],
-
-      '/springboot/': [
-        {
-          text: 'SpringBoot配置',
-          collapsed: false,
-          items: [
-            { text: '日志配置', link: '/springboot/logback' },
-            { text: '数据库连接配置', link: '/springboot/database-connection-configuration' },
-            { text: 'Redis配置', link: '/springboot/redis-configuration' },
-          ]
-        },
-        {
-          text: 'SpringBoot事务',
-          collapsed: false,
-          items: [
-            { text: 'PlatformTransactionManager', link: '/springboot/PlatformTransactionManager' },
-          ]
-        },
-        {
-          text: 'SpringBoot扩展',
-          collapsed: false,
-          items: [
-            { text: 'SpringBoot Starter', link: '/springboot/starter' },
-            { text: 'Endpoint扩展', link: '/springboot/endpoint' },
           ]
         }
       ],
@@ -1176,24 +1101,7 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/工具/': [
-        {
-          text: '工具',
-          collapsed: false,
-          items: [
-            {
-              text: 'git',
-              items: [
-                { text: '从项目中取消git版库跟踪', link: '/docs/工具/git/01.从项目中取消git版库跟踪' },
-                { text: 'git分支相关操作', link: '/docs/工具/git/02.git分支相关操作' },
-                { text: 'git撤销本地提交到远程仓库操作', link: '/docs/工具/git/03.git撤销本地提交到远程仓库操作' },
-                { text: 'git重置本地的修改', link: '/docs/工具/git/04.git重置本地的修改' },
-                { text: '代码提交规范', link: '/docs/工具/git/05.代码提交规范' },
-              ]
-            }
-          ]
-        }
-      ],
+ 
 
       '/my-projects/': [
         {
