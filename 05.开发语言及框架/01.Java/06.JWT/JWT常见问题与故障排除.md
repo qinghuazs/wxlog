@@ -1,3 +1,12 @@
+---
+title: JWT常见问题与故障排除
+date: 2025-11-19
+permalink: /java/jwt-troubleshooting.html
+categories:
+  - Java
+  - JWT
+---
+
 # JWT 常见问题与故障排除
 
 ## 常见错误及解决方案

@@ -1,3 +1,12 @@
+---
+title: JWT基础知识
+date: 2025-11-19
+permalink: /java/jwt-basics.html
+categories:
+  - Java
+  - JWT
+---
+
 # JWT (JSON Web Token) 基础知识
 
 ## 什么是JWT？

@@ -204,7 +204,52 @@ export default withMermaid(defineConfig({
     '01.AI/codeagent/VSCode 插件开发 - Code Agent 前端实现.md': 'ai/codeagent/vscode-extension.md',
     // Other
     '01.AI/claudecode/architecture/Claude Code 错误处理与容错设计.md': 'ai/claudecode/architecture-error-handling.md',
-  }, 
+
+    // === 05.开发语言及框架/01.Java 目录 ===
+    // 集合
+    '05.开发语言及框架/01.Java/01.集合/01.HashMap 源码分析及面试题.md': 'java/hashmap.md',
+    '05.开发语言及框架/01.Java/01.集合/02.ConcurrentHashMap 源码分析及面试题.md': 'java/concurrent-hashmap.md',
+    // IO
+    '05.开发语言及框架/01.Java/02.IO操作/01.IO分类.md': 'java/io-classification.md',
+    '05.开发语言及框架/01.Java/02.IO操作/02.多路复用.md': 'java/io-multiplexing.md',
+    // JUC - 队列
+    '05.开发语言及框架/01.Java/03.并发包/01.队列/01.JUC中的队列.md': 'java/juc-queue.md',
+    // JUC - 锁
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/01.JUC中的锁.md': 'java/juc-lock.md',
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/02.AbstractQueuedSynchronizer.md': 'java/aqs.md',
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/02.ReentrantLock源码解析和面试题.md': 'java/reentrant-lock.md',
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/03.独占锁和共享锁.md': 'java/exclusive-shared-lock.md',
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/04.CountDownLatch 源码分析和面试题.md': 'java/countdownlatch.md',
+    '05.开发语言及框架/01.Java/03.并发包/02.Java 锁/05.Semphore源码分析和面试题.md': 'java/semaphore.md',
+    // JUC - 原子类
+    '05.开发语言及框架/01.Java/03.并发包/03.原子类/01.原子类.md': 'java/atomic.md',
+    // 线程池
+    '05.开发语言及框架/01.Java/03.并发包/04.线程池/01.自定义线程池工厂类.md': 'java/threadpool-factory.md',
+    '05.开发语言及框架/01.Java/03.并发包/04.线程池/01.ThreadLocal.md': 'java/threadlocal.md',
+    '05.开发语言及框架/01.Java/03.并发包/04.线程池/03.线程池.md': 'java/thread-threadpool.md',
+    // JVM
+    '05.开发语言及框架/01.Java/04.JVM/01.线程FullGC问题排查.md': 'java/jvm-fullgc01.md',
+    '05.开发语言及框架/01.Java/04.JVM/02.Java虚拟机配置.md': 'java/jvm-memory-config.md',
+    '05.开发语言及框架/01.Java/04.JVM/03.元空间 MetaSpace.md': 'java/jvm-metaspace.md',
+    // Spring
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.数据库连接的配置.md': 'springboot/database-connection-configuration.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/01.SpringBoot日志配置.md': 'springboot/logback.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/01.配置/02.Redis的配置.md': 'springboot/redis-configuration.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/02.事务管理/01.PlatformTransactionManager.md': 'springboot/PlatformTransactionManager.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/03.Bean 管理/01.Spring Bean 的加载过程.md': 'spring/bean-loading.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/01.Spring AOP实现机制.md': 'spring/aop.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/02.Spring扩展点.md': 'spring/extension.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/02.SpringBoot Starter.md': 'springboot/starter.md',
+    '05.开发语言及框架/01.Java/05.Spring/01.SpringBoot/04.扩展机制/03.Endpoint.md': 'springboot/endpoint.md',
+    // JWT
+    '05.开发语言及框架/01.Java/06.JWT/工作流程.md': 'java/jwt-workflow.md',
+    '05.开发语言及框架/01.Java/06.JWT/JWT实战应用.md': 'java/jwt-practice.md',
+    '05.开发语言及框架/01.Java/06.JWT/JWT基础知识.md': 'java/jwt-basics.md',
+    '05.开发语言及框架/01.Java/06.JWT/JWT常见问题与故障排除.md': 'java/jwt-troubleshooting.md',
+    '05.开发语言及框架/01.Java/06.JWT/使用了JWT之后还需要auth2吗.md': 'java/jwt-oauth2.md',
+    // MyBatis
+    '05.开发语言及框架/01.Java/07.MyBatis/first.md': 'java/mybatis-interceptor.md',
+  },
 
   // Markdown 配置
   markdown: {
@@ -226,11 +271,11 @@ export default withMermaid(defineConfig({
       {
         text: '后端技术',
         items: [
-          { text: 'Java', link: '/docs/java/first' },
-          { text: 'Spring', link: '/docs/spring/Bean/01.Spring Bean 的加载过程' },
-          { text: 'SpringBoot', link: '/docs/spring/SpringBoot/01.SpringBoot日志配置' },
+          { text: 'Java', link: '/java/hashmap' },
+          { text: 'Spring', link: '/spring/bean-loading' },
+          { text: 'SpringBoot', link: '/springboot/logback' },
           { text: 'SpringCloud', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
-          { text: 'MyBatis', link: '/docs/mybatis/first' },
+          { text: 'MyBatis', link: '/java/mybatis-interceptor' },
         ]
       },
       {
@@ -445,101 +490,110 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/java/': [
+      '/java/': [
         {
-          text: 'Java 基础',
+          text: '集合',
           collapsed: false,
           items: [
-            { text: 'first', link: '/docs/java/first' },
-            { text: 'arthas', link: '/docs/java/arthas' },
-            { text: 'arthas-redefine', link: '/docs/java/arthas-redefine' },
-            { text: 'concurrenct', link: '/docs/java/concurrenct' },
-            { text: 'consumer', link: '/docs/java/consumer' },
-            { text: 'functional', link: '/docs/java/functional' },
-            { text: 'javathread', link: '/docs/java/javathread' },
-            { text: 'jvmcommand', link: '/docs/java/jvmcommand' },
-            { text: 'lock', link: '/docs/java/lock' },
+            { text: 'HashMap 源码分析', link: '/java/hashmap' },
+            { text: 'ConcurrentHashMap 源码分析', link: '/java/concurrent-hashmap' },
           ]
         },
         {
           text: 'IO',
           collapsed: false,
           items: [
-            { text: 'IO流程', link: '/docs/java/IO/01.IO流程' },
-            { text: '五路复用', link: '/docs/java/IO/02.五路复用' },
+            { text: 'IO分类', link: '/java/io-classification' },
+            { text: '多路复用', link: '/java/io-multiplexing' },
           ]
         },
         {
-          text: 'JUC',
+          text: 'JUC并发包',
           collapsed: false,
           items: [
-            { text: 'AbstractQueuedSynchronizer', link: '/docs/java/JUC/02.AbstractQueuedSynchronizer' },
-            {
-              text: '原子类',
-              items: [
-                { text: '原子类', link: '/docs/java/JUC/原子类/01.原子类' },
-              ]
-            },
-            {
-              text: '锁',
-              items: [
-                { text: 'JUC中的锁', link: '/docs/java/JUC/锁/01.JUC中的锁' },
-                { text: 'ReentrantLock源码（深度剖析）', link: '/docs/java/JUC/锁/02.ReentrantLockԴ源码（深度剖析）' },
-                { text: '独占锁与共享锁', link: '/docs/java/JUC/锁/03.独占锁与共享锁' },
-                { text: 'CountDownLatch 源码（深度剖析）', link: '/docs/java/JUC/锁/04.CountDownLatch 源码（深度剖析）' },
-                { text: 'Semphore源码（深度剖析）', link: '/docs/java/JUC/锁/05.Semphore源码（深度剖析）' },
-              ]
-            },
-            {
-              text: '队列',
-              items: [
-                { text: 'JUC中的队列', link: '/docs/java/JUC/队列/01.JUC中的队列' },
-              ]
-            }
+            { text: 'JUC中的队列', link: '/java/juc-queue' },
+            { text: 'JUC中的锁', link: '/java/juc-lock' },
+            { text: 'AQS源码解析', link: '/java/aqs' },
+            { text: 'ReentrantLock源码解析', link: '/java/reentrant-lock' },
+            { text: '独占锁和共享锁', link: '/java/exclusive-shared-lock' },
+            { text: 'CountDownLatch源码分析', link: '/java/countdownlatch' },
+            { text: 'Semaphore源码分析', link: '/java/semaphore' },
+            { text: '原子类', link: '/java/atomic' },
+          ]
+        },
+        {
+          text: '线程池',
+          collapsed: false,
+          items: [
+            { text: 'ThreadLocal', link: '/java/threadlocal' },
+            { text: '自定义线程池工厂类', link: '/java/threadpool-factory' },
+            { text: '线程池', link: '/java/thread-threadpool' },
           ]
         },
         {
           text: 'JVM',
           collapsed: false,
           items: [
-            { text: '线程FullGC问题排查', link: '/docs/java/JVM/01.线程FullGC问题排查' },
-            { text: 'Java内存结构', link: '/docs/java/JVM/02.Java内存结构' },
-            { text: '元空间 MetaSpace', link: '/docs/java/JVM/03.元空间 MetaSpace' },
+            { text: 'FullGC问题排查', link: '/java/jvm-fullgc01' },
+            { text: 'JVM内存配置', link: '/java/jvm-memory-config' },
+            { text: '元空间 MetaSpace', link: '/java/jvm-metaspace' },
           ]
         },
         {
-          text: 'Maven',
+          text: 'JWT',
           collapsed: false,
           items: [
-            { text: '查看Maven依赖', link: '/docs/java/Maven/01查看Maven依赖' },
+            { text: 'JWT基础知识', link: '/java/jwt-basics' },
+            { text: 'JWT工作流程', link: '/java/jwt-workflow' },
+            { text: 'JWT实战应用', link: '/java/jwt-practice' },
+            { text: 'JWT常见问题', link: '/java/jwt-troubleshooting' },
+            { text: 'JWT与OAuth2', link: '/java/jwt-oauth2' },
           ]
         },
         {
-          text: 'Thread',
+          text: 'MyBatis',
           collapsed: false,
           items: [
-            {
-              text: '线程',
-              items: [
-                { text: 'Thread', link: '/docs/java/Thread/线程/00.Thread' },
-                { text: 'ThreadLocal', link: '/docs/java/Thread/线程/01.ThreadLocal' },
-              ]
-            },
-            {
-              text: '线程池',
-              items: [
-                { text: '自定义线程池工厂类', link: '/docs/java/Thread/线程池/01.自定义线程池工厂类' },
-                { text: '线程池', link: '/docs/java/Thread/线程池/03.线程池' },
-              ]
-            }
+            { text: 'MyBatis Interceptor扩展', link: '/java/mybatis-interceptor' },
+          ]
+        }
+      ],
+
+      '/spring/': [
+        {
+          text: 'Spring核心',
+          collapsed: false,
+          items: [
+            { text: 'Bean加载过程', link: '/spring/bean-loading' },
+            { text: 'AOP实现机制', link: '/spring/aop' },
+            { text: 'Spring扩展点', link: '/spring/extension' },
+          ]
+        }
+      ],
+
+      '/springboot/': [
+        {
+          text: '配置',
+          collapsed: false,
+          items: [
+            { text: '日志配置', link: '/springboot/logback' },
+            { text: '数据库连接配置', link: '/springboot/database-connection-configuration' },
+            { text: 'Redis配置', link: '/springboot/redis-configuration' },
           ]
         },
         {
-          text: '集合',
+          text: '事务管理',
           collapsed: false,
           items: [
-            { text: 'HashMap 源码（深度剖析）', link: '/docs/java/集合/01.HashMap 源码（深度剖析）' },
-            { text: 'ConcurrentHashMap 源码（深度剖析）', link: '/docs/java/集合/02.ConcurrentHashMap 源码（深度剖析）' },
+            { text: 'PlatformTransactionManager', link: '/springboot/PlatformTransactionManager' },
+          ]
+        },
+        {
+          text: '扩展机制',
+          collapsed: false,
+          items: [
+            { text: 'SpringBoot Starter', link: '/springboot/starter' },
+            { text: 'Endpoint扩展', link: '/springboot/endpoint' },
           ]
         }
       ],

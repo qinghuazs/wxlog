@@ -1,3 +1,12 @@
+---
+title: JWT 实战应用
+date: 2025-11-19
+permalink: /java/jwt-practice.html
+categories:
+  - Java
+  - JWT
+---
+
 # JWT 实战应用
 
 ## Spring Boot + JWT 完整示例

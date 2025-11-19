@@ -1,3 +1,12 @@
+---
+title: JWT与OAuth2的关系
+date: 2025-11-19
+permalink: /java/jwt-oauth2.html
+categories:
+  - Java
+  - JWT
+---
+
 # 使用了JWT之后还需要OAuth2吗？
 
 ## 简短回答
