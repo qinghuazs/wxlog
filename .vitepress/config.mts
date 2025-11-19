@@ -65,6 +65,20 @@ export default withMermaid(defineConfig({
     '04.中间件/01.数据库/02.Redis/02.数据结构/01.sds.md': 'redis/sds.md',
     '04.中间件/01.数据库/02.Redis/02.数据结构/02.Redis 代码整体架构.md': 'redis/architecture.md',
     '04.中间件/01.数据库/02.Redis/03.高级特性/01.哨兵模式.md': 'redis/sentinel.md',
+    // Kafka
+    '04.中间件/02.消息中间件/01.Kafka/01.应用配置/01Kafka整体介绍.md': 'kafka/introduction.md',
+    '04.中间件/02.消息中间件/01.Kafka/01.应用配置/02Kafka安装部署.md': 'kafka/installation.md',
+    '04.中间件/02.消息中间件/01.Kafka/01.应用配置/02Kafka安装部署2.md': 'kafka/installation-2.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/00.前置准备.md': 'kafka/producer-preparation.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/01.指标.md': 'kafka/producer-metrics.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/02.配置参数.md': 'kafka/producer-config.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/03.重要的配置参数.md': 'kafka/producer-important-config.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/04.分区计算.md': 'kafka/producer-partitioning.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/05.发送消息.md': 'kafka/producer-send.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/06.消息追加到消息累加器.md': 'kafka/producer-accumulator.md',
+    '04.中间件/02.消息中间件/01.Kafka/02.源码分析/01.Producer/07.粘性分区.md': 'kafka/producer-sticky-partition.md',
+    '04.中间件/02.消息中间件/01.Kafka/03.面试真题/01.Kafka为什么那么快.md': 'kafka/why-so-fast.md',
+    '04.中间件/02.消息中间件/01.Kafka/03.面试真题/02.零拷贝技术.md': 'kafka/zero-copy.md',
 
     // === 02.系统设计 目录 ===
     // 注册中心
@@ -217,7 +231,7 @@ export default withMermaid(defineConfig({
           { text: 'SpringBoot', link: '/docs/spring/SpringBoot/01.SpringBoot日志配置' },
           { text: 'SpringCloud', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
           { text: 'MyBatis', link: '/docs/mybatis/first' },
-          { text: 'Kafka', link: '/docs/kafka/00.prompts' },
+          { text: 'Kafka', link: '/kafka/introduction' },
         ]
       },
       {
@@ -619,40 +633,36 @@ export default withMermaid(defineConfig({
       ],
 
 
-      '/docs/kafka/': [
+      '/kafka/': [
         {
-          text: 'Kafka',
+          text: '应用配置',
           collapsed: false,
           items: [
-            { text: '提示词', link: '/docs/kafka/00.prompts' },
-            { text: 'Kafka概述介绍', link: '/docs/kafka/01Kafka概述介绍' },
-            { text: 'Kafka安装部署', link: '/docs/kafka/02Kafka安装部署' },
-            { text: 'Kafka安装部署2', link: '/docs/kafka/02Kafka安装部署2' },
-            {
-              text: '源码解析',
-              items: [
-                { text: '前置准备', link: '/docs/kafka/源码解析/01前置准备' },
-                {
-                  text: 'Producer',
-                  items: [
-                    { text: '指标', link: '/docs/kafka/源码解析/Producer/01.指标' },
-                    { text: '配置参数', link: '/docs/kafka/源码解析/Producer/02.配置参数' },
-                    { text: '重要配置参数', link: '/docs/kafka/源码解析/Producer/03.重要配置参数' },
-                    { text: '发送概览', link: '/docs/kafka/源码解析/Producer/04.发送概览' },
-                    { text: '发送消息', link: '/docs/kafka/源码解析/Producer/05.发送消息' },
-                    { text: '消息追加到消息累加器', link: '/docs/kafka/源码解析/Producer/06.消息追加到消息累加器' },
-                    { text: '粘性分区', link: '/docs/kafka/源码解析/Producer/07.粘性分区' },
-                  ]
-                }
-              ]
-            },
-            {
-              text: '原理解析',
-              items: [
-                { text: 'Kafka为什么这么快', link: '/docs/kafka/原理解析/01.Kafka为什么这么快' },
-                { text: '副本机制', link: '/docs/kafka/原理解析/02.副本机制' },
-              ]
-            }
+            { text: 'Kafka整体介绍', link: '/kafka/introduction' },
+            { text: 'Kafka安装部署', link: '/kafka/installation' },
+            { text: 'Kafka安装部署2', link: '/kafka/installation-2' },
+          ]
+        },
+        {
+          text: 'Producer源码分析',
+          collapsed: false,
+          items: [
+            { text: '前置准备', link: '/kafka/producer-preparation' },
+            { text: '指标', link: '/kafka/producer-metrics' },
+            { text: '配置参数', link: '/kafka/producer-config' },
+            { text: '重要的配置参数', link: '/kafka/producer-important-config' },
+            { text: '分区计算', link: '/kafka/producer-partitioning' },
+            { text: '发送消息', link: '/kafka/producer-send' },
+            { text: '消息追加到消息累加器', link: '/kafka/producer-accumulator' },
+            { text: '粘性分区', link: '/kafka/producer-sticky-partition' },
+          ]
+        },
+        {
+          text: '面试真题',
+          collapsed: false,
+          items: [
+            { text: 'Kafka为什么那么快', link: '/kafka/why-so-fast' },
+            { text: '零拷贝技术', link: '/kafka/zero-copy' },
           ]
         }
       ],
