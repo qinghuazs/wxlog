@@ -269,7 +269,7 @@ export default withMermaid(defineConfig({
     nav: [
       { text: '首页', link: '/' },
       {
-        text: '后端技术',
+        text: '开发语言及框架',
         items: [
           { text: 'Java', link: '/java/hashmap' },
           { text: 'Spring', link: '/spring/bean-loading' },
