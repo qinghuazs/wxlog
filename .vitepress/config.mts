@@ -49,6 +49,36 @@ export default withMermaid(defineConfig({
     // Docker
     '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
 
+    // === 02.系统设计 目录 ===
+    // 注册中心
+    '02.系统设计/01.注册中心/01.注册中心的设计.md': 'system-design/service-registry.md',
+    // 负载均衡
+    '02.系统设计/03.负载均衡/01.负载均衡详解.md': 'system-design/load-balancing.md',
+    '02.系统设计/03.负载均衡/02.OpenFeign详解.md': 'system-design/openfeign.md',
+    // 熔断限流降级
+    '02.系统设计/04.熔断限流降级/01.分布式熔断算法和组件详解.md': 'system-design/circuit-breaker.md',
+    '02.系统设计/04.熔断限流降级/02.分布式限流算法和组件详解.md': 'system-design/rate-limiting.md',
+    '02.系统设计/04.熔断限流降级/03.分布式降级算法和组件详解.md': 'system-design/degradation.md',
+    // 场景设计
+    '02.系统设计/08.场景设计/01.短URL系统设计.md': 'system-design/short-url.md',
+    '02.系统设计/08.场景设计/08.短连接URL系统设计详解.md': 'system-design/short-url-detailed.md',
+    '02.系统设计/08.场景设计/09.互联网企业面试场景题大全.md': 'system-design/interview-questions.md',
+    '02.系统设计/08.场景设计/10.库存扣减一致性解决方案.md': 'system-design/inventory-consistency.md',
+    '02.系统设计/08.场景设计/11.秒杀系统设计.md': 'system-design/flash-sale.md',
+    '02.系统设计/08.场景设计/12.抢红包系统设计.md': 'system-design/red-packet.md',
+    '02.系统设计/08.场景设计/13.12306火车票系统设计.md': 'system-design/train-ticket-system.md',
+    '02.系统设计/08.场景设计/14.分布式缓存系统设计.md': 'system-design/distributed-cache.md',
+    '02.系统设计/08.场景设计/15.打车系统设计.md': 'system-design/ride-hailing.md',
+    '02.系统设计/08.场景设计/16.大数据量下数据库分库分表方案.md': 'system-design/sharding.md',
+    '02.系统设计/08.场景设计/17.HTTP请求完整流程详解.md': 'system-design/http-flow.md',
+    '02.系统设计/08.场景设计/18.CDN实现原理详解.md': 'system-design/cdn.md',
+    '02.系统设计/08.场景设计/19.DNS实现原理详解.md': 'system-design/dns.md',
+    '02.系统设计/08.场景设计/20.ClickHouse和Doris技术选型对比.md': 'system-design/clickhouse-vs-doris.md',
+    '02.系统设计/08.场景设计/21.MySQL主从同步方案和对比分析.md': 'system-design/mysql-replication.md',
+    '02.系统设计/08.场景设计/22.技术选型标准和方法.md': 'system-design/tech-selection.md',
+    '02.系统设计/08.场景设计/支付系统架构设计.md': 'system-design/payment-system.md',
+    '02.系统设计/08.场景设计/滴滴配送引擎业务.md': 'system-design/delivery-engine.md',
+
     // === 01.AI 目录 ===
     // Claude Code
     '01.AI/01.AI开发工具/01. ClaudeCode/Agent工作流引擎详解.md': 'ai/claude-code/agent-workflow-engine.md',
@@ -211,8 +241,10 @@ export default withMermaid(defineConfig({
       {
         text: '系统设计',
         items: [
-          { text: '场景题', link: '/system-design/short-url.html' },
-          { text: '区块链', link: '/docs/blockchain/基础知识/00.比特币知识学习路线路' },
+          { text: '注册中心', link: '/system-design/service-registry' },
+          { text: '负载均衡', link: '/system-design/load-balancing' },
+          { text: '熔断限流降级', link: '/system-design/circuit-breaker' },
+          { text: '场景设计', link: '/system-design/short-url' },
         ]
       },
       {
@@ -983,25 +1015,51 @@ export default withMermaid(defineConfig({
 
       '/system-design/': [
         {
-          text: '系统设计',
+          text: '注册中心',
+          collapsed: false,
+          items: [
+            { text: '注册中心的设计', link: '/system-design/service-registry' },
+          ]
+        },
+        {
+          text: '负载均衡',
+          collapsed: false,
+          items: [
+            { text: '负载均衡详解', link: '/system-design/load-balancing' },
+            { text: 'OpenFeign详解', link: '/system-design/openfeign' },
+          ]
+        },
+        {
+          text: '熔断限流降级',
+          collapsed: false,
+          items: [
+            { text: '分布式熔断算法和组件详解', link: '/system-design/circuit-breaker' },
+            { text: '分布式限流算法和组件详解', link: '/system-design/rate-limiting' },
+            { text: '分布式降级算法和组件详解', link: '/system-design/degradation' },
+          ]
+        },
+        {
+          text: '场景设计',
           collapsed: false,
           items: [
             { text: '短URL系统设计', link: '/system-design/short-url' },
-            { text: '注册中心的设计', link: '/system-design/service-registry' },
-            { text: '负载均衡设计', link: '/system-design/load-balancing' },
-            { text: '分布式熔断算法（滑动窗口）', link: '/system-design/circuit-breaker' },
-            { text: 'OpenFeign详解', link: '/system-design/openfeign' },
-            { text: '分布式限流算法（令牌桶算法）', link: '/system-design/rate-limiting' },
-            { text: '深度解析短URL系统高级特性', link: '/system-design/short-url-detailed' },
+            { text: '短连接URL系统设计详解', link: '/system-design/short-url-detailed' },
+            { text: '互联网企业面试场景题大全', link: '/system-design/interview-questions' },
+            { text: '库存扣减一致性解决方案', link: '/system-design/inventory-consistency' },
             { text: '秒杀系统设计', link: '/system-design/flash-sale' },
-            { text: '12306抢票系统设计', link: '/system-design/train-ticket-system' },
-            { text: '详细分析数据库分库分表的方案', link: '/system-design/sharding' },
+            { text: '抢红包系统设计', link: '/system-design/red-packet' },
+            { text: '12306火车票系统设计', link: '/system-design/train-ticket-system' },
+            { text: '分布式缓存系统设计', link: '/system-design/distributed-cache' },
+            { text: '打车系统设计', link: '/system-design/ride-hailing' },
+            { text: '大数据量下数据库分库分表方案', link: '/system-design/sharding' },
+            { text: 'HTTP请求完整流程详解', link: '/system-design/http-flow' },
             { text: 'CDN实现原理详解', link: '/system-design/cdn' },
             { text: 'DNS实现原理详解', link: '/system-design/dns' },
             { text: 'ClickHouse和Doris技术选型对比', link: '/system-design/clickhouse-vs-doris' },
-            { text: 'MySQL几种同步机制对比分析', link: '/system-design/mysql-replication' },
-            { text: '技术选型标准与分析', link: '/system-design/tech-selection' },
-            { text: '支付系统设计', link: '/system-design/payment-system' },
+            { text: 'MySQL主从同步方案和对比分析', link: '/system-design/mysql-replication' },
+            { text: '技术选型标准和方法', link: '/system-design/tech-selection' },
+            { text: '支付系统架构设计', link: '/system-design/payment-system' },
+            { text: '滴滴配送引擎业务', link: '/system-design/delivery-engine' },
           ]
         }
       ],
