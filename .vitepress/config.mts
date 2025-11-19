@@ -249,6 +249,27 @@ export default withMermaid(defineConfig({
     '05.开发语言及框架/01.Java/06.JWT/使用了JWT之后还需要auth2吗.md': 'java/jwt-oauth2.md',
     // MyBatis
     '05.开发语言及框架/01.Java/07.MyBatis/first.md': 'java/mybatis-interceptor.md',
+
+    // === SpringCloud ===
+    // Gateway
+    'docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway.md': 'springcloud/gateway.md',
+    'docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用.md': 'springcloud/gateway-usage.md',
+    'docs/spring/SpringCloud/Gateway/03.文章汇总.md': 'springcloud/gateway-articles.md',
+    // OpenFeign
+    'docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign.md': 'springcloud/openfeign.md',
+    // 断路器
+    'docs/spring/SpringCloud/断路器/01. Resilience4J.md': 'springcloud/resilience4j.md',
+    'docs/spring/SpringCloud/断路器/02.Resilience4J熔断器使用.md': 'springcloud/resilience4j-circuit-breaker.md',
+    'docs/spring/SpringCloud/断路器/03.Resilience4J限流器使用.md': 'springcloud/resilience4j-rate-limiter.md',
+    // 注册中心
+    'docs/spring/SpringCloud/注册中心/01.Eureka.md': 'springcloud/eureka.md',
+    'docs/spring/SpringCloud/注册中心/02.Eureka的面试题.md': 'springcloud/eureka-interview.md',
+    'docs/spring/SpringCloud/注册中心/03.Consul.md': 'springcloud/consul.md',
+    'docs/spring/SpringCloud/注册中心/04.Consul面试题.md': 'springcloud/consul-interview.md',
+    'docs/spring/SpringCloud/注册中心/05.Raft算法.md': 'springcloud/raft.md',
+    // 负载均衡
+    'docs/spring/SpringCloud/负载均衡/01.Ribbon.md': 'springcloud/ribbon.md',
+    'docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer.md': 'springcloud/loadbalancer.md',
   },
 
   // Markdown 配置
@@ -598,40 +619,88 @@ export default withMermaid(defineConfig({
             {
               text: 'Gateway',
               items: [
-                { text: 'Spring Cloud Gateway', link: '/docs/spring/SpringCloud/Gateway/01.Spring Cloud Gateway' },
-                { text: 'Spring Cloud Gateway的使用', link: '/docs/spring/SpringCloud/Gateway/02.Spring Cloud Gateway的使用' },
-                { text: '动态路由', link: '/docs/spring/SpringCloud/Gateway/03.动态路由' },
+                { text: 'Spring Cloud Gateway', link: '/springcloud/gateway' },
+                { text: 'Gateway使用', link: '/springcloud/gateway-usage' },
+                { text: '文章汇总', link: '/springcloud/gateway-articles' },
               ]
             },
             {
               text: 'OpenFeign',
               items: [
-                { text: 'Spring Cloud OpenFeign', link: '/docs/spring/SpringCloud/OpenFeign/01.Spring Cloud OpenFeign' },
+                { text: 'Spring Cloud OpenFeign', link: '/springcloud/openfeign' },
               ]
             },
             {
-              text: '熔断器',
+              text: '断路器',
               items: [
-                { text: 'Resilience4J', link: '/docs/spring/SpringCloud/熔断器/01. Resilience4J' },
-                { text: 'Resilience4J熔断器使用', link: '/docs/spring/SpringCloud/熔断器/02.Resilience4J熔断器使用' },
-                { text: 'Resilience4J限流器使用', link: '/docs/spring/SpringCloud/熔断器/03.Resilience4J限流器使用' },
+                { text: 'Resilience4J', link: '/springcloud/resilience4j' },
+                { text: 'Resilience4J熔断器使用', link: '/springcloud/resilience4j-circuit-breaker' },
+                { text: 'Resilience4J限流器使用', link: '/springcloud/resilience4j-rate-limiter' },
               ]
             },
             {
               text: '注册中心',
               items: [
-                { text: 'Eureka', link: '/docs/spring/SpringCloud/注册中心/01.Eureka' },
-                { text: 'Eureka核心机制', link: '/docs/spring/SpringCloud/注册中心/02.Eureka核心机制' },
-                { text: 'Consul', link: '/docs/spring/SpringCloud/注册中心/03.Consul' },
-                { text: 'Consul高级特性', link: '/docs/spring/SpringCloud/注册中心/04.Consul高级特性' },
-                { text: 'Raft算法', link: '/docs/spring/SpringCloud/注册中心/05.Raft算法' },
+                { text: 'Eureka', link: '/springcloud/eureka' },
+                { text: 'Eureka面试题', link: '/springcloud/eureka-interview' },
+                { text: 'Consul', link: '/springcloud/consul' },
+                { text: 'Consul面试题', link: '/springcloud/consul-interview' },
+                { text: 'Raft算法', link: '/springcloud/raft' },
               ]
             },
             {
               text: '负载均衡',
               items: [
-                { text: 'Ribbon', link: '/docs/spring/SpringCloud/负载均衡/01.Ribbon' },
-                { text: 'Spring Cloud LoadBalancer', link: '/docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer' },
+                { text: 'Ribbon', link: '/springcloud/ribbon' },
+                { text: 'Spring Cloud LoadBalancer', link: '/springcloud/loadbalancer' },
+              ]
+            }
+          ]
+        }
+      ],
+
+      '/springcloud/': [
+        {
+          text: 'SpringCloud',
+          collapsed: false,
+          items: [
+            {
+              text: 'Gateway',
+              items: [
+                { text: 'Spring Cloud Gateway', link: '/springcloud/gateway' },
+                { text: 'Gateway使用', link: '/springcloud/gateway-usage' },
+                { text: '文章汇总', link: '/springcloud/gateway-articles' },
+              ]
+            },
+            {
+              text: 'OpenFeign',
+              items: [
+                { text: 'Spring Cloud OpenFeign', link: '/springcloud/openfeign' },
+              ]
+            },
+            {
+              text: '断路器',
+              items: [
+                { text: 'Resilience4J', link: '/springcloud/resilience4j' },
+                { text: 'Resilience4J熔断器使用', link: '/springcloud/resilience4j-circuit-breaker' },
+                { text: 'Resilience4J限流器使用', link: '/springcloud/resilience4j-rate-limiter' },
+              ]
+            },
+            {
+              text: '注册中心',
+              items: [
+                { text: 'Eureka', link: '/springcloud/eureka' },
+                { text: 'Eureka面试题', link: '/springcloud/eureka-interview' },
+                { text: 'Consul', link: '/springcloud/consul' },
+                { text: 'Consul面试题', link: '/springcloud/consul-interview' },
+                { text: 'Raft算法', link: '/springcloud/raft' },
+              ]
+            },
+            {
+              text: '负载均衡',
+              items: [
+                { text: 'Ribbon', link: '/springcloud/ribbon' },
+                { text: 'Spring Cloud LoadBalancer', link: '/springcloud/loadbalancer' },
               ]
             }
           ]
@@ -664,8 +733,6 @@ export default withMermaid(defineConfig({
           ]
         }
       ],
-
-
 
       '/kafka/': [
         {
