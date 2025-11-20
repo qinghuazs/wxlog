@@ -30,7 +30,8 @@
       "Bash(npm install:*)",
       "Bash(npm run docs:build:*)",
       "Bash(grep:*)",
-      "mcp__vercel__get_deployment"
+      "mcp__vercel__get_deployment",
+      "Bash(dir /b \"D:\\blogs\\wxlog\\docs\\ai\")"
     ],
     "deny": [],
     "ask": []
