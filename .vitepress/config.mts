@@ -145,6 +145,8 @@ export default withMermaid(defineConfig({
     // 其他 Claude Code 文件
     '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/02.ClaudeCode命令/00.Claude Code安装.md': 'ai/claude-code/installation.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/02.ClaudeCode命令/01.模型切换.md': 'ai/claude-code/model-switch.md',
+    // MCP 安装配置
+    '01.AI/01.AI开发工具/01. ClaudeCode/02.安装配置/03.MCP 安装配置/01.Vercel MCP 安装配置.md': 'ai/claude-code/vercel-mcp-setup.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/安全机制设计.md': 'ai/claude-code/security-design.md',
     '01.AI/01.AI开发工具/01. ClaudeCode/终端集成实现.md': 'ai/claude-code/terminal-integration.md',
     // LangChain
@@ -374,6 +376,13 @@ export default withMermaid(defineConfig({
                 { text: 'Claude Code安装', link: '/ai/claude-code/installation' },
                 { text: '模型切换', link: '/ai/claude-code/model-switch' },
               ]
+            },
+            {
+                text: 'MCP 安装配置',
+                collapsed: true,
+                items: [
+                { text: 'Vercel MCP 安装配置', link: '/ai/claude-code/vercel-mcp-setup' },
+                ]
             },
             {
               text: '架构详解',

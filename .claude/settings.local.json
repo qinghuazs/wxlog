@@ -18,7 +18,13 @@
       "Bash(done)",
       "Bash(find:*)",
       "Bash(npm run docs:dev:*)",
-      "Bash(package.json)"
+      "Bash(package.json)",
+      "WebSearch",
+      "WebFetch(domain:mcp.harishgarg.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "mcp__open-websearch__search",
+      "mcp__vercel__list_teams",
+      "mcp__vercel__list_projects"
     ],
     "deny": [],
     "ask": []
