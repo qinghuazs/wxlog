@@ -21,7 +21,8 @@
       "WebFetch(domain:www.npmjs.com)",
       "mcp__open-websearch__search",
       "mcp__vercel__list_teams",
-      "mcp__vercel__list_projects"
+      "mcp__vercel__list_projects",
+      "mcp__vercel__deploy_to_vercel"
     ],
     "deny": [],
     "ask": []

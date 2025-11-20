@@ -68,3 +68,4 @@ mermaid-test.md
 *.tmp
 *.temp
 .cache/
+.vercel
