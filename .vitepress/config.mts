@@ -324,9 +324,8 @@ export default withMermaid(defineConfig({
         text: 'AI',
         items: [
           { text: 'Claude Code', link: '/ai/claude-code/model-switch' },
-          { text: 'CodeAgent', link: '/docs/ai/codeagent/00.命令指令参数表' },
-          { text: 'LangChain', link: '/docs/ai/langchain/README' },
-          { text: 'LangGraph', link: '/docs/ai/langgraph/00.目录概览' },
+          { text: 'LangChain', link: '/ai/langchain/learning-roadmap' },
+          {text: 'LangGraph', link: '/ai/langgraph/learning-roadmap' },
           { text: 'MCP', link: '/docs/ai/mcp/01.MCP的底层原理' },
           { text: 'Dify', link: '/docs/ai/dify/01.安装dify' },
           { text: 'Ollama', link: '/docs/ai/ollma/ollama安装' },
