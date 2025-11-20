@@ -520,7 +520,7 @@ response = agent.run("""
 4. **第7-8周**：实战项目：构建智能助手
 
 **推荐阅读**：
-- 本博客的 [LangChain完整学习指南](./README.md)（16周系统课程）
+- 本博客的 [LangChain完整学习指南](./README)（16周系统课程）
 
 
 ## 九、总结与建议
@@ -659,7 +659,7 @@ agent = initialize_agent(tools, llm, ...)
 
 2. **如果你想全面掌握LLM应用开发**：
    - 直接学LangChain（更全面）
-   - 参考本博客的[LangChain 16周课程](./README.md)
+   - 参考本博客的[LangChain 16周课程](./README)
 
 
 ### Q5: 如何迁移？

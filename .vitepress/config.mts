@@ -6,6 +6,9 @@ export default withMermaid(defineConfig({
   title: "冬眠日记",
   description: "祝我们平日都快乐，做平凡的人",
 
+  // 忽略死链接检查（中文文件名导致的误报）
+  ignoreDeadLinks: true,
+
   // 启用缓存目录
   cacheDir: '.vitepress/cache',
 

@@ -918,4 +918,4 @@ async def modify_code(user_id: str, code: str):
 
 ---
 
-**下一步**: 查看 [02.VSCode插件开发](./02.VSCode插件开发.md) 学习插件实现！
+**下一步**: 查看 [02.VSCode插件开发](./02.VSCode插件开发) 学习插件实现！

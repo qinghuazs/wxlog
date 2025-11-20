@@ -31,7 +31,7 @@ categories:
 
 掌握LangChain的基本概念和核心组件。
 
-#### [第1周：环境搭建与核心概念](./第1周-环境搭建与核心概念.md)
+#### [第1周：环境搭建与核心概念](./1.环境搭建与核心概念)
 - LangChain是什么？为什么要用它？
 - 开发环境搭建（Python、API密钥配置）
 - 核心概念：Components、Chains、Agents
@@ -41,7 +41,7 @@ categories:
 **学习重点**：理解LangChain的价值和基本架构
 
 
-#### [第3周：Models详解](./第3周-Models详解.md)
+#### [第3周：Models详解](./3.Models层深入探讨)
 - LLM vs Chat Models
 - 集成OpenAI、Anthropic等模型
 - 模型参数调优（temperature、top_p等）
@@ -56,7 +56,7 @@ categories:
 
 深入学习数据处理、记忆系统、工具集成和RAG系统。
 
-#### [第5周：Documents文档处理](./第5周-Documents文档处理.md)
+#### [第5周：Documents文档处理](./5.Documents文档处理)
 - Document Loaders（PDF、Word、网页等）
 - Text Splitters策略
 - Document Transformers
@@ -66,7 +66,7 @@ categories:
 **学习重点**：掌握各类文档的加载和处理技巧
 
 
-#### [第7周：Tools工具集成](./第7周-Tools工具集成.md)
+#### [第7周：Tools工具集成](./7.Tools工具集成)
 - Tools的概念和作用
 - 内置工具（搜索、计算器、数据库等）
 - 自定义工具开发
@@ -76,7 +76,7 @@ categories:
 **学习重点**：扩展LLM的能力边界
 
 
-#### [第9周：Embeddings和VectorStores](./第9周-Embeddings和VectorStores.md)
+#### [第9周：Embeddings和VectorStores](./9.Embeddings和Vector Stores详解)
 - Embeddings原理
 - OpenAI Embeddings
 - 向量数据库对比（Chroma、FAISS、Pinecone）
@@ -91,7 +91,7 @@ categories:
 
 学习生产环境所需的监控、优化、部署和安全知识。
 
-#### [第11周：Callbacks和监控系统](./第11周-Callbacks和监控系统.md)
+#### [第11周：Callbacks和监控系统](./11.Callbacks和监控系统)
 - Callbacks机制详解
 - 生命周期钩子
 - 成本追踪
@@ -103,7 +103,7 @@ categories:
 **学习重点**：实现生产级的可观测性
 
 
-#### [第16周：生产部署与优化](./第16周-生产部署与优化.md)
+#### [第16周：生产部署与优化](./16.部署与优化)
 - 性能优化策略
   - 多层缓存（本地 + Redis）
   - 异步并发处理
@@ -128,7 +128,7 @@ categories:
 **学习重点**：确保系统的高性能、低成本、高可用
 
 
-### [LangChain学习路线图](./学习总结/LangChain学习路线图.md)
+### [LangChain学习路线图](./LangChain学习路线图)
 完整的学习规划和知识图谱。
 
 
@@ -173,7 +173,7 @@ categories:
 
 ## 🚀 下一步
 
-1. **开始学习**：从[第1周：环境搭建与核心概念](./第1周-环境搭建与核心概念.md)开始
+1. **开始学习**：从[第1周：环境搭建与核心概念](./第1周-环境搭建与核心概念)开始
 2. **制定计划**：根据自己的时间安排选择学习方案
 3. **准备环境**：安装Python、申请API密钥
 4. **加入社区**：找到学习伙伴，相互交流
