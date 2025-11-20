@@ -28,19 +28,37 @@ export default withMermaid(defineConfig({
   },
 
   rewrites: {
-    // === docs 目录 ===
+    // === docs 目录通配符规则 ===
+    // 将所有 docs/ 子目录路径映射到根路径
+    'docs/htmlcssjs/:rest*': 'htmlcssjs/:rest*',
+    'docs/ai/codeagent/:rest*': 'ai/codeagent/:rest*',
+    'docs/ai/mcp/:rest*': 'ai/mcp/:rest*',
+    'docs/ai/dify/:rest*': 'ai/dify/:rest*',
+    'docs/ai/ollma/:rest*': 'ai/ollma/:rest*',
+    'docs/ai/prompts/:rest*': 'ai/prompts/:rest*',
+    'docs/leetcode/:rest*': 'leetcode/:rest*',
+    'docs/JWT/:rest*': 'JWT/:rest*',
+    'docs/swift/:rest*': 'swift/:rest*',
+    'docs/blockchain/:rest*': 'blockchain/:rest*',
+    'docs/docker/:rest*': 'docker/:rest*',
+    'docs/microservice/:rest*': 'microservice/:rest*',
+    'docs/mybatis/:rest*': 'mybatis/:rest*',
+    'docs/scheduler/:rest*': 'scheduler/:rest*',
+    'docs/systemdesign/:rest*': 'systemdesign/:rest*',
+
+    // === docs 目录特殊规则 ===
     // MySQL
     'docs/database/mysql/提示词.md': 'docs/database/mysql/prompts.md',
     // Kafka
     'docs/kafka/00.提示词.md': 'docs/kafka/00.prompts.md',
     // TailwindCSS
-    'docs/htmlcssjs/TailwindCSS/00提示词.md': 'docs/htmlcssjs/TailwindCSS/00prompts.md',
+    'docs/htmlcssjs/TailwindCSS/00提示词.md': 'htmlcssjs/TailwindCSS/00prompts.md',
     // Redis
     'docs/database/redis/数据结构/:page': 'docs/database/redis/data-structures/:page',
     // 区块链
-    'docs/区块链/:dir/:page': 'docs/blockchain/:dir/:page',
+    'docs/区块链/:dir/:page': 'blockchain/:dir/:page',
     // AI 提示词
-    'docs/ai/提示词/:dir/:page': 'docs/ai/prompts/:dir/:page',
+    'docs/ai/提示词/:dir/:page': 'ai/prompts/:dir/:page',
 
     // === 03.工具 目录 ===
     // Git
@@ -313,11 +331,11 @@ export default withMermaid(defineConfig({
       {
         text: '前端技术',
         items: [
-          { text: 'React', link: '/docs/htmlcssjs/React/01useclient' },
-          { text: 'TailwindCSS', link: '/docs/htmlcssjs/TailwindCSS/00prompts' },
-          { text: 'Daisyui', link: '/docs/htmlcssjs/Daisyui/03hero' },
-          { text: 'Monaco', link: '/docs/htmlcssjs/monaco/01EditorProps' },
-          { text: 'VuePress', link: '/docs/htmlcssjs/vuepress/主题开发与发布流程' },
+          { text: 'React', link: '/htmlcssjs/React/01useclient' },
+          { text: 'TailwindCSS', link: '/htmlcssjs/TailwindCSS/00prompts' },
+          { text: 'Daisyui', link: '/htmlcssjs/Daisyui/03hero' },
+          { text: 'Monaco', link: '/htmlcssjs/monaco/01EditorProps' },
+          { text: 'VuePress', link: '/htmlcssjs/vuepress/主题开发与发布流程' },
         ]
       },
       {
@@ -326,15 +344,15 @@ export default withMermaid(defineConfig({
           { text: 'Claude Code', link: '/ai/claude-code/model-switch' },
           { text: 'LangChain', link: '/ai/langchain/learning-roadmap' },
           {text: 'LangGraph', link: '/ai/langgraph/learning-roadmap' },
-          { text: 'MCP', link: '/docs/ai/mcp/01.MCP的底层原理' },
-          { text: 'Dify', link: '/docs/ai/dify/01.安装dify' },
-          { text: 'Ollama', link: '/docs/ai/ollma/ollama安装' },
+          { text: 'MCP', link: '/ai/mcp/01.MCP的底层原理' },
+          { text: 'Dify', link: '/ai/dify/01.安装dify' },
+          { text: 'Ollama', link: '/ai/ollma/ollama安装' },
         ]
       },
       {
         text: '算法',
         items: [
-          { text: 'LeetCode', link: '/docs/leetcode/first' },
+          { text: 'LeetCode', link: '/leetcode/first' },
         ]
       },
       {
@@ -356,8 +374,8 @@ export default withMermaid(defineConfig({
       {
         text: '其他',
         items: [
-          { text: 'JWT', link: '/docs/JWT/JWT基础知识' },
-          { text: 'Swift', link: '/docs/swift/01.在VSCode中编写运行Swift' },
+          { text: 'JWT', link: '/JWT/JWT基础知识' },
+          { text: 'Swift', link: '/swift/01.在VSCode中编写运行Swift' },
           { text: '小程序', link: '/miniprogram/monetization.html' },
           { text: '我的经历', link: '/my-experience/management.html' },
           { text: '我的玩具', link: '/my-projects/free-apps.html' },
@@ -419,11 +437,11 @@ export default withMermaid(defineConfig({
           text: 'CodeAgent',
           collapsed: true,
           items: [
-            { text: '命令指令参数表', link: '/docs/ai/codeagent/00.命令指令参数表' },
-            { text: '架构概述', link: '/docs/ai/codeagent/01.架构概述' },
-            { text: 'VSCode工具详解', link: '/docs/ai/codeagent/02.VSCode工具详解' },
-            { text: 'AI编程基础实践', link: '/docs/ai/codeagent/03.AI编程基础实践' },
-            { text: '代码安全实践指南', link: '/docs/ai/codeagent/04.代码安全实践指南' },
+            { text: '命令指令参数表', link: '/ai/codeagent/00.命令指令参数表' },
+            { text: '架构概述', link: '/ai/codeagent/01.架构概述' },
+            { text: 'VSCode工具详解', link: '/ai/codeagent/02.VSCode工具详解' },
+            { text: 'AI编程基础实践', link: '/ai/codeagent/03.AI编程基础实践' },
+            { text: '代码安全实践指南', link: '/ai/codeagent/04.代码安全实践指南' },
           ]
         },
         {
@@ -486,24 +504,24 @@ export default withMermaid(defineConfig({
           text: 'MCP',
           collapsed: true,
           items: [
-            { text: 'MCP的底层原理', link: '/docs/ai/mcp/01.MCP的底层原理' },
-            { text: '通过SpringAI构建一个MCP', link: '/docs/ai/mcp/02.通过SpringAI构建一个MCP' },
-            { text: '深入分析playwright_mcp', link: '/docs/ai/mcp/03.深入分析playwright_mcp' },
+            { text: 'MCP的底层原理', link: '/ai/mcp/01.MCP的底层原理' },
+            { text: '通过SpringAI构建一个MCP', link: '/ai/mcp/02.通过SpringAI构建一个MCP' },
+            { text: '深入分析playwright_mcp', link: '/ai/mcp/03.深入分析playwright_mcp' },
           ]
         },
         {
           text: 'Dify',
           collapsed: true,
           items: [
-            { text: '安装dify', link: '/docs/ai/dify/01.安装dify' },
+            { text: '安装dify', link: '/ai/dify/01.安装dify' },
           ]
         },
         {
           text: 'Ollama',
           collapsed: true,
           items: [
-            { text: 'ollama安装', link: '/docs/ai/ollma/ollama安装' },
-            { text: '模型调优', link: '/docs/ai/ollma/模型调优' },
+            { text: 'ollama安装', link: '/ai/ollma/ollama安装' },
+            { text: '模型调优', link: '/ai/ollma/模型调优' },
           ]
         },
         {
@@ -513,7 +531,7 @@ export default withMermaid(defineConfig({
             {
               text: 'UI',
               items: [
-                { text: '小红书配图页面', link: '/docs/ai/prompts/UI/01.小红书配图页面' },
+                { text: '小红书配图页面', link: '/ai/prompts/UI/01.小红书配图页面' },
               ]
             }
           ]
@@ -704,73 +722,73 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/leetcode/': [
+      '/leetcode/': [
         {
           text: 'LeetCode',
           collapsed: false,
           items: [
-            { text: 'first', link: '/docs/leetcode/first' },
+            { text: 'first', link: '/leetcode/first' },
             {
               text: '二叉树',
               items: [
-                { text: '二叉树的层序遍历', link: '/docs/leetcode/二叉树/01.二叉树的层序遍历' },
-                { text: '二叉树的中序遍历', link: '/docs/leetcode/二叉树/02.二叉树的中序遍历' },
-                { text: '二叉树的最近公共祖先', link: '/docs/leetcode/二叉树/03.二叉树的最近公共祖先' },
-                { text: '二叉树的层序遍历二', link: '/docs/leetcode/二叉树/04.二叉树的层序遍历二' },
-                { text: '二叉树遍历', link: '/docs/leetcode/二叉树/二叉树遍历' },
+                { text: '二叉树的层序遍历', link: '/leetcode/二叉树/01.二叉树的层序遍历' },
+                { text: '二叉树的中序遍历', link: '/leetcode/二叉树/02.二叉树的中序遍历' },
+                { text: '二叉树的最近公共祖先', link: '/leetcode/二叉树/03.二叉树的最近公共祖先' },
+                { text: '二叉树的层序遍历二', link: '/leetcode/二叉树/04.二叉树的层序遍历二' },
+                { text: '二叉树遍历', link: '/leetcode/二叉树/二叉树遍历' },
               ]
             },
             {
               text: '前缀和',
               items: [
-                { text: '前缀和', link: '/docs/leetcode/前缀和/01.前缀和' },
-                { text: '买卖股票的最佳时机', link: '/docs/leetcode/前缀和/02.买卖股票的最佳时机' },
+                { text: '前缀和', link: '/leetcode/前缀和/01.前缀和' },
+                { text: '买卖股票的最佳时机', link: '/leetcode/前缀和/02.买卖股票的最佳时机' },
               ]
             },
             {
               text: '动态规划',
               items: [
-                { text: '动态规划题单', link: '/docs/leetcode/动态规划/01.动态规划题单' },
+                { text: '动态规划题单', link: '/leetcode/动态规划/01.动态规划题单' },
               ]
             },
             {
               text: '多线程题目',
               items: [
-                { text: '2 两线程循环打印0~100', link: '/docs/leetcode/多线程题目/01.2 两线程循环打印0~100' },
+                { text: '2 两线程循环打印0~100', link: '/leetcode/多线程题目/01.2 两线程循环打印0~100' },
               ]
             },
             {
               text: '字符串',
               items: [
-                { text: '最长子字符串', link: '/docs/leetcode/字符串/01.最长子字符串' },
-                { text: '滑动窗口技巧', link: '/docs/leetcode/字符串/02.滑动窗口技巧' },
+                { text: '最长子字符串', link: '/leetcode/字符串/01.最长子字符串' },
+                { text: '滑动窗口技巧', link: '/leetcode/字符串/02.滑动窗口技巧' },
               ]
             },
             {
               text: '数组',
               items: [
-                { text: '合并区间', link: '/docs/leetcode/数组/01.合并区间' },
-                { text: '两数之和', link: '/docs/leetcode/数组/01.两数之和' },
-                { text: '搜索旋转排序数', link: '/docs/leetcode/数组/02.搜索旋转排序数' },
-                { text: '盛最多水的容器', link: '/docs/leetcode/数组/03.盛最多水的容器' },
-                { text: '数组中的第 K 个最大元素', link: '/docs/leetcode/数组/04.数组中的第 K 个最大元素' },
-                { text: '三数之和', link: '/docs/leetcode/数组/05.三数之和' },
-                { text: '字母异位词', link: '/docs/leetcode/数组/06.字母异位词' },
-                { text: '全排列', link: '/docs/leetcode/数组/07.全排列' },
-                { text: '合并两个有序数组', link: '/docs/leetcode/数组/08.合并两个有序数组' },
+                { text: '合并区间', link: '/leetcode/数组/01.合并区间' },
+                { text: '两数之和', link: '/leetcode/数组/01.两数之和' },
+                { text: '搜索旋转排序数', link: '/leetcode/数组/02.搜索旋转排序数' },
+                { text: '盛最多水的容器', link: '/leetcode/数组/03.盛最多水的容器' },
+                { text: '数组中的第 K 个最大元素', link: '/leetcode/数组/04.数组中的第 K 个最大元素' },
+                { text: '三数之和', link: '/leetcode/数组/05.三数之和' },
+                { text: '字母异位词', link: '/leetcode/数组/06.字母异位词' },
+                { text: '全排列', link: '/leetcode/数组/07.全排列' },
+                { text: '合并两个有序数组', link: '/leetcode/数组/08.合并两个有序数组' },
                 {
                   text: '一维数组',
                   items: [
-                    { text: '最大子数组和', link: '/docs/leetcode/数组/一维数组/01.最大子数组和' },
+                    { text: '最大子数组和', link: '/leetcode/数组/一维数组/01.最大子数组和' },
                   ]
                 },
                 {
                   text: '二维数组',
                   items: [
-                    { text: '搜索二维矩阵', link: '/docs/leetcode/数组/二维数组/01.搜索二维矩阵' },
-                    { text: '全排列', link: '/docs/leetcode/数组/二维数组/02.全排列' },
-                    { text: '旋转矩阵', link: '/docs/leetcode/数组/二维数组/03.旋转矩阵' },
-                    { text: '螺旋矩阵', link: '/docs/leetcode/数组/二维数组/04.螺旋矩阵' },
+                    { text: '搜索二维矩阵', link: '/leetcode/数组/二维数组/01.搜索二维矩阵' },
+                    { text: '全排列', link: '/leetcode/数组/二维数组/02.全排列' },
+                    { text: '旋转矩阵', link: '/leetcode/数组/二维数组/03.旋转矩阵' },
+                    { text: '螺旋矩阵', link: '/leetcode/数组/二维数组/04.螺旋矩阵' },
                   ]
                 }
               ]
@@ -778,37 +796,37 @@ export default withMermaid(defineConfig({
             {
               text: '查找',
               items: [
-                { text: '二分查找', link: '/docs/leetcode/查找/01.二分查找' },
+                { text: '二分查找', link: '/leetcode/查找/01.二分查找' },
               ]
             },
             {
               text: '栈',
               items: [
-                { text: '有效的括号', link: '/docs/leetcode/栈/01.有效的括号' },
+                { text: '有效的括号', link: '/leetcode/栈/01.有效的括号' },
               ]
             },
             {
               text: '链表',
               items: [
-                { text: '反转链表', link: '/docs/leetcode/链表/01.反转链表' },
-                { text: 'K个一组翻转链表', link: '/docs/leetcode/链表/02.K个一组翻转链表' },
-                { text: '合并两个有序链表', link: '/docs/leetcode/链表/03.合并两个有序链表' },
-                { text: '反转链表ii', link: '/docs/leetcode/链表/04.反转链表ii' },
-                { text: '删除链表', link: '/docs/leetcode/链表/05.删除链表' },
+                { text: '反转链表', link: '/leetcode/链表/01.反转链表' },
+                { text: 'K个一组翻转链表', link: '/leetcode/链表/02.K个一组翻转链表' },
+                { text: '合并两个有序链表', link: '/leetcode/链表/03.合并两个有序链表' },
+                { text: '反转链表ii', link: '/leetcode/链表/04.反转链表ii' },
+                { text: '删除链表', link: '/leetcode/链表/05.删除链表' },
               ]
             },
             {
               text: '滑动窗口',
               items: [
-                { text: '滑动窗口', link: '/docs/leetcode/滑动窗口/01.滑动窗口' },
-                { text: '无重复字符的最长子串', link: '/docs/leetcode/滑动窗口/02.无重复字符的最长子串' },
+                { text: '滑动窗口', link: '/leetcode/滑动窗口/01.滑动窗口' },
+                { text: '无重复字符的最长子串', link: '/leetcode/滑动窗口/02.无重复字符的最长子串' },
               ]
             }
           ]
         }
       ],
 
-      '/docs/htmlcssjs/': [
+      '/htmlcssjs/': [
         {
           text: '前端技术',
           collapsed: false,
@@ -816,41 +834,41 @@ export default withMermaid(defineConfig({
             {
               text: 'Daisyui',
               items: [
-                { text: 'hero', link: '/docs/htmlcssjs/Daisyui/03hero' },
-                { text: 'tooltip', link: '/docs/htmlcssjs/Daisyui/100tooltip' },
+                { text: 'hero', link: '/htmlcssjs/Daisyui/03hero' },
+                { text: 'tooltip', link: '/htmlcssjs/Daisyui/100tooltip' },
               ]
             },
             {
               text: 'monaco',
               items: [
-                { text: 'EditorProps', link: '/docs/htmlcssjs/monaco/01EditorProps' },
+                { text: 'EditorProps', link: '/htmlcssjs/monaco/01EditorProps' },
               ]
             },
             {
               text: 'React',
               items: [
-                { text: 'useclient', link: '/docs/htmlcssjs/React/01useclient' },
-                { text: 'Client Component 中的数据获取与性能策略', link: '/docs/htmlcssjs/React/02.Client Component 中的数据获取与性能策略' },
-                { text: 'useState的使用', link: '/docs/htmlcssjs/React/03.useState的使用' },
-                { text: 'useEffect的使用', link: '/docs/htmlcssjs/React/04.useEffect的使用' },
-                { text: 'useContext的使用', link: '/docs/htmlcssjs/React/05.useContext的使用' },
-                { text: 'Metadata的使用', link: '/docs/htmlcssjs/React/06.Metadata的使用' },
+                { text: 'useclient', link: '/htmlcssjs/React/01useclient' },
+                { text: 'Client Component 中的数据获取与性能策略', link: '/htmlcssjs/React/02.Client Component 中的数据获取与性能策略' },
+                { text: 'useState的使用', link: '/htmlcssjs/React/03.useState的使用' },
+                { text: 'useEffect的使用', link: '/htmlcssjs/React/04.useEffect的使用' },
+                { text: 'useContext的使用', link: '/htmlcssjs/React/05.useContext的使用' },
+                { text: 'Metadata的使用', link: '/htmlcssjs/React/06.Metadata的使用' },
               ]
             },
             {
               text: 'TailwindCSS',
               items: [
-                { text: '提示词', link: '/docs/htmlcssjs/TailwindCSS/00prompts' },
-                { text: 'all', link: '/docs/htmlcssjs/TailwindCSS/01all' },
-                { text: 'buttong', link: '/docs/htmlcssjs/TailwindCSS/02buttong' },
-                { text: 'background', link: '/docs/htmlcssjs/TailwindCSS/03background' },
-                { text: 'layout', link: '/docs/htmlcssjs/TailwindCSS/04layout' },
+                { text: '提示词', link: '/htmlcssjs/TailwindCSS/00prompts' },
+                { text: 'all', link: '/htmlcssjs/TailwindCSS/01all' },
+                { text: 'buttong', link: '/htmlcssjs/TailwindCSS/02buttong' },
+                { text: 'background', link: '/htmlcssjs/TailwindCSS/03background' },
+                { text: 'layout', link: '/htmlcssjs/TailwindCSS/04layout' },
               ]
             },
             {
               text: 'vuepress',
               items: [
-                { text: '主题开发与发布流程', link: '/docs/htmlcssjs/vuepress/主题开发与发布流程' },
+                { text: '主题开发与发布流程', link: '/htmlcssjs/vuepress/主题开发与发布流程' },
               ]
             }
           ]
@@ -908,7 +926,7 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/blockchain/': [
+      '/blockchain/': [
         {
           text: '区块链',
           collapsed: false,
@@ -916,16 +934,16 @@ export default withMermaid(defineConfig({
             {
               text: '基础知识',
               items: [
-                { text: '比特币知识学习路线路', link: '/docs/blockchain/基础知识/00.比特币知识学习路线路' },
-                { text: '比特币系统中用到的密码学原理', link: '/docs/blockchain/基础知识/01.比特币系统中用到的密码学原理' },
-                { text: '比特币系统中用到的数据结构', link: '/docs/blockchain/基础知识/02.比特币系统中用到的数据结构' },
-                { text: '比特币协议栈', link: '/docs/blockchain/基础知识/03.比特币协议栈' },
-                { text: '比特币挖矿原理', link: '/docs/blockchain/基础知识/04.比特币挖矿原理' },
-                { text: '比特币白皮书精华解读', link: '/docs/blockchain/基础知识/05.比特币白皮书精华解读' },
-                { text: '比特币网络协议详解', link: '/docs/blockchain/基础知识/06.比特币网络协议详解' },
-                { text: '比特币钱包地址实现', link: '/docs/blockchain/基础知识/07.比特币钱包地址实现' },
-                { text: '共识机制原理对比', link: '/docs/blockchain/基础知识/08.共识机制原理对比' },
-                { text: '比特币脚本编程语言', link: '/docs/blockchain/基础知识/09.比特币脚本编程语言' },
+                { text: '比特币知识学习路线路', link: '/blockchain/基础知识/00.比特币知识学习路线路' },
+                { text: '比特币系统中用到的密码学原理', link: '/blockchain/基础知识/01.比特币系统中用到的密码学原理' },
+                { text: '比特币系统中用到的数据结构', link: '/blockchain/基础知识/02.比特币系统中用到的数据结构' },
+                { text: '比特币协议栈', link: '/blockchain/基础知识/03.比特币协议栈' },
+                { text: '比特币挖矿原理', link: '/blockchain/基础知识/04.比特币挖矿原理' },
+                { text: '比特币白皮书精华解读', link: '/blockchain/基础知识/05.比特币白皮书精华解读' },
+                { text: '比特币网络协议详解', link: '/blockchain/基础知识/06.比特币网络协议详解' },
+                { text: '比特币钱包地址实现', link: '/blockchain/基础知识/07.比特币钱包地址实现' },
+                { text: '共识机制原理对比', link: '/blockchain/基础知识/08.共识机制原理对比' },
+                { text: '比特币脚本编程语言', link: '/blockchain/基础知识/09.比特币脚本编程语言' },
                 // ... 更多区块链文章
               ]
             }
@@ -933,84 +951,84 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/docs/docker/': [
+      '/docker/': [
         {
           text: 'Docker',
           collapsed: false,
           items: [
-            { text: 'CentOS安装Docker', link: '/docs/docker/01.CentOS安装Docker' },
-            { text: 'Docker安装Redis', link: '/docs/docker/02.Docker安装Redis' },
+            { text: 'CentOS安装Docker', link: '/docker/01.CentOS安装Docker' },
+            { text: 'Docker安装Redis', link: '/docker/02.Docker安装Redis' },
           ]
         }
       ],
 
-      '/docs/JWT/': [
+      '/JWT/': [
         {
           text: 'JWT',
           collapsed: false,
           items: [
-            { text: 'JWT基础知识', link: '/docs/JWT/JWT基础知识' },
-            { text: 'JWT实战应用', link: '/docs/JWT/JWT实战应用' },
-            { text: 'JWT常见问题及其排除', link: '/docs/JWT/JWT常见问题及其排除' },
-            { text: '使用了JWT之后还需要auth2吗', link: '/docs/JWT/使用了JWT之后还需要auth2吗' },
-            { text: '单点登录', link: '/docs/JWT/单点登录' },
+            { text: 'JWT基础知识', link: '/JWT/JWT基础知识' },
+            { text: 'JWT实战应用', link: '/JWT/JWT实战应用' },
+            { text: 'JWT常见问题及其排除', link: '/JWT/JWT常见问题及其排除' },
+            { text: '使用了JWT之后还需要auth2吗', link: '/JWT/使用了JWT之后还需要auth2吗' },
+            { text: '单点登录', link: '/JWT/单点登录' },
           ]
         }
       ],
 
-      '/docs/microservice/': [
+      '/microservice/': [
         {
           text: '微服务',
           collapsed: false,
           items: [
-            { text: 'first', link: '/docs/microservice/first' },
-            { text: 'rpcandrestful', link: '/docs/microservice/rpcandrestful' },
+            { text: 'first', link: '/microservice/first' },
+            { text: 'rpcandrestful', link: '/microservice/rpcandrestful' },
           ]
         }
       ],
 
-      '/docs/mybatis/': [
+      '/mybatis/': [
         {
           text: 'MyBatis',
           collapsed: false,
           items: [
-            { text: 'first', link: '/docs/mybatis/first' },
+            { text: 'first', link: '/mybatis/first' },
           ]
         }
       ],
 
-      '/docs/scheduler/': [
+      '/scheduler/': [
         {
           text: '调度任务',
           collapsed: false,
           items: [
-            { text: 'first', link: '/docs/scheduler/first' },
-            { text: 'xxlexecutor', link: '/docs/scheduler/xxlexecutor' },
-            { text: 'xxlrouter', link: '/docs/scheduler/xxlrouter' },
-            { text: 'xxlthread', link: '/docs/scheduler/xxlthread' },
+            { text: 'first', link: '/scheduler/first' },
+            { text: 'xxlexecutor', link: '/scheduler/xxlexecutor' },
+            { text: 'xxlrouter', link: '/scheduler/xxlrouter' },
+            { text: 'xxlthread', link: '/scheduler/xxlthread' },
           ]
         }
       ],
 
-      '/docs/swift/': [
+      '/swift/': [
         {
           text: 'Swift',
           collapsed: false,
           items: [
-            { text: '在VSCode中编写运行Swift', link: '/docs/swift/01.在VSCode中编写运行Swift' },
-            { text: 'SwiftUI中的布局方式', link: '/docs/swift/02.SwiftUI中的布局方式' },
-            { text: 'SwiftUI中的组合方式', link: '/docs/swift/03.SwiftUI中的组合方式' },
+            { text: '在VSCode中编写运行Swift', link: '/swift/01.在VSCode中编写运行Swift' },
+            { text: 'SwiftUI中的布局方式', link: '/swift/02.SwiftUI中的布局方式' },
+            { text: 'SwiftUI中的组合方式', link: '/swift/03.SwiftUI中的组合方式' },
           ]
         }
       ],
 
-      '/docs/systemdesign/': [
+      '/systemdesign/': [
         {
           text: '系统设计',
           collapsed: false,
           items: [
-            { text: 'job', link: '/docs/systemdesign/job' },
-            { text: '企业内部事件中心设计', link: '/docs/systemdesign/企业内部事件中心设计' },
+            { text: 'job', link: '/systemdesign/job' },
+            { text: '企业内部事件中心设计', link: '/systemdesign/企业内部事件中心设计' },
           ]
         }
       ],
@@ -1037,16 +1055,6 @@ export default withMermaid(defineConfig({
             { text: '本地项目取消git仓库关联', link: '/git/unlink' },
             { text: 'git重置本地的修改', link: '/git/revert' },
             { text: 'git commit规范', link: '/git/commit' },
-          ]
-        }
-      ],
-
-      '/docker/': [
-        {
-          text: 'Docker',
-          collapsed: false,
-          items: [
-            { text: 'CentOS安装Docker', link: '/docker/centos-install' },
           ]
         }
       ],
