@@ -23,7 +23,10 @@
       "mcp__vercel__list_teams",
       "mcp__vercel__list_projects",
       "mcp__vercel__deploy_to_vercel",
-      "Bash(kill:*)"
+      "Bash(kill:*)",
+      "mcp__vercel__web_fetch_vercel_url",
+      "mcp__vercel__list_deployments",
+      "mcp__vercel__get_deployment_build_logs"
     ],
     "deny": [],
     "ask": []
