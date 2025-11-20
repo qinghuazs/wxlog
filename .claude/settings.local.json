@@ -28,7 +28,8 @@
       "mcp__vercel__list_deployments",
       "mcp__vercel__get_deployment_build_logs",
       "Bash(npm install:*)",
-      "Bash(npm run docs:build:*)"
+      "Bash(npm run docs:build:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

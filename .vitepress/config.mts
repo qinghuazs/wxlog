@@ -23,7 +23,15 @@ export default withMermaid(defineConfig({
       }
     },
     build: {
-      chunkSizeWarningLimit: 1000
+      chunkSizeWarningLimit: 2000, // 提高警告阈值以减少构建警告
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // 手动分块优化
+            mermaid: ['vitepress-plugin-mermaid']
+          }
+        }
+      }
     }
   },
 
