@@ -15,7 +15,7 @@ Kafka是一个分布式的流处理平台，最初由LinkedIn公司开发，后�
 
 ## 2. 核心概念
 
-![](./image/01.Kafka基本架构.png)
+![](https://i.imgur.com/yOHkY0y.png)
 
 ### 2.1 Producer（生产者）
 
