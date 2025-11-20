@@ -1,15 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(do sed -i 's/^## 第一部分:/## 一、/g; s/^## 第二部分:/## 二、/g; s/^## 第三部分:/## 三、/g; s/^## 第四部分:/## 四、/g; s/^## 第五部分:/## 五、/g; s/^## 第六部分:/## 六、/g; s/^## 第七部分:/## 七、/g; s/^## 第八部分:/## 八、/g' \"$file\")",
       "Bash(cat:*)",
       "Bash(cp:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\n重构Claude Code架构文档：Java代码转TypeScript\n\n主要改动：\n- 将 A2A 机制详解文档中的所有 Java 代码示例转换为 TypeScript\n- 为文档添加编号：21.A2A机制详解、22.MCP服务加载机制\n- 移除旧的未编号文档文件\n- 更新 .vitepress/config.mts 配置，添加新文档导航\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git push:*)",
       "Bash(git commit:*)",
       "Bash(git checkout:*)",
-      "Bash(for file in \"08.短连接URL系统设计详解.md\" \"09.互联网企业面试场景题大全.md\" \"10.库存扣减一致性解决方案.md\" \"11.秒杀系统设计.md\" \"12.抢红包系统设计.md\")",
       "Bash(do)",
       "Bash(if [ -f \"$file\" ])",
       "Bash(then)",
