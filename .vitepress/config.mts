@@ -38,6 +38,7 @@ export default withMermaid(defineConfig({
     '03.工具/02.Git/05.代码提交规范.md': 'git/commit.md',
     // Docker
     '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
+    
 
     // === 04.中间件 目录 ===
     // MySQL
@@ -350,9 +351,7 @@ export default withMermaid(defineConfig({
     'blockchain/基础知识/08.共识机制原理对比.md': 'blockchain/basics/consensus-mechanisms.md',
     'blockchain/基础知识/09.比特币脚本编程语言.md': 'blockchain/basics/bitcoin-script.md',
 
-    // === docker 目录 ===
-    'docker/01.CentOS安装Docker.md': 'docker/centos-install-docker.md',
-    'docker/02.Docker安装Redis.md': 'docker/install-redis.md',
+   
 
     // === JWT 目录 ===
     'JWT/JWT基础知识.md': 'JWT/jwt-basics.md',
@@ -1024,8 +1023,7 @@ export default withMermaid(defineConfig({
           text: 'Docker',
           collapsed: false,
           items: [
-            { text: 'CentOS安装Docker', link: '/docker/centos-install-docker' },
-            { text: 'Docker安装Redis', link: '/docker/install-redis' },
+            { text: 'CentOS安装Docker', link: '/docker/centos-install' }
           ]
         }
       ],
