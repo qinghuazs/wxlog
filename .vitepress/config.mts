@@ -285,51 +285,53 @@ export default withMermaid(defineConfig({
     'docs/spring/SpringCloud/负载均衡/01.Ribbon.md': 'spring/ribbon.md',
     'docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer.md': 'spring/loadbalancer.md',
 
-    // === LeetCode 目录 ===
-    // 二叉树
-    'leetcode/二叉树/01.二叉树的层序遍历.md': 'leetcode/binary-tree/level-order-traversal.md',
-    'leetcode/二叉树/02.二叉树的中序遍历.md': 'leetcode/binary-tree/inorder-traversal.md',
-    'leetcode/二叉树/03.二叉树的最近公共祖先.md': 'leetcode/binary-tree/lowest-common-ancestor.md',
-    'leetcode/二叉树/04.二叉树的层序遍历二.md': 'leetcode/binary-tree/level-order-traversal-ii.md',
-    'leetcode/二叉树/二叉树遍历.md': 'leetcode/binary-tree/tree-traversal.md',
-    // 前缀和
-    'leetcode/前缀和/01.前缀和.md': 'leetcode/prefix-sum/prefix-sum.md',
-    'leetcode/前缀和/02.买卖股票的最佳时机.md': 'leetcode/prefix-sum/best-time-to-buy-sell-stock.md',
-    // 动态规划
-    'leetcode/动态规划/01.动态规划题单.md': 'leetcode/dynamic-programming/problems.md',
-    // 多线程
-    'leetcode/多线程题目/01.2 两线程循环打印0~100.md': 'leetcode/multithreading/two-threads-print.md',
-    // 字符串
-    'leetcode/字符串/01.最长子字符串.md': 'leetcode/string/longest-substring.md',
-    'leetcode/字符串/02.滑动窗口技巧.md': 'leetcode/string/sliding-window.md',
-    // 数组
-    'leetcode/数组/01.合并区间.md': 'leetcode/array/merge-intervals.md',
-    'leetcode/数组/01.两数之和.md': 'leetcode/array/two-sum.md',
-    'leetcode/数组/02.搜索旋转排序数.md': 'leetcode/array/search-rotated-sorted-array.md',
-    'leetcode/数组/03.盛最多水的容器.md': 'leetcode/array/container-with-most-water.md',
-    'leetcode/数组/04.数组中的第 K 个最大元素.md': 'leetcode/array/kth-largest-element.md',
-    'leetcode/数组/05.三数之和.md': 'leetcode/array/three-sum.md',
-    'leetcode/数组/06.字母异位词.md': 'leetcode/array/anagrams.md',
-    'leetcode/数组/07.全排列.md': 'leetcode/array/permutations.md',
-    'leetcode/数组/08.合并两个有序数组.md': 'leetcode/array/merge-sorted-arrays.md',
-    'leetcode/数组/一维数组/01.最大子数组和.md': 'leetcode/array/1d/maximum-subarray.md',
-    'leetcode/数组/二维数组/01.搜索二维矩阵.md': 'leetcode/array/2d/search-2d-matrix.md',
-    'leetcode/数组/二维数组/02.全排列.md': 'leetcode/array/2d/permutations.md',
-    'leetcode/数组/二维数组/03.旋转矩阵.md': 'leetcode/array/2d/rotate-matrix.md',
-    'leetcode/数组/二维数组/04.螺旋矩阵.md': 'leetcode/array/2d/spiral-matrix.md',
+    // === 06.面试/01.算法题 目录 ===
+    // 算法分类
+    '06.面试/01.算法题/00.算法分类/算法分类.md': 'algorithm/classification.md',
+    // 排序
+    '06.面试/01.算法题/01.排序/01.快速排序.md': 'algorithm/sorting/quick-sort.md',
     // 查找
-    'leetcode/查找/01.二分查找.md': 'leetcode/search/binary-search.md',
-    // 栈
-    'leetcode/栈/01.有效的括号.md': 'leetcode/stack/valid-parentheses.md',
+    '06.面试/01.算法题/02.查找/01.二分查找.md': 'algorithm/search/binary-search.md',
+    // 数组
+    '06.面试/01.算法题/03.数组/01.两数之和.md': 'algorithm/array/two-sum.md',
+    '06.面试/01.算法题/03.数组/02.最大子序列和.md': 'algorithm/array/maximum-subarray-sum.md',
+    '06.面试/01.算法题/03.数组/03.最长递增子序列.md': 'algorithm/array/longest-increasing-subsequence.md',
+    '06.面试/01.算法题/03.数组/04.数组中的第 K 个最大元素.md': 'algorithm/array/kth-largest-element.md',
+    '06.面试/01.算法题/03.数组/05.三数之和.md': 'algorithm/array/three-sum.md',
+    '06.面试/01.算法题/03.数组/06.最大子数组和.md': 'algorithm/array/maximum-subarray.md',
+    '06.面试/01.算法题/03.数组/07.全排列.md': 'algorithm/array/permutations.md',
+    '06.面试/01.算法题/03.数组/08.合并两个有序数组.md': 'algorithm/array/merge-sorted-arrays.md',
+    // 数组 - 一维数组
+    '06.面试/01.算法题/03.数组/一维数组/01.最长上升子序列.md': 'algorithm/array/1d/longest-increasing-subsequence.md',
+    // 数组 - 二维数组
+    '06.面试/01.算法题/03.数组/二维数组/01.岛屿数量.md': 'algorithm/array/2d/number-of-islands.md',
+    '06.面试/01.算法题/03.数组/二维数组/02.全排列.md': 'algorithm/array/2d/permutations.md',
+    '06.面试/01.算法题/03.数组/二维数组/03.旋转矩阵.md': 'algorithm/array/2d/rotate-matrix.md',
+    '06.面试/01.算法题/03.数组/二维数组/04.螺旋矩阵.md': 'algorithm/array/2d/spiral-matrix.md',
     // 链表
-    'leetcode/链表/01.反转链表.md': 'leetcode/linked-list/reverse-list.md',
-    'leetcode/链表/02.K个一组翻转链表.md': 'leetcode/linked-list/reverse-k-group.md',
-    'leetcode/链表/03.合并两个有序链表.md': 'leetcode/linked-list/merge-two-lists.md',
-    'leetcode/链表/04.反转链表ii.md': 'leetcode/linked-list/reverse-list-ii.md',
-    'leetcode/链表/05.删除链表.md': 'leetcode/linked-list/delete-node.md',
-    // 滑动窗口
-    'leetcode/滑动窗口/01.滑动窗口.md': 'leetcode/sliding-window/sliding-window.md',
-    'leetcode/滑动窗口/02.无重复字符的最长子串.md': 'leetcode/sliding-window/longest-substring-without-repeating.md',
+    '06.面试/01.算法题/05.链表/01.反转链表.md': 'algorithm/linked-list/reverse-list.md',
+    '06.面试/01.算法题/05.链表/02.K个一组翻转链表.md': 'algorithm/linked-list/reverse-k-group.md',
+    '06.面试/01.算法题/05.链表/03.合并两个有序链表.md': 'algorithm/linked-list/merge-two-lists.md',
+    '06.面试/01.算法题/05.链表/04.反转链表ii.md': 'algorithm/linked-list/reverse-list-ii.md',
+    '06.面试/01.算法题/05.链表/05.环形链表.md': 'algorithm/linked-list/linked-list-cycle.md',
+    // 二叉树
+    '06.面试/01.算法题/06.二叉树/二叉树详解.md': 'algorithm/binary-tree/binary-tree-guide.md',
+    '06.面试/01.算法题/06.二叉树/01.二叉树的层序遍历.md': 'algorithm/binary-tree/level-order-traversal.md',
+    '06.面试/01.算法题/06.二叉树/02.二叉树的中序遍历.md': 'algorithm/binary-tree/inorder-traversal.md',
+    '06.面试/01.算法题/06.二叉树/03.二叉树的最近公共祖先.md': 'algorithm/binary-tree/lowest-common-ancestor.md',
+    '06.面试/01.算法题/06.二叉树/04.二叉树的层序遍历详解.md': 'algorithm/binary-tree/level-order-traversal-detail.md',
+    // 动态规划
+    '06.面试/01.算法题/07.动态规划/01.动态规划题单.md': 'algorithm/dynamic-programming/problems.md',
+    // 前缀和
+    '06.面试/01.算法题/08.前缀和/01.前缀和.md': 'algorithm/prefix-sum/prefix-sum.md',
+    '06.面试/01.算法题/08.前缀和/02.买卖股票的最好时机.md': 'algorithm/prefix-sum/best-time-to-buy-sell-stock.md',
+    // 栈
+    '06.面试/01.算法题/09.栈/01.有效的括号.md': 'algorithm/stack/valid-parentheses.md',
+    // 多线程
+    '06.面试/01.算法题/10.多线程题目/01.2 个线程循环打印0~100.md': 'algorithm/multithreading/two-threads-print.md',
+    // 限流算法
+    '06.面试/01.算法题/11.限流算法/01.滑动窗口.md': 'algorithm/rate-limiting/sliding-window.md',
+    '06.面试/01.算法题/11.限流算法/02.基于数量的滑动窗口.md': 'algorithm/rate-limiting/count-based-sliding-window.md',
 
     // === htmlcssjs 目录 ===
     // React
@@ -426,9 +428,9 @@ export default withMermaid(defineConfig({
         ]
       },
       {
-        text: '算法',
+        text: '面试指南',
         items: [
-          { text: 'LeetCode', link: '/leetcode/first' },
+          { text: '算法题', link: '/algorithm/classification' },
         ]
       },
       {
@@ -456,7 +458,6 @@ export default withMermaid(defineConfig({
           { text: '小程序', link: '/miniprogram/monetization.html' },
           { text: '我的经历', link: '/my-experience/management.html' },
           { text: '我的玩具', link: '/my-projects/free-apps.html' },
-          { text: '面试', link: '/interview/self-introduction.html' },
         ]
       }
     ],
@@ -792,104 +793,114 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/leetcode/': [
+      '/algorithm/': [
         {
-          text: 'LeetCode',
+          text: '算法题',
           collapsed: false,
           items: [
-            { text: 'first', link: '/leetcode/first' },
+            { text: '算法分类', link: '/algorithm/classification' },
             {
-              text: '二叉树',
+              text: '排序',
+              collapsed: true,
               items: [
-                { text: '二叉树的层序遍历', link: '/leetcode/binary-tree/level-order-traversal' },
-                { text: '二叉树的中序遍历', link: '/leetcode/binary-tree/inorder-traversal' },
-                { text: '二叉树的最近公共祖先', link: '/leetcode/binary-tree/lowest-common-ancestor' },
-                { text: '二叉树的层序遍历二', link: '/leetcode/binary-tree/level-order-traversal-ii' },
-                { text: '二叉树遍历', link: '/leetcode/binary-tree/tree-traversal' },
+                { text: '快速排序', link: '/algorithm/sorting/quick-sort' },
               ]
             },
             {
-              text: '前缀和',
+              text: '查找',
+              collapsed: true,
               items: [
-                { text: '前缀和', link: '/leetcode/prefix-sum/prefix-sum' },
-                { text: '买卖股票的最佳时机', link: '/leetcode/prefix-sum/best-time-to-buy-sell-stock' },
-              ]
-            },
-            {
-              text: '动态规划',
-              items: [
-                { text: '动态规划题单', link: '/leetcode/dynamic-programming/problems' },
-              ]
-            },
-            {
-              text: '多线程题目',
-              items: [
-                { text: '2 两线程循环打印0~100', link: '/leetcode/multithreading/two-threads-print' },
-              ]
-            },
-            {
-              text: '字符串',
-              items: [
-                { text: '最长子字符串', link: '/leetcode/string/longest-substring' },
-                { text: '滑动窗口技巧', link: '/leetcode/string/sliding-window' },
+                { text: '二分查找', link: '/algorithm/search/binary-search' },
               ]
             },
             {
               text: '数组',
+              collapsed: true,
               items: [
-                { text: '合并区间', link: '/leetcode/array/merge-intervals' },
-                { text: '两数之和', link: '/leetcode/array/two-sum' },
-                { text: '搜索旋转排序数', link: '/leetcode/array/search-rotated-sorted-array' },
-                { text: '盛最多水的容器', link: '/leetcode/array/container-with-most-water' },
-                { text: '数组中的第 K 个最大元素', link: '/leetcode/array/kth-largest-element' },
-                { text: '三数之和', link: '/leetcode/array/three-sum' },
-                { text: '字母异位词', link: '/leetcode/array/anagrams' },
-                { text: '全排列', link: '/leetcode/array/permutations' },
-                { text: '合并两个有序数组', link: '/leetcode/array/merge-sorted-arrays' },
+                { text: '两数之和', link: '/algorithm/array/two-sum' },
+                { text: '最大子序列和', link: '/algorithm/array/maximum-subarray-sum' },
+                { text: '最长递增子序列', link: '/algorithm/array/longest-increasing-subsequence' },
+                { text: '数组中的第 K 个最大元素', link: '/algorithm/array/kth-largest-element' },
+                { text: '三数之和', link: '/algorithm/array/three-sum' },
+                { text: '最大子数组和', link: '/algorithm/array/maximum-subarray' },
+                { text: '全排列', link: '/algorithm/array/permutations' },
+                { text: '合并两个有序数组', link: '/algorithm/array/merge-sorted-arrays' },
                 {
                   text: '一维数组',
+                  collapsed: true,
                   items: [
-                    { text: '最大子数组和', link: '/leetcode/array/1d/maximum-subarray' },
+                    { text: '最长上升子序列', link: '/algorithm/array/1d/longest-increasing-subsequence' },
                   ]
                 },
                 {
                   text: '二维数组',
+                  collapsed: true,
                   items: [
-                    { text: '搜索二维矩阵', link: '/leetcode/array/2d/search-2d-matrix' },
-                    { text: '全排列', link: '/leetcode/array/2d/permutations' },
-                    { text: '旋转矩阵', link: '/leetcode/array/2d/rotate-matrix' },
-                    { text: '螺旋矩阵', link: '/leetcode/array/2d/spiral-matrix' },
+                    { text: '岛屿数量', link: '/algorithm/array/2d/number-of-islands' },
+                    { text: '全排列', link: '/algorithm/array/2d/permutations' },
+                    { text: '旋转矩阵', link: '/algorithm/array/2d/rotate-matrix' },
+                    { text: '螺旋矩阵', link: '/algorithm/array/2d/spiral-matrix' },
                   ]
                 }
               ]
             },
             {
-              text: '查找',
+              text: '链表',
+              collapsed: true,
               items: [
-                { text: '二分查找', link: '/leetcode/search/binary-search' },
+                { text: '反转链表', link: '/algorithm/linked-list/reverse-list' },
+                { text: 'K个一组翻转链表', link: '/algorithm/linked-list/reverse-k-group' },
+                { text: '合并两个有序链表', link: '/algorithm/linked-list/merge-two-lists' },
+                { text: '反转链表 II', link: '/algorithm/linked-list/reverse-list-ii' },
+                { text: '环形链表', link: '/algorithm/linked-list/linked-list-cycle' },
+              ]
+            },
+            {
+              text: '二叉树',
+              collapsed: true,
+              items: [
+                { text: '二叉树详解', link: '/algorithm/binary-tree/binary-tree-guide' },
+                { text: '二叉树的层序遍历', link: '/algorithm/binary-tree/level-order-traversal' },
+                { text: '二叉树的中序遍历', link: '/algorithm/binary-tree/inorder-traversal' },
+                { text: '二叉树的最近公共祖先', link: '/algorithm/binary-tree/lowest-common-ancestor' },
+                { text: '二叉树的层序遍历详解', link: '/algorithm/binary-tree/level-order-traversal-detail' },
+              ]
+            },
+            {
+              text: '动态规划',
+              collapsed: true,
+              items: [
+                { text: '动态规划题单', link: '/algorithm/dynamic-programming/problems' },
+              ]
+            },
+            {
+              text: '前缀和',
+              collapsed: true,
+              items: [
+                { text: '前缀和', link: '/algorithm/prefix-sum/prefix-sum' },
+                { text: '买卖股票的最佳时机', link: '/algorithm/prefix-sum/best-time-to-buy-sell-stock' },
               ]
             },
             {
               text: '栈',
+              collapsed: true,
               items: [
-                { text: '有效的括号', link: '/leetcode/stack/valid-parentheses' },
+                { text: '有效的括号', link: '/algorithm/stack/valid-parentheses' },
               ]
             },
             {
-              text: '链表',
+              text: '多线程',
+              collapsed: true,
               items: [
-                { text: '反转链表', link: '/leetcode/linked-list/reverse-list' },
-                { text: 'K个一组翻转链表', link: '/leetcode/linked-list/reverse-k-group' },
-                { text: '合并两个有序链表', link: '/leetcode/linked-list/merge-two-lists' },
-                { text: '反转链表ii', link: '/leetcode/linked-list/reverse-list-ii' },
-                { text: '删除链表', link: '/leetcode/linked-list/delete-node' },
+                { text: '2个线程循环打印0~100', link: '/algorithm/multithreading/two-threads-print' },
               ]
             },
             {
-              text: '滑动窗口',
+              text: '限流算法',
+              collapsed: true,
               items: [
-                { text: '滑动窗口', link: '/leetcode/sliding-window/sliding-window' },
-                { text: '无重复字符的最长子串', link: '/leetcode/sliding-window/longest-substring-without-repeating' },
+                { text: '滑动窗口', link: '/algorithm/rate-limiting/sliding-window' },
+                { text: '基于数量的滑动窗口', link: '/algorithm/rate-limiting/count-based-sliding-window' },
               ]
             }
           ]
