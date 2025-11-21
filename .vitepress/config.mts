@@ -28,37 +28,6 @@ export default withMermaid(defineConfig({
   },
 
   rewrites: {
-    // === docs 目录通配符规则 ===
-    // 将所有 docs/ 子目录路径映射到根路径
-    'docs/htmlcssjs/:rest*': 'htmlcssjs/:rest*',
-    'docs/ai/codeagent/:rest*': 'ai/codeagent/:rest*',
-    'docs/ai/mcp/:rest*': 'ai/mcp/:rest*',
-    'docs/ai/dify/:rest*': 'ai/dify/:rest*',
-    'docs/ai/ollma/:rest*': 'ai/ollma/:rest*',
-    'docs/ai/prompts/:rest*': 'ai/prompts/:rest*',
-    'docs/leetcode/:rest*': 'leetcode/:rest*',
-    'docs/JWT/:rest*': 'JWT/:rest*',
-    'docs/swift/:rest*': 'swift/:rest*',
-    'docs/blockchain/:rest*': 'blockchain/:rest*',
-    'docs/docker/:rest*': 'docker/:rest*',
-    'docs/microservice/:rest*': 'microservice/:rest*',
-    'docs/mybatis/:rest*': 'mybatis/:rest*',
-    'docs/scheduler/:rest*': 'scheduler/:rest*',
-    'docs/systemdesign/:rest*': 'systemdesign/:rest*',
-
-    // === docs 目录特殊规则 ===
-    // MySQL
-    'docs/database/mysql/提示词.md': 'docs/database/mysql/prompts.md',
-    // Kafka
-    'docs/kafka/00.提示词.md': 'docs/kafka/00.prompts.md',
-    // TailwindCSS
-    'docs/htmlcssjs/TailwindCSS/00提示词.md': 'htmlcssjs/TailwindCSS/00prompts.md',
-    // Redis
-    'docs/database/redis/数据结构/:page': 'docs/database/redis/data-structures/:page',
-    // 区块链
-    'docs/区块链/:dir/:page': 'blockchain/:dir/:page',
-    // AI 提示词
-    'docs/ai/提示词/:dir/:page': 'ai/prompts/:dir/:page',
 
     // === 03.工具 目录 ===
     // Git
@@ -290,7 +259,7 @@ export default withMermaid(defineConfig({
     '05.开发语言及框架/01.Java/06.JWT/JWT常见问题与故障排除.md': 'java/jwt-troubleshooting.md',
     '05.开发语言及框架/01.Java/06.JWT/使用了JWT之后还需要auth2吗.md': 'java/jwt-oauth2.md',
     // MyBatis
-    '05.开发语言及框架/01.Java/07.MyBatis/first.md': 'java/mybatis-interceptor.md',
+    '05.开发语言及框架/01.Java/07.MyBatis/01.MyBatis Interceptor扩展.md': 'mybatis/mybatis-interceptor.md',
 
     // === SpringCloud ===
     // Gateway
@@ -423,7 +392,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'Java', link: '/java/hashmap' },
           { text: 'Spring', link: '/spring/bean-loading' },
-          { text: 'MyBatis', link: '/java/mybatis-interceptor' },
+          { text: 'MyBatis', link: '/mybatis/mybatis-interceptor' },
         ]
       },
       {
@@ -702,13 +671,6 @@ export default withMermaid(defineConfig({
             { text: 'JWT实战应用', link: '/java/jwt-practice' },
             { text: 'JWT常见问题', link: '/java/jwt-troubleshooting' },
             { text: 'JWT与OAuth2', link: '/java/jwt-oauth2' },
-          ]
-        },
-        {
-          text: 'MyBatis',
-          collapsed: false,
-          items: [
-            { text: 'MyBatis Interceptor扩展', link: '/java/mybatis-interceptor' },
           ]
         }
       ],
@@ -1098,7 +1060,7 @@ export default withMermaid(defineConfig({
           text: 'MyBatis',
           collapsed: false,
           items: [
-            { text: 'first', link: '/mybatis/first' },
+            { text: 'MyBatis Interceptor扩展', link: '/mybatis/mybatis-interceptor' },
           ]
         }
       ],
