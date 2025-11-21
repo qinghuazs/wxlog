@@ -38,7 +38,9 @@ export default withMermaid(defineConfig({
     '03.工具/02.Git/05.代码提交规范.md': 'git/commit.md',
     // Docker
     '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
-    
+    //arthas
+    '03.工具/04.Arthas/01.Arthas在线热部署.md': 'arthas/retransform.md',
+    '03.工具/04.Arthas/02.Arthas常用命令.md': 'arthas/commands.md',
 
     // === 04.中间件 目录 ===
     // MySQL
@@ -443,6 +445,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'Docker', link: '/docker/centos-install' },
           { text: 'Git', link: '/git/remote' },
+          { text: 'Arthas', link: '/arthas/retransform' },
         ]
       },
       {
@@ -1024,6 +1027,16 @@ export default withMermaid(defineConfig({
           collapsed: false,
           items: [
             { text: 'CentOS安装Docker', link: '/docker/centos-install' }
+          ]
+        }
+      ],
+      '/arthas/': [
+        {
+          text: 'Arthas',
+          collapsed: false,
+          items: [
+            { text: 'Arthas在线热部署', link: '/arthas/retransform' },
+            { text: 'Arthas常用命令', link: '/arthas/commands' },
           ]
         }
       ],
