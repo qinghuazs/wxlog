@@ -343,17 +343,45 @@ export default withMermaid(defineConfig({
     // VuePress
     'htmlcssjs/vuepress/主题开发与发布流程.md': 'htmlcssjs/vuepress/theme-development-publishing.md',
 
-    // === blockchain 目录 ===
-    'blockchain/基础知识/00.比特币知识学习路线路.md': 'blockchain/basics/bitcoin-learning-roadmap.md',
-    'blockchain/基础知识/01.比特币系统中用到的密码学原理.md': 'blockchain/basics/bitcoin-cryptography.md',
-    'blockchain/基础知识/02.比特币系统中用到的数据结构.md': 'blockchain/basics/bitcoin-data-structures.md',
-    'blockchain/基础知识/03.比特币协议栈.md': 'blockchain/basics/bitcoin-protocol-stack.md',
-    'blockchain/基础知识/04.比特币挖矿原理.md': 'blockchain/basics/bitcoin-mining.md',
-    'blockchain/基础知识/05.比特币白皮书精华解读.md': 'blockchain/basics/bitcoin-whitepaper.md',
-    'blockchain/基础知识/06.比特币网络协议详解.md': 'blockchain/basics/bitcoin-network-protocol.md',
-    'blockchain/基础知识/07.比特币钱包地址实现.md': 'blockchain/basics/bitcoin-wallet-address.md',
-    'blockchain/基础知识/08.共识机制原理对比.md': 'blockchain/basics/consensus-mechanisms.md',
-    'blockchain/基础知识/09.比特币脚本编程语言.md': 'blockchain/basics/bitcoin-script.md',
+    // === 07.区块链 目录 ===
+    '07.区块链/01.基础知识/00.比特币知识学习路线路.md': 'blockchain/bitcoin-learning-roadmap.md',
+    '07.区块链/01.基础知识/01.比特币系统用到的密码学原理.md': 'blockchain/bitcoin-cryptography.md',
+    '07.区块链/01.基础知识/02.比特币系统用到的数据结构.md': 'blockchain/bitcoin-data-structures.md',
+    '07.区块链/01.基础知识/03.比特币交易详解.md': 'blockchain/bitcoin-transactions.md',
+    '07.区块链/01.基础知识/04.比特币挖矿原理.md': 'blockchain/bitcoin-mining.md',
+    '07.区块链/01.基础知识/05.比特币白皮书深度解读.md': 'blockchain/bitcoin-whitepaper.md',
+    '07.区块链/01.基础知识/06.比特币网络协议详解.md': 'blockchain/bitcoin-network-protocol.md',
+    '07.区块链/01.基础知识/07.比特币钱包技术实现.md': 'blockchain/bitcoin-wallet.md',
+    '07.区块链/01.基础知识/08.闪电网络原理详解.md': 'blockchain/lightning-network.md',
+    '07.区块链/01.基础知识/09.比特币脚本语言详解.md': 'blockchain/bitcoin-script.md',
+    '07.区块链/01.基础知识/10.比特币基础概念入门.md': 'blockchain/bitcoin-basics.md',
+    '07.区块链/01.基础知识/11.比特币生态系统详解.md': 'blockchain/bitcoin-ecosystem.md',
+    '07.区块链/01.基础知识/12.比特币共识机制详解.md': 'blockchain/bitcoin-consensus.md',
+    '07.区块链/01.基础知识/13.比特币经济模型与激励机制.md': 'blockchain/bitcoin-economics.md',
+    '07.区块链/01.基础知识/14.比特币安全机制.md': 'blockchain/bitcoin-security.md',
+    '07.区块链/01.基础知识/15.比特币开发环境搭建.md': 'blockchain/bitcoin-dev-setup.md',
+    '07.区块链/01.基础知识/16.比特币交易构建与广播.md': 'blockchain/bitcoin-tx-broadcast.md',
+    '07.区块链/01.基础知识/17.比特币SPV轻节点实现.md': 'blockchain/bitcoin-spv.md',
+    '07.区块链/01.基础知识/18.比特币改进提案(BIPs)详解.md': 'blockchain/bitcoin-bips.md',
+    '07.区块链/01.基础知识/19.比特币隐私技术.md': 'blockchain/bitcoin-privacy.md',
+    '07.区块链/01.基础知识/20.比特币扩展方案.md': 'blockchain/bitcoin-scaling.md',
+    '07.区块链/01.基础知识/21.比特币智能合约.md': 'blockchain/bitcoin-smart-contracts.md',
+    '07.区块链/01.基础知识/22.比特币节点运维实战.md': 'blockchain/bitcoin-node-ops.md',
+    '07.区块链/01.基础知识/23.比特币测试与调试技巧.md': 'blockchain/bitcoin-testing.md',
+    '07.区块链/01.基础知识/24.比特币分叉详解.md': 'blockchain/bitcoin-forks.md',
+    '07.区块链/01.基础知识/25.比特币性能优化.md': 'blockchain/bitcoin-performance.md',
+    '07.区块链/01.基础知识/26.比特币支付集成实战.md': 'blockchain/bitcoin-payment-integration.md',
+    '07.区块链/01.基础知识/27.比特币多签钱包开发.md': 'blockchain/bitcoin-multisig.md',
+    '07.区块链/01.基础知识/28.比特币攻击案例分析.md': 'blockchain/bitcoin-attacks.md',
+    '07.区块链/01.基础知识/29.比特币冷钱包方案.md': 'blockchain/bitcoin-cold-wallet.md',
+    '07.区块链/01.基础知识/30.比特币二层生态全景.md': 'blockchain/bitcoin-layer2.md',
+    '07.区块链/01.基础知识/31.比特币与DeFi.md': 'blockchain/bitcoin-defi.md',
+    '07.区块链/01.基础知识/32.比特币Taproot升级详解.md': 'blockchain/bitcoin-taproot.md',
+    '07.区块链/01.基础知识/33.比特币矿池协议.md': 'blockchain/bitcoin-mining-pool.md',
+    '07.区块链/01.基础知识/34.比特币监管合规实践.md': 'blockchain/bitcoin-compliance.md',
+    '07.区块链/01.基础知识/35.比特币跨链技术.md': 'blockchain/bitcoin-crosschain.md',
+    '07.区块链/01.基础知识/36.比特币时间锁应用.md': 'blockchain/bitcoin-timelock.md',
+    '07.区块链/01.基础知识/37.比特币交易所架构设计.md': 'blockchain/bitcoin-exchange.md',
 
    
 
@@ -427,12 +455,7 @@ export default withMermaid(defineConfig({
           { text: 'Ollama', link: '/ai/ollma/installation' },
         ]
       },
-      {
-        text: '面试指南',
-        items: [
-          { text: '算法题', link: '/algorithm/classification' },
-        ]
-      },
+      
       {
         text: '系统设计',
         items: [
@@ -443,11 +466,23 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '区块链',
+        items: [
+          { text: '比特币', link: '/blockchain/bitcoin-learning-roadmap' },
+        ]
+      },
+      {
         text: '工具',
         items: [
           { text: 'Docker', link: '/docker/centos-install' },
           { text: 'Git', link: '/git/remote' },
           { text: 'Arthas', link: '/arthas/retransform' },
+        ]
+      },
+      {
+        text: '面试指南',
+        items: [
+          { text: '算法题', link: '/algorithm/classification' },
         ]
       },
       {
@@ -1012,20 +1047,84 @@ export default withMermaid(defineConfig({
           text: '区块链',
           collapsed: false,
           items: [
+            { text: '学习路线', link: '/blockchain/bitcoin-learning-roadmap' },
             {
-              text: '基础知识',
+              text: '核心原理',
+              collapsed: true,
               items: [
-                { text: '比特币知识学习路线路', link: '/blockchain/basics/bitcoin-learning-roadmap' },
-                { text: '比特币系统中用到的密码学原理', link: '/blockchain/basics/bitcoin-cryptography' },
-                { text: '比特币系统中用到的数据结构', link: '/blockchain/basics/bitcoin-data-structures' },
-                { text: '比特币协议栈', link: '/blockchain/basics/bitcoin-protocol-stack' },
-                { text: '比特币挖矿原理', link: '/blockchain/basics/bitcoin-mining' },
-                { text: '比特币白皮书精华解读', link: '/blockchain/basics/bitcoin-whitepaper' },
-                { text: '比特币网络协议详解', link: '/blockchain/basics/bitcoin-network-protocol' },
-                { text: '比特币钱包地址实现', link: '/blockchain/basics/bitcoin-wallet-address' },
-                { text: '共识机制原理对比', link: '/blockchain/basics/consensus-mechanisms' },
-                { text: '比特币脚本编程语言', link: '/blockchain/basics/bitcoin-script' },
-                // ... 更多区块链文章
+                { text: '密码学原理', link: '/blockchain/bitcoin-cryptography' },
+                { text: '数据结构', link: '/blockchain/bitcoin-data-structures' },
+                { text: '交易详解', link: '/blockchain/bitcoin-transactions' },
+                { text: '挖矿原理', link: '/blockchain/bitcoin-mining' },
+                { text: '共识机制', link: '/blockchain/bitcoin-consensus' },
+                { text: '网络协议', link: '/blockchain/bitcoin-network-protocol' },
+              ]
+            },
+            {
+              text: '入门指南',
+              collapsed: true,
+              items: [
+                { text: '基础概念入门', link: '/blockchain/bitcoin-basics' },
+                { text: '白皮书深度解读', link: '/blockchain/bitcoin-whitepaper' },
+                { text: '生态系统详解', link: '/blockchain/bitcoin-ecosystem' },
+                { text: '经济模型与激励', link: '/blockchain/bitcoin-economics' },
+              ]
+            },
+            {
+              text: '技术实现',
+              collapsed: true,
+              items: [
+                { text: '钱包技术实现', link: '/blockchain/bitcoin-wallet' },
+                { text: '脚本语言详解', link: '/blockchain/bitcoin-script' },
+                { text: 'SPV轻节点实现', link: '/blockchain/bitcoin-spv' },
+                { text: '交易构建与广播', link: '/blockchain/bitcoin-tx-broadcast' },
+                { text: '多签钱包开发', link: '/blockchain/bitcoin-multisig' },
+                { text: '时间锁应用', link: '/blockchain/bitcoin-timelock' },
+              ]
+            },
+            {
+              text: '开发实战',
+              collapsed: true,
+              items: [
+                { text: '开发环境搭建', link: '/blockchain/bitcoin-dev-setup' },
+                { text: '节点运维实战', link: '/blockchain/bitcoin-node-ops' },
+                { text: '测试与调试技巧', link: '/blockchain/bitcoin-testing' },
+                { text: '支付集成实战', link: '/blockchain/bitcoin-payment-integration' },
+                { text: '交易所架构设计', link: '/blockchain/bitcoin-exchange' },
+              ]
+            },
+            {
+              text: '扩展方案',
+              collapsed: true,
+              items: [
+                { text: '闪电网络原理', link: '/blockchain/lightning-network' },
+                { text: '扩展方案', link: '/blockchain/bitcoin-scaling' },
+                { text: '二层生态全景', link: '/blockchain/bitcoin-layer2' },
+                { text: 'Taproot升级详解', link: '/blockchain/bitcoin-taproot' },
+                { text: '智能合约', link: '/blockchain/bitcoin-smart-contracts' },
+                { text: '跨链技术', link: '/blockchain/bitcoin-crosschain' },
+                { text: '与DeFi', link: '/blockchain/bitcoin-defi' },
+              ]
+            },
+            {
+              text: '安全与合规',
+              collapsed: true,
+              items: [
+                { text: '安全机制', link: '/blockchain/bitcoin-security' },
+                { text: '隐私技术', link: '/blockchain/bitcoin-privacy' },
+                { text: '攻击案例分析', link: '/blockchain/bitcoin-attacks' },
+                { text: '冷钱包方案', link: '/blockchain/bitcoin-cold-wallet' },
+                { text: '监管合规实践', link: '/blockchain/bitcoin-compliance' },
+              ]
+            },
+            {
+              text: '进阶知识',
+              collapsed: true,
+              items: [
+                { text: 'BIPs改进提案', link: '/blockchain/bitcoin-bips' },
+                { text: '分叉详解', link: '/blockchain/bitcoin-forks' },
+                { text: '性能优化', link: '/blockchain/bitcoin-performance' },
+                { text: '矿池协议', link: '/blockchain/bitcoin-mining-pool' },
               ]
             }
           ]
