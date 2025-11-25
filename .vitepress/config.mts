@@ -399,6 +399,9 @@ export default withMermaid(defineConfig({
 
     // === systemdesign 目录 ===
     'systemdesign/企业内部事件中心设计.md': 'systemdesign/event-center-design.md',
+
+    // === 04.StableDiffusion 目录 ===
+    '04.StableDiffusion/00.学习路线图.md': '/ai-art-stablediffusion/roadmap.md',
   },
 
   // Markdown 配置
@@ -453,6 +456,7 @@ export default withMermaid(defineConfig({
           { text: 'MCP', link: '/ai/mcp/mcp-fundamentals' },
           { text: 'Dify', link: '/ai/dify/installation' },
           { text: 'Ollama', link: '/ai/ollma/installation' },
+          { text: 'StableDiffusion', link: '/ai-art-stablediffusion/roadmap' },
         ]
       },
       {
@@ -628,6 +632,14 @@ export default withMermaid(defineConfig({
           items: [
             { text: 'ollama安装', link: '/ai/ollma/installation' },
             { text: '模型调优', link: '/ai/ollma/model-tuning' },
+          ]
+        },
+         {
+          text: 'StableDiffusion',
+          collapsed: true,
+          items: [
+            { text: '学习路线图', link: '/ai-art-stablediffusion/roadmap' },
+            
           ]
         },
         {
