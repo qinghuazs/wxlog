@@ -1,37 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)",
-      "Bash(cp:*)",
-      "Bash(git add:*)",
-      "Bash(git push:*)",
-      "Bash(git commit:*)",
-      "Bash(git checkout:*)",
-      "Bash(do)",
-      "Bash(if [ -f \"$file\" ])",
-      "Bash(then)",
-      "Bash(echo:*)",
-      "Bash(fi)",
-      "Bash(done)",
-      "Bash(find:*)",
-      "Bash(npm run docs:dev:*)",
-      "Bash(package.json)",
-      "WebSearch",
-      "WebFetch(domain:mcp.harishgarg.com)",
-      "WebFetch(domain:www.npmjs.com)",
-      "mcp__open-websearch__search",
-      "mcp__vercel__list_teams",
-      "mcp__vercel__list_projects",
-      "mcp__vercel__deploy_to_vercel",
-      "Bash(kill:*)",
-      "mcp__vercel__web_fetch_vercel_url",
-      "mcp__vercel__list_deployments",
-      "mcp__vercel__get_deployment_build_logs",
-      "Bash(npm install:*)",
-      "Bash(npm run docs:build:*)",
-      "Bash(grep:*)",
-      "mcp__vercel__get_deployment",
-      "Bash(dir /b \"D:\\blogs\\wxlog\\docs\\ai\")"
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

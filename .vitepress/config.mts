@@ -401,7 +401,7 @@ export default withMermaid(defineConfig({
     'systemdesign/企业内部事件中心设计.md': 'systemdesign/event-center-design.md',
 
     // === 04.StableDiffusion 目录 ===
-    '04.StableDiffusion/00.学习路线图.md': '/ai/ai-art-stablediffusion/roadmap.md',
+    '01.AI/04.StableDiffusion/00.学习路线图.md': 'ai/ai-art-stablediffusion/roadmap.md',
   },
 
   // Markdown 配置
