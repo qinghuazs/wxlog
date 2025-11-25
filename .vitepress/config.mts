@@ -28,37 +28,6 @@ export default withMermaid(defineConfig({
   },
 
   rewrites: {
-    // === docs 目录通配符规则 ===
-    // 将所有 docs/ 子目录路径映射到根路径
-    'docs/htmlcssjs/:rest*': 'htmlcssjs/:rest*',
-    'docs/ai/codeagent/:rest*': 'ai/codeagent/:rest*',
-    'docs/ai/mcp/:rest*': 'ai/mcp/:rest*',
-    'docs/ai/dify/:rest*': 'ai/dify/:rest*',
-    'docs/ai/ollma/:rest*': 'ai/ollma/:rest*',
-    'docs/ai/prompts/:rest*': 'ai/prompts/:rest*',
-    'docs/leetcode/:rest*': 'leetcode/:rest*',
-    'docs/JWT/:rest*': 'JWT/:rest*',
-    'docs/swift/:rest*': 'swift/:rest*',
-    'docs/blockchain/:rest*': 'blockchain/:rest*',
-    'docs/docker/:rest*': 'docker/:rest*',
-    'docs/microservice/:rest*': 'microservice/:rest*',
-    'docs/mybatis/:rest*': 'mybatis/:rest*',
-    'docs/scheduler/:rest*': 'scheduler/:rest*',
-    'docs/systemdesign/:rest*': 'systemdesign/:rest*',
-
-    // === docs 目录特殊规则 ===
-    // MySQL
-    'docs/database/mysql/提示词.md': 'docs/database/mysql/prompts.md',
-    // Kafka
-    'docs/kafka/00.提示词.md': 'docs/kafka/00.prompts.md',
-    // TailwindCSS
-    'docs/htmlcssjs/TailwindCSS/00提示词.md': 'htmlcssjs/TailwindCSS/00prompts.md',
-    // Redis
-    'docs/database/redis/数据结构/:page': 'docs/database/redis/data-structures/:page',
-    // 区块链
-    'docs/区块链/:dir/:page': 'blockchain/:dir/:page',
-    // AI 提示词
-    'docs/ai/提示词/:dir/:page': 'ai/prompts/:dir/:page',
 
     // === 03.工具 目录 ===
     // Git
@@ -69,6 +38,9 @@ export default withMermaid(defineConfig({
     '03.工具/02.Git/05.代码提交规范.md': 'git/commit.md',
     // Docker
     '03.工具/03.Docker/01.CentOS安装Docker.md': 'docker/centos-install.md',
+    //arthas
+    '03.工具/04.Arthas/01.Arthas在线热部署.md': 'arthas/retransform.md',
+    '03.工具/04.Arthas/02.Arthas常用命令.md': 'arthas/commands.md',
 
     // === 04.中间件 目录 ===
     // MySQL
@@ -290,7 +262,7 @@ export default withMermaid(defineConfig({
     '05.开发语言及框架/01.Java/06.JWT/JWT常见问题与故障排除.md': 'java/jwt-troubleshooting.md',
     '05.开发语言及框架/01.Java/06.JWT/使用了JWT之后还需要auth2吗.md': 'java/jwt-oauth2.md',
     // MyBatis
-    '05.开发语言及框架/01.Java/07.MyBatis/first.md': 'java/mybatis-interceptor.md',
+    '05.开发语言及框架/01.Java/07.MyBatis/01.MyBatis Interceptor扩展.md': 'mybatis/mybatis-interceptor.md',
 
     // === SpringCloud ===
     // Gateway
@@ -313,51 +285,53 @@ export default withMermaid(defineConfig({
     'docs/spring/SpringCloud/负载均衡/01.Ribbon.md': 'spring/ribbon.md',
     'docs/spring/SpringCloud/负载均衡/02.Spring Cloud LoadBalancer.md': 'spring/loadbalancer.md',
 
-    // === LeetCode 目录 ===
-    // 二叉树
-    'leetcode/二叉树/01.二叉树的层序遍历.md': 'leetcode/binary-tree/level-order-traversal.md',
-    'leetcode/二叉树/02.二叉树的中序遍历.md': 'leetcode/binary-tree/inorder-traversal.md',
-    'leetcode/二叉树/03.二叉树的最近公共祖先.md': 'leetcode/binary-tree/lowest-common-ancestor.md',
-    'leetcode/二叉树/04.二叉树的层序遍历二.md': 'leetcode/binary-tree/level-order-traversal-ii.md',
-    'leetcode/二叉树/二叉树遍历.md': 'leetcode/binary-tree/tree-traversal.md',
-    // 前缀和
-    'leetcode/前缀和/01.前缀和.md': 'leetcode/prefix-sum/prefix-sum.md',
-    'leetcode/前缀和/02.买卖股票的最佳时机.md': 'leetcode/prefix-sum/best-time-to-buy-sell-stock.md',
-    // 动态规划
-    'leetcode/动态规划/01.动态规划题单.md': 'leetcode/dynamic-programming/problems.md',
-    // 多线程
-    'leetcode/多线程题目/01.2 两线程循环打印0~100.md': 'leetcode/multithreading/two-threads-print.md',
-    // 字符串
-    'leetcode/字符串/01.最长子字符串.md': 'leetcode/string/longest-substring.md',
-    'leetcode/字符串/02.滑动窗口技巧.md': 'leetcode/string/sliding-window.md',
-    // 数组
-    'leetcode/数组/01.合并区间.md': 'leetcode/array/merge-intervals.md',
-    'leetcode/数组/01.两数之和.md': 'leetcode/array/two-sum.md',
-    'leetcode/数组/02.搜索旋转排序数.md': 'leetcode/array/search-rotated-sorted-array.md',
-    'leetcode/数组/03.盛最多水的容器.md': 'leetcode/array/container-with-most-water.md',
-    'leetcode/数组/04.数组中的第 K 个最大元素.md': 'leetcode/array/kth-largest-element.md',
-    'leetcode/数组/05.三数之和.md': 'leetcode/array/three-sum.md',
-    'leetcode/数组/06.字母异位词.md': 'leetcode/array/anagrams.md',
-    'leetcode/数组/07.全排列.md': 'leetcode/array/permutations.md',
-    'leetcode/数组/08.合并两个有序数组.md': 'leetcode/array/merge-sorted-arrays.md',
-    'leetcode/数组/一维数组/01.最大子数组和.md': 'leetcode/array/1d/maximum-subarray.md',
-    'leetcode/数组/二维数组/01.搜索二维矩阵.md': 'leetcode/array/2d/search-2d-matrix.md',
-    'leetcode/数组/二维数组/02.全排列.md': 'leetcode/array/2d/permutations.md',
-    'leetcode/数组/二维数组/03.旋转矩阵.md': 'leetcode/array/2d/rotate-matrix.md',
-    'leetcode/数组/二维数组/04.螺旋矩阵.md': 'leetcode/array/2d/spiral-matrix.md',
+    // === 06.面试/01.算法题 目录 ===
+    // 算法分类
+    '06.面试/01.算法题/00.算法分类/算法分类.md': 'algorithm/classification.md',
+    // 排序
+    '06.面试/01.算法题/01.排序/01.快速排序.md': 'algorithm/sorting/quick-sort.md',
     // 查找
-    'leetcode/查找/01.二分查找.md': 'leetcode/search/binary-search.md',
-    // 栈
-    'leetcode/栈/01.有效的括号.md': 'leetcode/stack/valid-parentheses.md',
+    '06.面试/01.算法题/02.查找/01.二分查找.md': 'algorithm/search/binary-search.md',
+    // 数组
+    '06.面试/01.算法题/03.数组/01.两数之和.md': 'algorithm/array/two-sum.md',
+    '06.面试/01.算法题/03.数组/02.最大子序列和.md': 'algorithm/array/maximum-subarray-sum.md',
+    '06.面试/01.算法题/03.数组/03.最长递增子序列.md': 'algorithm/array/longest-increasing-subsequence.md',
+    '06.面试/01.算法题/03.数组/04.数组中的第 K 个最大元素.md': 'algorithm/array/kth-largest-element.md',
+    '06.面试/01.算法题/03.数组/05.三数之和.md': 'algorithm/array/three-sum.md',
+    '06.面试/01.算法题/03.数组/06.最大子数组和.md': 'algorithm/array/maximum-subarray.md',
+    '06.面试/01.算法题/03.数组/07.全排列.md': 'algorithm/array/permutations.md',
+    '06.面试/01.算法题/03.数组/08.合并两个有序数组.md': 'algorithm/array/merge-sorted-arrays.md',
+    // 数组 - 一维数组
+    '06.面试/01.算法题/03.数组/一维数组/01.最长上升子序列.md': 'algorithm/array/1d/longest-increasing-subsequence.md',
+    // 数组 - 二维数组
+    '06.面试/01.算法题/03.数组/二维数组/01.岛屿数量.md': 'algorithm/array/2d/number-of-islands.md',
+    '06.面试/01.算法题/03.数组/二维数组/02.全排列.md': 'algorithm/array/2d/permutations.md',
+    '06.面试/01.算法题/03.数组/二维数组/03.旋转矩阵.md': 'algorithm/array/2d/rotate-matrix.md',
+    '06.面试/01.算法题/03.数组/二维数组/04.螺旋矩阵.md': 'algorithm/array/2d/spiral-matrix.md',
     // 链表
-    'leetcode/链表/01.反转链表.md': 'leetcode/linked-list/reverse-list.md',
-    'leetcode/链表/02.K个一组翻转链表.md': 'leetcode/linked-list/reverse-k-group.md',
-    'leetcode/链表/03.合并两个有序链表.md': 'leetcode/linked-list/merge-two-lists.md',
-    'leetcode/链表/04.反转链表ii.md': 'leetcode/linked-list/reverse-list-ii.md',
-    'leetcode/链表/05.删除链表.md': 'leetcode/linked-list/delete-node.md',
-    // 滑动窗口
-    'leetcode/滑动窗口/01.滑动窗口.md': 'leetcode/sliding-window/sliding-window.md',
-    'leetcode/滑动窗口/02.无重复字符的最长子串.md': 'leetcode/sliding-window/longest-substring-without-repeating.md',
+    '06.面试/01.算法题/05.链表/01.反转链表.md': 'algorithm/linked-list/reverse-list.md',
+    '06.面试/01.算法题/05.链表/02.K个一组翻转链表.md': 'algorithm/linked-list/reverse-k-group.md',
+    '06.面试/01.算法题/05.链表/03.合并两个有序链表.md': 'algorithm/linked-list/merge-two-lists.md',
+    '06.面试/01.算法题/05.链表/04.反转链表ii.md': 'algorithm/linked-list/reverse-list-ii.md',
+    '06.面试/01.算法题/05.链表/05.环形链表.md': 'algorithm/linked-list/linked-list-cycle.md',
+    // 二叉树
+    '06.面试/01.算法题/06.二叉树/二叉树详解.md': 'algorithm/binary-tree/binary-tree-guide.md',
+    '06.面试/01.算法题/06.二叉树/01.二叉树的层序遍历.md': 'algorithm/binary-tree/level-order-traversal.md',
+    '06.面试/01.算法题/06.二叉树/02.二叉树的中序遍历.md': 'algorithm/binary-tree/inorder-traversal.md',
+    '06.面试/01.算法题/06.二叉树/03.二叉树的最近公共祖先.md': 'algorithm/binary-tree/lowest-common-ancestor.md',
+    '06.面试/01.算法题/06.二叉树/04.二叉树的层序遍历详解.md': 'algorithm/binary-tree/level-order-traversal-detail.md',
+    // 动态规划
+    '06.面试/01.算法题/07.动态规划/01.动态规划题单.md': 'algorithm/dynamic-programming/problems.md',
+    // 前缀和
+    '06.面试/01.算法题/08.前缀和/01.前缀和.md': 'algorithm/prefix-sum/prefix-sum.md',
+    '06.面试/01.算法题/08.前缀和/02.买卖股票的最好时机.md': 'algorithm/prefix-sum/best-time-to-buy-sell-stock.md',
+    // 栈
+    '06.面试/01.算法题/09.栈/01.有效的括号.md': 'algorithm/stack/valid-parentheses.md',
+    // 多线程
+    '06.面试/01.算法题/10.多线程题目/01.2 个线程循环打印0~100.md': 'algorithm/multithreading/two-threads-print.md',
+    // 限流算法
+    '06.面试/01.算法题/11.限流算法/01.滑动窗口.md': 'algorithm/rate-limiting/sliding-window.md',
+    '06.面试/01.算法题/11.限流算法/02.基于数量的滑动窗口.md': 'algorithm/rate-limiting/count-based-sliding-window.md',
 
     // === htmlcssjs 目录 ===
     // React
@@ -369,21 +343,47 @@ export default withMermaid(defineConfig({
     // VuePress
     'htmlcssjs/vuepress/主题开发与发布流程.md': 'htmlcssjs/vuepress/theme-development-publishing.md',
 
-    // === blockchain 目录 ===
-    'blockchain/基础知识/00.比特币知识学习路线路.md': 'blockchain/basics/bitcoin-learning-roadmap.md',
-    'blockchain/基础知识/01.比特币系统中用到的密码学原理.md': 'blockchain/basics/bitcoin-cryptography.md',
-    'blockchain/基础知识/02.比特币系统中用到的数据结构.md': 'blockchain/basics/bitcoin-data-structures.md',
-    'blockchain/基础知识/03.比特币协议栈.md': 'blockchain/basics/bitcoin-protocol-stack.md',
-    'blockchain/基础知识/04.比特币挖矿原理.md': 'blockchain/basics/bitcoin-mining.md',
-    'blockchain/基础知识/05.比特币白皮书精华解读.md': 'blockchain/basics/bitcoin-whitepaper.md',
-    'blockchain/基础知识/06.比特币网络协议详解.md': 'blockchain/basics/bitcoin-network-protocol.md',
-    'blockchain/基础知识/07.比特币钱包地址实现.md': 'blockchain/basics/bitcoin-wallet-address.md',
-    'blockchain/基础知识/08.共识机制原理对比.md': 'blockchain/basics/consensus-mechanisms.md',
-    'blockchain/基础知识/09.比特币脚本编程语言.md': 'blockchain/basics/bitcoin-script.md',
+    // === 07.区块链 目录 ===
+    '07.区块链/01.基础知识/00.比特币知识学习路线路.md': 'blockchain/bitcoin-learning-roadmap.md',
+    '07.区块链/01.基础知识/01.比特币系统用到的密码学原理.md': 'blockchain/bitcoin-cryptography.md',
+    '07.区块链/01.基础知识/02.比特币系统用到的数据结构.md': 'blockchain/bitcoin-data-structures.md',
+    '07.区块链/01.基础知识/03.比特币交易详解.md': 'blockchain/bitcoin-transactions.md',
+    '07.区块链/01.基础知识/04.比特币挖矿原理.md': 'blockchain/bitcoin-mining.md',
+    '07.区块链/01.基础知识/05.比特币白皮书深度解读.md': 'blockchain/bitcoin-whitepaper.md',
+    '07.区块链/01.基础知识/06.比特币网络协议详解.md': 'blockchain/bitcoin-network-protocol.md',
+    '07.区块链/01.基础知识/07.比特币钱包技术实现.md': 'blockchain/bitcoin-wallet.md',
+    '07.区块链/01.基础知识/08.闪电网络原理详解.md': 'blockchain/lightning-network.md',
+    '07.区块链/01.基础知识/09.比特币脚本语言详解.md': 'blockchain/bitcoin-script.md',
+    '07.区块链/01.基础知识/10.比特币基础概念入门.md': 'blockchain/bitcoin-basics.md',
+    '07.区块链/01.基础知识/11.比特币生态系统详解.md': 'blockchain/bitcoin-ecosystem.md',
+    '07.区块链/01.基础知识/12.比特币共识机制详解.md': 'blockchain/bitcoin-consensus.md',
+    '07.区块链/01.基础知识/13.比特币经济模型与激励机制.md': 'blockchain/bitcoin-economics.md',
+    '07.区块链/01.基础知识/14.比特币安全机制.md': 'blockchain/bitcoin-security.md',
+    '07.区块链/01.基础知识/15.比特币开发环境搭建.md': 'blockchain/bitcoin-dev-setup.md',
+    '07.区块链/01.基础知识/16.比特币交易构建与广播.md': 'blockchain/bitcoin-tx-broadcast.md',
+    '07.区块链/01.基础知识/17.比特币SPV轻节点实现.md': 'blockchain/bitcoin-spv.md',
+    '07.区块链/01.基础知识/18.比特币改进提案(BIPs)详解.md': 'blockchain/bitcoin-bips.md',
+    '07.区块链/01.基础知识/19.比特币隐私技术.md': 'blockchain/bitcoin-privacy.md',
+    '07.区块链/01.基础知识/20.比特币扩展方案.md': 'blockchain/bitcoin-scaling.md',
+    '07.区块链/01.基础知识/21.比特币智能合约.md': 'blockchain/bitcoin-smart-contracts.md',
+    '07.区块链/01.基础知识/22.比特币节点运维实战.md': 'blockchain/bitcoin-node-ops.md',
+    '07.区块链/01.基础知识/23.比特币测试与调试技巧.md': 'blockchain/bitcoin-testing.md',
+    '07.区块链/01.基础知识/24.比特币分叉详解.md': 'blockchain/bitcoin-forks.md',
+    '07.区块链/01.基础知识/25.比特币性能优化.md': 'blockchain/bitcoin-performance.md',
+    '07.区块链/01.基础知识/26.比特币支付集成实战.md': 'blockchain/bitcoin-payment-integration.md',
+    '07.区块链/01.基础知识/27.比特币多签钱包开发.md': 'blockchain/bitcoin-multisig.md',
+    '07.区块链/01.基础知识/28.比特币攻击案例分析.md': 'blockchain/bitcoin-attacks.md',
+    '07.区块链/01.基础知识/29.比特币冷钱包方案.md': 'blockchain/bitcoin-cold-wallet.md',
+    '07.区块链/01.基础知识/30.比特币二层生态全景.md': 'blockchain/bitcoin-layer2.md',
+    '07.区块链/01.基础知识/31.比特币与DeFi.md': 'blockchain/bitcoin-defi.md',
+    '07.区块链/01.基础知识/32.比特币Taproot升级详解.md': 'blockchain/bitcoin-taproot.md',
+    '07.区块链/01.基础知识/33.比特币矿池协议.md': 'blockchain/bitcoin-mining-pool.md',
+    '07.区块链/01.基础知识/34.比特币监管合规实践.md': 'blockchain/bitcoin-compliance.md',
+    '07.区块链/01.基础知识/35.比特币跨链技术.md': 'blockchain/bitcoin-crosschain.md',
+    '07.区块链/01.基础知识/36.比特币时间锁应用.md': 'blockchain/bitcoin-timelock.md',
+    '07.区块链/01.基础知识/37.比特币交易所架构设计.md': 'blockchain/bitcoin-exchange.md',
 
-    // === docker 目录 ===
-    'docker/01.CentOS安装Docker.md': 'docker/centos-install-docker.md',
-    'docker/02.Docker安装Redis.md': 'docker/install-redis.md',
+   
 
     // === JWT 目录 ===
     'JWT/JWT基础知识.md': 'JWT/jwt-basics.md',
@@ -426,7 +426,7 @@ export default withMermaid(defineConfig({
         items: [
           { text: 'Java', link: '/java/hashmap' },
           { text: 'Spring', link: '/spring/bean-loading' },
-          { text: 'MyBatis', link: '/java/mybatis-interceptor' },
+          { text: 'MyBatis', link: '/mybatis/mybatis-interceptor' },
         ]
       },
       {
@@ -459,12 +459,7 @@ export default withMermaid(defineConfig({
           { text: 'StableDiffusion', link: '/ai-art-stablediffusion/roadmap' },
         ]
       },
-      {
-        text: '算法',
-        items: [
-          { text: 'LeetCode', link: '/leetcode/first' },
-        ]
-      },
+      
       {
         text: '系统设计',
         items: [
@@ -475,10 +470,23 @@ export default withMermaid(defineConfig({
         ]
       },
       {
+        text: '区块链',
+        items: [
+          { text: '比特币', link: '/blockchain/bitcoin-learning-roadmap' },
+        ]
+      },
+      {
         text: '工具',
         items: [
           { text: 'Docker', link: '/docker/centos-install' },
           { text: 'Git', link: '/git/remote' },
+          { text: 'Arthas', link: '/arthas/retransform' },
+        ]
+      },
+      {
+        text: '面试指南',
+        items: [
+          { text: '算法题', link: '/algorithm/classification' },
         ]
       },
       {
@@ -489,7 +497,6 @@ export default withMermaid(defineConfig({
           { text: '小程序', link: '/miniprogram/monetization.html' },
           { text: '我的经历', link: '/my-experience/management.html' },
           { text: '我的玩具', link: '/my-projects/free-apps.html' },
-          { text: '面试', link: '/interview/self-introduction.html' },
         ]
       }
     ],
@@ -715,13 +722,6 @@ export default withMermaid(defineConfig({
             { text: 'JWT常见问题', link: '/java/jwt-troubleshooting' },
             { text: 'JWT与OAuth2', link: '/java/jwt-oauth2' },
           ]
-        },
-        {
-          text: 'MyBatis',
-          collapsed: false,
-          items: [
-            { text: 'MyBatis Interceptor扩展', link: '/java/mybatis-interceptor' },
-          ]
         }
       ],
 
@@ -840,104 +840,114 @@ export default withMermaid(defineConfig({
         }
       ],
 
-      '/leetcode/': [
+      '/algorithm/': [
         {
-          text: 'LeetCode',
+          text: '算法题',
           collapsed: false,
           items: [
-            { text: 'first', link: '/leetcode/first' },
+            { text: '算法分类', link: '/algorithm/classification' },
             {
-              text: '二叉树',
+              text: '排序',
+              collapsed: true,
               items: [
-                { text: '二叉树的层序遍历', link: '/leetcode/binary-tree/level-order-traversal' },
-                { text: '二叉树的中序遍历', link: '/leetcode/binary-tree/inorder-traversal' },
-                { text: '二叉树的最近公共祖先', link: '/leetcode/binary-tree/lowest-common-ancestor' },
-                { text: '二叉树的层序遍历二', link: '/leetcode/binary-tree/level-order-traversal-ii' },
-                { text: '二叉树遍历', link: '/leetcode/binary-tree/tree-traversal' },
+                { text: '快速排序', link: '/algorithm/sorting/quick-sort' },
               ]
             },
             {
-              text: '前缀和',
+              text: '查找',
+              collapsed: true,
               items: [
-                { text: '前缀和', link: '/leetcode/prefix-sum/prefix-sum' },
-                { text: '买卖股票的最佳时机', link: '/leetcode/prefix-sum/best-time-to-buy-sell-stock' },
-              ]
-            },
-            {
-              text: '动态规划',
-              items: [
-                { text: '动态规划题单', link: '/leetcode/dynamic-programming/problems' },
-              ]
-            },
-            {
-              text: '多线程题目',
-              items: [
-                { text: '2 两线程循环打印0~100', link: '/leetcode/multithreading/two-threads-print' },
-              ]
-            },
-            {
-              text: '字符串',
-              items: [
-                { text: '最长子字符串', link: '/leetcode/string/longest-substring' },
-                { text: '滑动窗口技巧', link: '/leetcode/string/sliding-window' },
+                { text: '二分查找', link: '/algorithm/search/binary-search' },
               ]
             },
             {
               text: '数组',
+              collapsed: true,
               items: [
-                { text: '合并区间', link: '/leetcode/array/merge-intervals' },
-                { text: '两数之和', link: '/leetcode/array/two-sum' },
-                { text: '搜索旋转排序数', link: '/leetcode/array/search-rotated-sorted-array' },
-                { text: '盛最多水的容器', link: '/leetcode/array/container-with-most-water' },
-                { text: '数组中的第 K 个最大元素', link: '/leetcode/array/kth-largest-element' },
-                { text: '三数之和', link: '/leetcode/array/three-sum' },
-                { text: '字母异位词', link: '/leetcode/array/anagrams' },
-                { text: '全排列', link: '/leetcode/array/permutations' },
-                { text: '合并两个有序数组', link: '/leetcode/array/merge-sorted-arrays' },
+                { text: '两数之和', link: '/algorithm/array/two-sum' },
+                { text: '最大子序列和', link: '/algorithm/array/maximum-subarray-sum' },
+                { text: '最长递增子序列', link: '/algorithm/array/longest-increasing-subsequence' },
+                { text: '数组中的第 K 个最大元素', link: '/algorithm/array/kth-largest-element' },
+                { text: '三数之和', link: '/algorithm/array/three-sum' },
+                { text: '最大子数组和', link: '/algorithm/array/maximum-subarray' },
+                { text: '全排列', link: '/algorithm/array/permutations' },
+                { text: '合并两个有序数组', link: '/algorithm/array/merge-sorted-arrays' },
                 {
                   text: '一维数组',
+                  collapsed: true,
                   items: [
-                    { text: '最大子数组和', link: '/leetcode/array/1d/maximum-subarray' },
+                    { text: '最长上升子序列', link: '/algorithm/array/1d/longest-increasing-subsequence' },
                   ]
                 },
                 {
                   text: '二维数组',
+                  collapsed: true,
                   items: [
-                    { text: '搜索二维矩阵', link: '/leetcode/array/2d/search-2d-matrix' },
-                    { text: '全排列', link: '/leetcode/array/2d/permutations' },
-                    { text: '旋转矩阵', link: '/leetcode/array/2d/rotate-matrix' },
-                    { text: '螺旋矩阵', link: '/leetcode/array/2d/spiral-matrix' },
+                    { text: '岛屿数量', link: '/algorithm/array/2d/number-of-islands' },
+                    { text: '全排列', link: '/algorithm/array/2d/permutations' },
+                    { text: '旋转矩阵', link: '/algorithm/array/2d/rotate-matrix' },
+                    { text: '螺旋矩阵', link: '/algorithm/array/2d/spiral-matrix' },
                   ]
                 }
               ]
             },
             {
-              text: '查找',
+              text: '链表',
+              collapsed: true,
               items: [
-                { text: '二分查找', link: '/leetcode/search/binary-search' },
+                { text: '反转链表', link: '/algorithm/linked-list/reverse-list' },
+                { text: 'K个一组翻转链表', link: '/algorithm/linked-list/reverse-k-group' },
+                { text: '合并两个有序链表', link: '/algorithm/linked-list/merge-two-lists' },
+                { text: '反转链表 II', link: '/algorithm/linked-list/reverse-list-ii' },
+                { text: '环形链表', link: '/algorithm/linked-list/linked-list-cycle' },
+              ]
+            },
+            {
+              text: '二叉树',
+              collapsed: true,
+              items: [
+                { text: '二叉树详解', link: '/algorithm/binary-tree/binary-tree-guide' },
+                { text: '二叉树的层序遍历', link: '/algorithm/binary-tree/level-order-traversal' },
+                { text: '二叉树的中序遍历', link: '/algorithm/binary-tree/inorder-traversal' },
+                { text: '二叉树的最近公共祖先', link: '/algorithm/binary-tree/lowest-common-ancestor' },
+                { text: '二叉树的层序遍历详解', link: '/algorithm/binary-tree/level-order-traversal-detail' },
+              ]
+            },
+            {
+              text: '动态规划',
+              collapsed: true,
+              items: [
+                { text: '动态规划题单', link: '/algorithm/dynamic-programming/problems' },
+              ]
+            },
+            {
+              text: '前缀和',
+              collapsed: true,
+              items: [
+                { text: '前缀和', link: '/algorithm/prefix-sum/prefix-sum' },
+                { text: '买卖股票的最佳时机', link: '/algorithm/prefix-sum/best-time-to-buy-sell-stock' },
               ]
             },
             {
               text: '栈',
+              collapsed: true,
               items: [
-                { text: '有效的括号', link: '/leetcode/stack/valid-parentheses' },
+                { text: '有效的括号', link: '/algorithm/stack/valid-parentheses' },
               ]
             },
             {
-              text: '链表',
+              text: '多线程',
+              collapsed: true,
               items: [
-                { text: '反转链表', link: '/leetcode/linked-list/reverse-list' },
-                { text: 'K个一组翻转链表', link: '/leetcode/linked-list/reverse-k-group' },
-                { text: '合并两个有序链表', link: '/leetcode/linked-list/merge-two-lists' },
-                { text: '反转链表ii', link: '/leetcode/linked-list/reverse-list-ii' },
-                { text: '删除链表', link: '/leetcode/linked-list/delete-node' },
+                { text: '2个线程循环打印0~100', link: '/algorithm/multithreading/two-threads-print' },
               ]
             },
             {
-              text: '滑动窗口',
+              text: '限流算法',
+              collapsed: true,
               items: [
-                { text: '滑动窗口', link: '/leetcode/sliding-window/sliding-window' },
-                { text: '无重复字符的最长子串', link: '/leetcode/sliding-window/longest-substring-without-repeating' },
+                { text: '滑动窗口', link: '/algorithm/rate-limiting/sliding-window' },
+                { text: '基于数量的滑动窗口', link: '/algorithm/rate-limiting/count-based-sliding-window' },
               ]
             }
           ]
@@ -1049,20 +1059,84 @@ export default withMermaid(defineConfig({
           text: '区块链',
           collapsed: false,
           items: [
+            { text: '学习路线', link: '/blockchain/bitcoin-learning-roadmap' },
             {
-              text: '基础知识',
+              text: '核心原理',
+              collapsed: true,
               items: [
-                { text: '比特币知识学习路线路', link: '/blockchain/basics/bitcoin-learning-roadmap' },
-                { text: '比特币系统中用到的密码学原理', link: '/blockchain/basics/bitcoin-cryptography' },
-                { text: '比特币系统中用到的数据结构', link: '/blockchain/basics/bitcoin-data-structures' },
-                { text: '比特币协议栈', link: '/blockchain/basics/bitcoin-protocol-stack' },
-                { text: '比特币挖矿原理', link: '/blockchain/basics/bitcoin-mining' },
-                { text: '比特币白皮书精华解读', link: '/blockchain/basics/bitcoin-whitepaper' },
-                { text: '比特币网络协议详解', link: '/blockchain/basics/bitcoin-network-protocol' },
-                { text: '比特币钱包地址实现', link: '/blockchain/basics/bitcoin-wallet-address' },
-                { text: '共识机制原理对比', link: '/blockchain/basics/consensus-mechanisms' },
-                { text: '比特币脚本编程语言', link: '/blockchain/basics/bitcoin-script' },
-                // ... 更多区块链文章
+                { text: '密码学原理', link: '/blockchain/bitcoin-cryptography' },
+                { text: '数据结构', link: '/blockchain/bitcoin-data-structures' },
+                { text: '交易详解', link: '/blockchain/bitcoin-transactions' },
+                { text: '挖矿原理', link: '/blockchain/bitcoin-mining' },
+                { text: '共识机制', link: '/blockchain/bitcoin-consensus' },
+                { text: '网络协议', link: '/blockchain/bitcoin-network-protocol' },
+              ]
+            },
+            {
+              text: '入门指南',
+              collapsed: true,
+              items: [
+                { text: '基础概念入门', link: '/blockchain/bitcoin-basics' },
+                { text: '白皮书深度解读', link: '/blockchain/bitcoin-whitepaper' },
+                { text: '生态系统详解', link: '/blockchain/bitcoin-ecosystem' },
+                { text: '经济模型与激励', link: '/blockchain/bitcoin-economics' },
+              ]
+            },
+            {
+              text: '技术实现',
+              collapsed: true,
+              items: [
+                { text: '钱包技术实现', link: '/blockchain/bitcoin-wallet' },
+                { text: '脚本语言详解', link: '/blockchain/bitcoin-script' },
+                { text: 'SPV轻节点实现', link: '/blockchain/bitcoin-spv' },
+                { text: '交易构建与广播', link: '/blockchain/bitcoin-tx-broadcast' },
+                { text: '多签钱包开发', link: '/blockchain/bitcoin-multisig' },
+                { text: '时间锁应用', link: '/blockchain/bitcoin-timelock' },
+              ]
+            },
+            {
+              text: '开发实战',
+              collapsed: true,
+              items: [
+                { text: '开发环境搭建', link: '/blockchain/bitcoin-dev-setup' },
+                { text: '节点运维实战', link: '/blockchain/bitcoin-node-ops' },
+                { text: '测试与调试技巧', link: '/blockchain/bitcoin-testing' },
+                { text: '支付集成实战', link: '/blockchain/bitcoin-payment-integration' },
+                { text: '交易所架构设计', link: '/blockchain/bitcoin-exchange' },
+              ]
+            },
+            {
+              text: '扩展方案',
+              collapsed: true,
+              items: [
+                { text: '闪电网络原理', link: '/blockchain/lightning-network' },
+                { text: '扩展方案', link: '/blockchain/bitcoin-scaling' },
+                { text: '二层生态全景', link: '/blockchain/bitcoin-layer2' },
+                { text: 'Taproot升级详解', link: '/blockchain/bitcoin-taproot' },
+                { text: '智能合约', link: '/blockchain/bitcoin-smart-contracts' },
+                { text: '跨链技术', link: '/blockchain/bitcoin-crosschain' },
+                { text: '与DeFi', link: '/blockchain/bitcoin-defi' },
+              ]
+            },
+            {
+              text: '安全与合规',
+              collapsed: true,
+              items: [
+                { text: '安全机制', link: '/blockchain/bitcoin-security' },
+                { text: '隐私技术', link: '/blockchain/bitcoin-privacy' },
+                { text: '攻击案例分析', link: '/blockchain/bitcoin-attacks' },
+                { text: '冷钱包方案', link: '/blockchain/bitcoin-cold-wallet' },
+                { text: '监管合规实践', link: '/blockchain/bitcoin-compliance' },
+              ]
+            },
+            {
+              text: '进阶知识',
+              collapsed: true,
+              items: [
+                { text: 'BIPs改进提案', link: '/blockchain/bitcoin-bips' },
+                { text: '分叉详解', link: '/blockchain/bitcoin-forks' },
+                { text: '性能优化', link: '/blockchain/bitcoin-performance' },
+                { text: '矿池协议', link: '/blockchain/bitcoin-mining-pool' },
               ]
             }
           ]
@@ -1074,8 +1148,17 @@ export default withMermaid(defineConfig({
           text: 'Docker',
           collapsed: false,
           items: [
-            { text: 'CentOS安装Docker', link: '/docker/centos-install-docker' },
-            { text: 'Docker安装Redis', link: '/docker/install-redis' },
+            { text: 'CentOS安装Docker', link: '/docker/centos-install' }
+          ]
+        }
+      ],
+      '/arthas/': [
+        {
+          text: 'Arthas',
+          collapsed: false,
+          items: [
+            { text: 'Arthas在线热部署', link: '/arthas/retransform' },
+            { text: 'Arthas常用命令', link: '/arthas/commands' },
           ]
         }
       ],
@@ -1110,7 +1193,7 @@ export default withMermaid(defineConfig({
           text: 'MyBatis',
           collapsed: false,
           items: [
-            { text: 'first', link: '/mybatis/first' },
+            { text: 'MyBatis Interceptor扩展', link: '/mybatis/mybatis-interceptor' },
           ]
         }
       ],
