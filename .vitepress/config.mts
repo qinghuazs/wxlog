@@ -402,6 +402,8 @@ export default withMermaid(defineConfig({
 
     // === 04.StableDiffusion 目录 ===
     '01.AI/04.StableDiffusion/00.学习路线图.md': 'ai/ai-art-stablediffusion/roadmap.md',
+    '01.AI/04.StableDiffusion/01.什么是StableDiffusion.md': 'ai/ai-art-stablediffusion/what-is-sd.md',
+    '01.AI/04.StableDiffusion/02.核心概念详解.md': 'ai/ai-art-stablediffusion/core-concepts.md',
   },
 
   // Markdown 配置
@@ -646,7 +648,8 @@ export default withMermaid(defineConfig({
           collapsed: true,
           items: [
             { text: '学习路线图', link: '/ai/ai-art-stablediffusion/roadmap' },
-            
+            { text: '什么是Stable Diffusion', link: '/ai/ai-art-stablediffusion/what-is-sd' },
+            { text: '核心概念详解', link: '/ai/ai-art-stablediffusion/core-concepts' },
           ]
         },
         {
