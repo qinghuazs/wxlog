@@ -191,6 +191,14 @@ export default withMermaid(defineConfig({
     '01.AI/02.AI 开发框架/02.LangGraph/28.学习指南-目录索引.md': 'ai/langgraph/index.md',
     // 提示词工程
     '01.AI/03.提示词工程/01.小红书提示词/Xiaohongshu Style.md': 'ai/prompts/xiaohongshu-style.md',
+    // UI设计提示词
+    '01.AI/03.提示词工程/02.UI设计/01.提示词基本结构.md': 'ai/prompts/ui-design/basic-structure.md',
+    '01.AI/03.提示词工程/02.UI设计/02.提示词模板与实战.md': 'ai/prompts/ui-design/template-practice.md',
+    '01.AI/03.提示词工程/02.UI设计/03.提示词优化技巧.md': 'ai/prompts/ui-design/optimization-tips.md',
+    '01.AI/03.提示词工程/02.UI设计/04.UI设计词汇表.md': 'ai/prompts/ui-design/vocabulary.md',
+    '01.AI/03.提示词工程/02.UI设计/05.进阶提示词模式.md': 'ai/prompts/ui-design/advanced-patterns.md',
+    '01.AI/03.提示词工程/02.UI设计/06.常见错误与修正.md': 'ai/prompts/ui-design/common-mistakes.md',
+    '01.AI/03.提示词工程/02.UI设计/07.提示词速查卡.md': 'ai/prompts/ui-design/cheatsheet.md',
     // CodeAgent
     '01.AI/codeagent/AI 集成与后端实现 - Code Agent 核心服务.md': 'ai/codeagent/ai-integration.md',
     '01.AI/codeagent/Code Agent 代码补全实现详解.md': 'ai/codeagent/code-completion.md',
@@ -688,6 +696,19 @@ export default withMermaid(defineConfig({
               text: 'UI',
               items: [
                 { text: '小红书配图页面', link: '/ai/prompts/UI/xiaohongshu-page' },
+              ]
+            },
+            {
+              text: 'UI设计提示词',
+              collapsed: true,
+              items: [
+                { text: '提示词基本结构', link: '/ai/prompts/ui-design/basic-structure' },
+                { text: '提示词模板与实战', link: '/ai/prompts/ui-design/template-practice' },
+                { text: '提示词优化技巧', link: '/ai/prompts/ui-design/optimization-tips' },
+                { text: 'UI设计词汇表', link: '/ai/prompts/ui-design/vocabulary' },
+                { text: '进阶提示词模式', link: '/ai/prompts/ui-design/advanced-patterns' },
+                { text: '常见错误与修正', link: '/ai/prompts/ui-design/common-mistakes' },
+                { text: '提示词速查卡', link: '/ai/prompts/ui-design/cheatsheet' },
               ]
             }
           ]
